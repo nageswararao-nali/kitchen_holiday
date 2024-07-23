@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate, useMatch } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 // import "./Layout.css";
 
 // Pass the child props
@@ -20,7 +22,21 @@ export default function Header() {
     }
     
   }
-  
+   // Sticky Menu Area
+   useEffect(() => {
+    window.addEventListener('scroll', isSticky);
+    return () => {
+        window.removeEventListener('scroll', isSticky);
+    };
+});
+
+       
+/* Method that will fix header after a specific scrollable */
+       const isSticky = (e) => {
+            const header = document.querySelector('header');
+            const scrollTop = window.scrollY;
+            scrollTop >= 1 ? header.classList.add('header-fixed') : header.classList.remove('header-fixed');
+        };
   return (
     <header className="">
 
