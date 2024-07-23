@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+
 // import "./Layout.css";
 
 // Pass the child props
@@ -8,16 +9,17 @@ export default function MainSlider() {
                 arrows: true,
                 // autoplay: true,
                 dots: true,
+                fade: true,
                 infinite: true,
-                speed: 500,
+                speed: 2000,
                 slidesToShow: 1,
                 slidesToScroll: 1
               };
   return (
     <section className="section-slide banner">
-<div className="">
+<div className="bg_view" style={{backgroundImage: "url(assets/images/banner_bg3.png)"}}>
 <Slider {...settings}>
-        <div className="" style={{backgroundImage: "url(assets/images/banner_bg3.png)"}}>
+        <div className="" >
                 <div className="row">  
                        
                         <div className="col-md-7 p-t-45 p-b-30">
