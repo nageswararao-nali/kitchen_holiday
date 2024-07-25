@@ -19,7 +19,7 @@ function Login() {
                     <div className="row justify-content-center">
                     <div className="col-md-8">
                     <div className="mb-4">
-                    <h3>Login</h3>
+                    <h2 className='form-title m-b-13'>Login</h2>
                     <p className="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
                     </div>
                     <form action="#" method="post">

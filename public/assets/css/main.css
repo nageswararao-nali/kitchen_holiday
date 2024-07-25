@@ -1486,7 +1486,7 @@ details[open] .accordion-icon svg {
 }
 .menu_items ul{padding: 0;flex-wrap: wrap;align-items: center;}
 .menu_items ul li{width: 50%;margin: 15px 0;}
-.menu_items .item_title{text-align: left;
+.menu_items .item_title{text-align: left;flex: 1;
   padding-left: 20px;}
 .a_price{color: #aaaaaa;text-decoration: line-through;font-size: 18px;}
 .f_price{color: rgb(46 154 63);font-size: 22px;font-weight: 600;}
@@ -1611,4 +1611,9 @@ transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgb
 .social-login a.google:hover {
   background: #e82e1e;
 }
+.bg_img img{position: absolute;
+  width: 90%;
+  left: 18%;
+  top: -30px;}
+.bg_img2 img{left: 3%;}
 

@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate, useMatch } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
+
 
 // import "./Layout.css";
 
@@ -57,7 +59,7 @@ export default function Header() {
       <a href="index.html">Home</a>
       </li>
       <li>
-      <a href="menu.html">Menu</a>
+      <Link to="/menu">Menu</Link>
       </li>
       <li>
       <a href="subscription.html">Subscription</a>
@@ -75,7 +77,7 @@ export default function Header() {
       </div>
 
       <div className="social flex-w flex-l-m p-r-20">
-      <a href="signin.html" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Sign in</a>
+      <Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Sign in</Link>
       <a href="#" className="cart_icon"><i className="fa fa-shopping-cart" aria-hidden="true" style={{fontSize: '28px'}}></i><span className="count">1</span></a>
       <button className="btn-show-sidebar m-l-33 trans-0-4 d-md-none d-block"></button>
       </div>

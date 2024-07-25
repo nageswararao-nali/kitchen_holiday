@@ -1642,4 +1642,4 @@ transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgb
   opacity: 1;background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;}
-  
+  .menu_items .item_title{flex:1}
