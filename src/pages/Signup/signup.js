@@ -11,7 +11,7 @@ function Signup() {
         <div className="container p-t-120">
             <div className="row">
                 <div className="col-md-5">
-                <img src="assets/images/logo_with_leaves.png" alt="Image" className="img-fluid"/>
+                    <img src="assets/images/logo_with_leaves.png" alt="Image" className="img-fluid"/>
                 </div>
                 <div className="col-md-7 contents">
                 <div className="row justify-content-center">
@@ -85,7 +85,7 @@ function Signup() {
                 </div>
                 </div>               
         </div>
-    </section>
+        </section>
     </Layout>
     
   );
