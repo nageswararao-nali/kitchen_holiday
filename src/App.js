@@ -6,6 +6,7 @@ import './App.css';
 import Home from './pages/Home/Home';
 import Terms from './pages/terms/Terms';
 import Privacy from './pages/privacy/Privacy';
+import Signup from './pages/Signup/signup';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/"  element={<Home />} />
         <Route path="/terms"  element={<Terms />} />
         <Route path="/privacy"  element={<Privacy />} />
+        <Route path="/Signup"  element={<Signup />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>
