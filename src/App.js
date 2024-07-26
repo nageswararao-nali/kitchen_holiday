@@ -10,6 +10,8 @@ import Signup from './pages/Signup/signup';
 import Login from './pages/Login/login';
 import Menu from './pages/Menu/menu';
 import Subscription from './pages/Subscription/subscription';
+import About from './pages/About/about';
+import Contact from './pages/Contact/contact';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/login"  element={<Login />} />
         <Route path="/menu"  element={<Menu />} />
         <Route path="/subscription"  element={<Subscription />} />
+        <Route path="/about"  element={<About />} />
+        <Route path="/contact"  element={<Contact />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>

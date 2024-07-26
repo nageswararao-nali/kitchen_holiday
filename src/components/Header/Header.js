@@ -47,30 +47,30 @@ export default function Header() {
       <div className="wrap_header trans-0-3">
 
       <div className="logo">
-      <a href="index.html">
+      <Link to="/home">
       <img src="assets/images/logo_f.png" alt="IMG-LOGO" data-logofixed="images/logo_f.png" />
-      </a>
+      </Link>
       </div>
 
       <div className="wrap_menu p-l-0-xl">
       <nav className="menu">
       <ul className="main_menu">
       <li className="active">
-      <a href="index.html">Home</a>
+      <Link to="/home">Home</Link>
       </li>
       <li>
       <Link to="/menu">Menu</Link>
       </li>
       <li>
-      <Link to="subscription">Subscription</Link>
+      <Link to="/subscription">Subscription</Link>
       </li>
 
       <li>
-      <a href="about.html">About</a>
+      <Link to="/about">About</Link>
       </li>
 
       <li>
-      <a href="contact.html">Contact</a>
+      <Link to="/contact">Contact</Link>
       </li>
       </ul>
       </nav>
