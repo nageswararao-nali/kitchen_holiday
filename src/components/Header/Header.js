@@ -62,7 +62,7 @@ export default function Header() {
       <Link to="/menu">Menu</Link>
       </li>
       <li>
-      <a href="subscription.html">Subscription</a>
+      <Link to="subscription">Subscription</Link>
       </li>
 
       <li>
