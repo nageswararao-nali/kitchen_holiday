@@ -1643,3 +1643,5 @@ transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgb
   background-repeat: no-repeat;
   background-position: center center;}
   .menu_items .item_title{flex:1}
+  .accordion-button:not(.collapsed){background-color: #f8f9fa;color: #000000;}
+  .accordion-button{background-color: #f8f9fa;}
