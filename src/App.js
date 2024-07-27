@@ -14,6 +14,7 @@ import About from './pages/About/about';
 import Contact from './pages/Contact/contact';
 import Checkout from './pages/Checkout/checkout';
 import Payment from './pages/Payment/payment';
+import My_account from './pages/My_account/myaccount';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/contact"  element={<Contact />} />
         <Route path="/checkout"  element={<Checkout />} />
         <Route path="/payment"  element={<Payment />} />
+        <Route path="/myaccount"  element={<My_account />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>
