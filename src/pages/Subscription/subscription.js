@@ -19,7 +19,7 @@ function Subscription() {
                 </div>
             </div>
         </section>
-    <section className="section-welcome p-t-45 p-b-105">       
+    <section className="section-welcome p-t-45 p-b-105 subscription_block">       
             <div className="container">            
           
                   <div className="row">

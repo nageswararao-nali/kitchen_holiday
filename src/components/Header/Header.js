@@ -52,7 +52,7 @@ export default function Header() {
       <div className="wrap-menu-header trans-0-4">
         <div className="container h-full">
           <div className="wrap_header trans-0-3">
-            <Navbar.Brand href="#home"> 
+            <Navbar.Brand href="/home"> 
               <div className="logo">
                 <img src="assets/images/logo_f.png" alt="IMG-LOGO" data-logofixed="images/logo_f.png" />
               </div>
