@@ -47,7 +47,7 @@ export default function Header() {
 
      
 
-      <Navbar expand="lg" className="bg-body-tertiary justify-content-between">
+      <Navbar expand="lg" className="bg-body-tertiary justify-content-between p-0">
       <Container>
       <div className="wrap-menu-header trans-0-4">
         <div className="container h-full">

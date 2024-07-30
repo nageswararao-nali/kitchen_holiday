@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 // import './App.css';
 import Layout from '../../components/Layout/Layout';
 import { Link } from 'react-router-dom'
-
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 function Subscription() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <Layout>
        <section className="section-slide banner">
@@ -56,8 +61,8 @@ function Subscription() {
                                   </div>
                                 
                                   <div className="d-ryt">
-                                      <span className="add_btn" id="addBtn1">ADD</span>
-                                      <div className="added_count" id="addedCount1" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div>
+                                     <Link to="/cart" className='text-decoration-none'><span className="add_btn" id="addBtn1" >ADD</span></Link> 
+                                      {/* <div className="added_count" id="addedCount1" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div> */}
                                   </div>
                               </div>
                               <Link to="/checkout" className="text-center m-t-32 m-b-13" id="selectBtn" ><span className="select_btn">Select this Plan</span></Link>
@@ -184,10 +189,7 @@ function Subscription() {
                 </div>
               </div>
                 
-                <div className="container">
-                   
-                   
-                </div>
+             
             </div>
     </section>
     </Layout>
