@@ -35,14 +35,14 @@ function Subscription() {
                         <a className="nav-link active" data-bs-toggle="tab" href="#home">
                           <div className="d-flex align-items-center">
                             <img src="assets/images/menu_veg.png" className="img-fluid" width="200"/>
-                            <span className="tit10 d-block m-t-13">Veg Meal Plan</span>
+                            <span className="tit10 d-block m-t-13">Veg Meal</span>
                           </div>
                         </a>
                       </li>
                       <li className="nav-item tab_item2">
                         <a className="nav-link" data-bs-toggle="tab" href="#menu1"> <div className="d-flex align-items-center">
                           <img src="assets/images/menu_veg.png" className="img-fluid" width="200"/>
-                          <span className="tit10 d-block m-t-13">Non-Veg Meal Plan</span>
+                          <span className="tit10 d-block m-t-13">Non-Veg Meal</span>
                         </div></a>
                       </li>
                     </ul>
@@ -55,9 +55,9 @@ function Subscription() {
                           <div className="plan_box h_item1 p-b-22 p-t-22 p-l-20 p-r-20 ">
                               <div className="d-flex justify-content-between align-items-center">
                                   <div className="d-lft d-flex flex-column align-items-start">
-                                      <span className="tit11"><span className="m-r-10"><img src="assets/images/veg_icon.png" width="18" alt=""/></span>Veg meal Plan - Trail (3Days)</span>
-                                      <span className="a_price">$ 654</span>
-                                      <span className="f_price">$ 495</span>
+                                      <span className="tit11"><span className="m-r-10"><img src="assets/images/veg_icon.png" width="18" alt=""/></span>Veg meal - Trail plan</span>
+                                      {/* <span className="a_price">$ 654</span>
+                                      <span className="f_price">$ 495</span> */}
                                   </div>
                                 
                                   <div className="d-ryt">
@@ -65,58 +65,24 @@ function Subscription() {
                                       {/* <div className="added_count" id="addedCount1" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div> */}
                                   </div>
                               </div>
-                              <Link to="/checkout" className="text-center m-t-32 m-b-13" id="selectBtn" ><span className="select_btn">Select this Plan</span></Link>
+                              {/* <Link to="/checkout" className="text-center m-t-32 m-b-13" id="selectBtn" ><span className="select_btn">Select this Plan</span></Link> */}
                           </div>
                           <div className="plan_box h_item1 p-b-22 p-t-22 p-l-20 p-r-20 m-t-32">
                               <div className="d-flex justify-content-between align-items-center">
                                   <div className="d-lft d-flex flex-column align-items-start">
-                                      <span className="tit11"><span className="m-r-10"><img src="assets/images/veg_icon.png" width="18" alt=""/></span>Veg meal Plan - Weekly</span>
-                                      <span className="a_price">$ 2150</span>
-                                      <span className="f_price">$ 1750</span>
+                                      <span className="tit11"><span className="m-r-10"><img src="assets/images/veg_icon.png" width="18" alt=""/></span>Veg meal  - Subscription plan</span>
+                                      {/* <span className="a_price">$ 2150</span>
+                                      <span className="f_price">$ 1750</span> */}
                                   </div>
                                   <div className="d-ryt">
                                       <span className="add_btn">ADD</span>
-                                      <div className="added_count" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div>
+                                      {/* <div className="added_count" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div> */}
                                   </div>
                               </div>
                           </div>
-                          <div className="plan_box h_item1 p-b-22 p-t-22 p-l-20 p-r-20 m-t-32">
-                              <div className="d-flex justify-content-between align-items-center">
-                                  <div className="d-lft d-flex flex-column align-items-start">
-                                      <span className="tit11"><span className="m-r-10"><img src="assets/
-                                      images/veg_icon.png" width="18" alt=""/></span>Veg meal Plan - Monthly</span>
-                                      <span className="a_price">$ 4299</span>
-                                      <span className="f_price">$ 3299</span>
-                                  </div>
-                                  <div className="d-ryt">
-                                      <span className="add_btn">ADD</span>
-                                  </div>
-                              </div>
-                          </div>
+                         
                         </div>
-                        <div className="custom_dates m-t-32 text-start">  
-                          <span className="custom_date_btn tit11">Select Custom Dates:</span> 
-                          <div className="row m-t-13 align-items-center">
-                            <div className="col-md-4">
-                              <span className="custom_date_btn">Start</span> 
-                              <div className="wrap-inputdate pos-relative txt10 size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                                <input className="my-calendar bo-rad-10 sizefull txt10 p-l-20" type="text" name="date"/>
-                                <i className="btn-calendar fa fa-calendar ab-r-m hov-pointer m-r-18" aria-hidden="true"></i>
-                                </div>   
-                            </div>
-                            <div className="col-md-4">
-                              <span className="custom_date_btn">End</span>
-                              <div className="wrap-inputdate pos-relative txt10 size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                                <input className="my-calendar bo-rad-10 sizefull txt10 p-l-20" type="text" name="date"/>
-                                <i className="btn-calendar fa fa-calendar ab-r-m hov-pointer m-r-18" aria-hidden="true"></i>
-                                </div>   
-                            </div>
-                            <div className="col-md-4">
-                              <a href="#" className="text-center" ><span className="select_btn btn_disable">Select this Plan</span></a>
-                            </div>
-                          </div>
-                                               
-                        </div>
+                       
                       </div>
                       <div id="menu1" className="container tab-pane fade"><br/>
                         <div className="plan_wrap">

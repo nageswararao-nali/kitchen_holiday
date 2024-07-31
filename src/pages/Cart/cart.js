@@ -8,11 +8,15 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
+
 function Cart() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <Layout>
         <div className='container p-t-120'>
@@ -91,7 +95,7 @@ function Cart() {
     <hr class="my-2"/>
     <div class="row pt-3 pb-5 mb-2">
         <div class="col-sm-6 mb-3"></div>
-        <div class="col-sm-6 mb-3"><a class="btn2 btn-style-1 btn-primary btn-block" href="checkout-address.html"><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
+        <div class="col-sm-6 mb-3"><a class="btn2 btn-style-1 btn-primary btn-block" href="/checkout"><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
     </div>
 
        

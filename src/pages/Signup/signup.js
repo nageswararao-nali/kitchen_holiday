@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 // import './App.css';
 import Layout from '../../components/Layout/Layout';
 
 function Signup() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <Layout>
         <section className="section-welcome p-t-45 p-b-105">    

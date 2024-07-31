@@ -20,7 +20,9 @@ const profile = () => {
 
 
 function Myaccount() {
-  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <Layout>
       <div className='container p-t-120'>
