@@ -16,6 +16,7 @@ import Checkout from './pages/Checkout/checkout';
 import Payment from './pages/Payment/payment';
 import My_account from './pages/My_account/myaccount';
 import Cart from './pages/Cart/cart';
+import Address from './pages/Address/address';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/payment"  element={<Payment />} />
         <Route path="/myaccount"  element={<My_account />} />
         <Route path="/cart"  element={<Cart />} />
+        <Route path="/address"  element={<Address />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>

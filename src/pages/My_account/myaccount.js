@@ -49,7 +49,7 @@ function Myaccount() {
                 <img src="assets/images/avatar-01.webp" alt="IGM-AVATAR"/>
               </a>
               <h1>Marie Simmons</h1>
-              <p>marie@theEmail.com</p>
+              <p className="text-white">marie@theEmail.com</p>
           </div>
 
           <ul className="nav nav-pills nav-stacked">
@@ -57,6 +57,7 @@ function Myaccount() {
               <li><a href="#"> <i className="fa fa-calendar"></i> Delivery Addresses <span className="label label-warning pull-right r-activity">9</span></a></li>
               <li><a href="#"> <i className="fa fa-edit"></i> Wallet details</a></li>
               <li><a href="#"> <i className="fa fa-edit"></i> Wallet history</a></li>
+              <li><a href="#"> <i className="fa fa-edit"></i> Booking history</a></li>
           </ul>
       </div>
   </div>
@@ -213,6 +214,81 @@ function Myaccount() {
                         </select>     
                       </div>
                       </div>
+                      <div className='row p-x-10 p-b-14'>
+                      <div className="page-content page-container p-0 m-t-12" id="page-content">
+                        <div className="padding">
+                          <div className="container d-flex justify-content-center p-0">
+                            <div className="grid-margin stretch-card p-0">
+                              <div className="card">
+                                <div className="card-body">                    
+                                  <div className="table-responsive">
+                                    <table className="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th>Date</th>
+                                          <th>Description</th>
+                                          <th>Amount</th>
+                                          <th>Debit/Credit</th>
+                                          <th>Payment Mode</th>
+                                          <th>Transaction by</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>27-07-2024</td>
+                                          <td>₹1200 Recieved by cash</td>
+                                          <td>₹1200</td>
+                                          <td className="text-success"> Credit </td>
+                                          <td><label className="badge bg-danger">Pending</label></td>
+                                          <td>Yes</td>
+                                        </tr>
+                                        <tr>
+                                          <td>26-07-2024</td>
+                                          <td>₹2500 Rrecieved by cash</td>
+                                          <td>₹2500</td>
+                                          <td className="text-success"> Credit </td>
+                                          <td><label className="badge bg-warning">In progress</label></td>
+                                          <td>Yes</td>
+                                        </tr>
+                                        <tr>
+                                          <td>25-07-2024</td>                              
+                                          <td>₹2500 Rrecieved by cash</td>
+                                          <td>₹2500</td>
+                                          <td className="text-success"> Credit </td>
+                                          <td><label className="badge bg-info">Fixed</label></td>
+                                          <td>Yes</td>
+                                        </tr>
+                                        <tr>
+                                          <td>24-07-2024</td>
+                                          <td>₹4800 Rrecieved by cash</td>
+                                          <td>₹4800</td>
+                                          <td className="text-success"> Credit </td>
+                                          <td><label className="badge bg-success">Completed</label></td>
+                                          <td>Yes</td>
+                                        </tr>
+                                        <tr>
+                                          <td>23-07-2024</td>
+                                          <td>₹2600 Rrecieved by cash</td>
+                                          <td>₹2600</td>
+                                          <td className="text-success"> Credit </td>
+                                          <td><label className="badge bg-success">Completed</label></td>
+                                          <td>Yes</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div> 
+                              </div>
+                            </div>
+                          </div> 
+                        </div>
+                      </div>
+                      </div>
+                     </div>
+                     <div className="card mb-3  ">
+                      <div className="d-address">
+                        <span className="sub_title  p-l-15 p-r-15">Booking History</span>
+                      </div>                     
                       <div className='row p-x-10 p-b-14'>
                       <div className="page-content page-container p-0 m-t-12" id="page-content">
                         <div className="padding">

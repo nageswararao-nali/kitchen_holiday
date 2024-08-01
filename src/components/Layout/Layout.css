@@ -1497,7 +1497,11 @@ details[open] .accordion-icon svg {
 transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.2);}
 .add_btn:hover{background: rgb(46 154 63);color: #fff;}
 .plan_box.h_item1{border: 1px solid #f6f6f6;border-radius: 10px;}
-.added_count{background: rgb(46 154 63);font-size: 18px;  color: #fff;text-align: center;}
+.added_count{    background: rgb(255 255 255);
+  font-size: 18px;
+  color: #000;
+  text-align: center;
+  border: 1px solid #dee2e6;}
 /* .count_total{margin: 0 15px;} */
 .count_minus,.count_plus{cursor: pointer;padding: 0 14px;}
 .select_btn{background:rgb(46 154 63);padding: 10px 25px;color: #ffffff;border-radius: 10px;font-size: 15px;cursor: pointer;display: inline-block;}

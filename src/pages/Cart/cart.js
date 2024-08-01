@@ -7,9 +7,12 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import {DateRangePicker} from "@nextui-org/react";
+
 
 
 function Cart() {
+    
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -59,7 +62,7 @@ function Cart() {
         </div>
         <div class="px-3 my-3 text-center">
             <div class="cart-item-label">Quantity</div>
-            <div class="count-input position-relative">
+            {/* <div class="count-input position-relative">
                 <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
                 <select class="form-control">
                     <option>1</option>
@@ -73,13 +76,17 @@ function Cart() {
                     <option>9</option>
                     <option>10</option>
                 </select>
-            </div>
+            </div> */}
+            <div className="added_count" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div>
         </div>
         <div class="px-3 my-3 text-center">
             <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">$910.00</span>
         </div>
     </div>
-  
+    {/* <DateRangePicker 
+      label="Stay duration" 
+      className="max-w-xs" 
+    /> */}
     <div class="d-sm-flex justify-content-between align-items-center text-center text-sm-left px-4">
         <form class="row py-2">
             <div className='col-md-6 px-0'>
@@ -97,7 +104,7 @@ function Cart() {
         <div class="col-sm-6 mb-3"></div>
         <div class="col-sm-6 mb-3"><a class="btn2 btn-style-1 btn-primary btn-block" href="/checkout"><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
     </div>
-
+    
        
     </div>
         </div>
