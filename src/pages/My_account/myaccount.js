@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 
 const heighstyle = {
@@ -289,75 +290,196 @@ function Myaccount() {
                       <div className="d-address">
                         <span className="sub_title  p-l-15 p-r-15">Booking History</span>
                       </div>                     
-                      <div className='row p-x-10 p-b-14'>
-                      <div className="page-content page-container p-0 m-t-12" id="page-content">
-                        <div className="padding">
-                          <div className="container d-flex justify-content-center p-0">
-                            <div className="grid-margin stretch-card p-0">
-                              <div className="card">
-                                <div className="card-body">                    
-                                  <div className="table-responsive">
-                                    <table className="table table-hover">
-                                      <thead>
-                                        <tr>
-                                          <th>Date</th>
-                                          <th>Description</th>
-                                          <th>Amount</th>
-                                          <th>Debit/Credit</th>
-                                          <th>Payment Mode</th>
-                                          <th>Transaction by</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td>27-07-2024</td>
-                                          <td>₹1200 Recieved by cash</td>
-                                          <td>₹1200</td>
-                                          <td className="text-success"> Credit </td>
-                                          <td><label className="badge bg-danger">Pending</label></td>
-                                          <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                          <td>26-07-2024</td>
-                                          <td>₹2500 Rrecieved by cash</td>
-                                          <td>₹2500</td>
-                                          <td className="text-success"> Credit </td>
-                                          <td><label className="badge bg-warning">In progress</label></td>
-                                          <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                          <td>25-07-2024</td>                              
-                                          <td>₹2500 Rrecieved by cash</td>
-                                          <td>₹2500</td>
-                                          <td className="text-success"> Credit </td>
-                                          <td><label className="badge bg-info">Fixed</label></td>
-                                          <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                          <td>24-07-2024</td>
-                                          <td>₹4800 Rrecieved by cash</td>
-                                          <td>₹4800</td>
-                                          <td className="text-success"> Credit </td>
-                                          <td><label className="badge bg-success">Completed</label></td>
-                                          <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                          <td>23-07-2024</td>
-                                          <td>₹2600 Rrecieved by cash</td>
-                                          <td>₹2600</td>
-                                          <td className="text-success"> Credit </td>
-                                          <td><label className="badge bg-success">Completed</label></td>
-                                          <td>Yes</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div> 
-                              </div>
-                            </div>
-                          </div> 
-                        </div>
-                      </div>
+                      <div className='p-b-14 p-3'>
+                        <Tabs
+                          defaultActiveKey="TodayDelivery"
+                          id="uncontrolled-tab-example"
+                          className="mb-3 booking_history"
+                        >
+                          <Tab eventKey="TodayDelivery" title="Today's Delivery">
+                            <table className="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>Order No.</th>
+                                  <th>Order Date</th>
+                                  <th>Your Order</th>
+                                  <th>Order Type</th>
+                                  <th>Deliverry/Pickup</th>
+                                  <th>Location</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>KH001234</td>
+                                  <td>27-07-2024</td>
+                                  <td>Trail meal(2)</td>
+                                  <td> Dinner </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                <td>KH001234</td>
+                                  <td>27-07-2024</td>
+                                  <td>Trail meal(2)</td>
+                                  <td> Dinner </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                <td>KH001234</td>
+                                  <td>27-07-2024</td>
+                                  <td>Trail meal(2)</td>
+                                  <td> Dinner </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                <td>KH001234</td>
+                                  <td>27-07-2024</td>
+                                  <td>Trail meal(2)</td>
+                                  <td> Dinner </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                <td>KH001234</td>
+                                  <td>27-07-2024</td>
+                                  <td>Trail meal(2)</td>
+                                  <td> Dinner </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </Tab>
+                          <Tab eventKey="SubscriptionPlan" title="Subscription Plan">
+                          <table className="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>Order No.</th>
+                                  <th>Order Date</th>
+                                  <th>Your Order</th>
+                                  <th>Order Type</th>
+                                  <th>Deliverry/Pickup</th>
+                                  <th>Location</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>KH001234</td>
+                                  <td>03-08-2024</td>
+                                  <td>Veg meal</td>
+                                  <td> Lunch </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                <td>KH001234</td>
+                                  <td>27-07-2024</td>
+                                  <td>Non-veg meal</td>
+                                  <td> Dinner </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                <td>KH001234</td>
+                                  <td>27-07-2024</td>
+                                  <td>Veg Meal</td>
+                                  <td> Dinner </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+                          </Tab>
+                          <Tab eventKey="SwappableOrder" title="Swappable Order">
+                            No Swappable orders
+                          </Tab>
+                          <Tab eventKey="DeliveredOrder" title="Delivered Order">
+                          <table className="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>Order No.</th>
+                                  <th>Order Date</th>
+                                  <th>Your Order</th>
+                                  <th>Order Type</th>
+                                  <th>Deliverry/Pickup</th>
+                                  <th>Location</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>KH001234</td>
+                                  <td>03-08-2024</td>
+                                  <td>Veg meal</td>
+                                  <td> Lunch </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                <td>KH001234</td>
+                                  <td>27-07-2024</td>
+                                  <td>Non-veg meal</td>
+                                  <td> Dinner </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                <td>KH001234</td>
+                                  <td>27-07-2024</td>
+                                  <td>Veg Meal</td>
+                                  <td> Dinner </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+                          </Tab>
+                          <Tab eventKey="CancelOrder" title="Cancel Order">
+                          <table className="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>Order No.</th>
+                                  <th>Order Date</th>
+                                  <th>Your Order</th>
+                                  <th>Order Type</th>
+                                  <th>Deliverry/Pickup</th>
+                                  <th>Location</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>KH001234</td>
+                                  <td>03-08-2024</td>
+                                  <td>Veg meal</td>
+                                  <td> Lunch </td>
+                                  <td>Delivery</td>
+                                  <td>SanFro</td>
+                                  <td>X</td>
+                                </tr>
+                                
+                               
+                              </tbody>
+                            </table>
+                          </Tab>
+                        </Tabs>
                       </div>
                      </div>
                 </div>

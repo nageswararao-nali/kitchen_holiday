@@ -1565,7 +1565,7 @@ transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgb
     -ms-box-shadow: 0 10px 30px 0px rgba(184, 70, 70, 0.5);}
 .btn-link{color: #57b846;}
 .subscription_block .nav-tabs .nav-item.show .nav-link, .subscription_block .nav-tabs .nav-link.active{   position: relative; background-color: #e5fde8;border-color: #dee2e6 #fff #dee2e6 #dee2e6;}
-.subscription_block .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active::after{    content: "";
+.subscription_block .nav-tabs .nav-item.show .nav-link, .subscription_block .nav-tabs .nav-link.active::after{    content: "";
   position: absolute;
   right: -20px;
   width: 30px;
@@ -2100,3 +2100,7 @@ ul.summary-list > li:last-child  {
   right: -10px !important;
 }
 .d-arrow{pointer-events: none;}
+.booking_history{background: #e5e5e5;}
+.booking_history .nav-link{color: #000;font-weight: 600;transition: color .0s ease-in-out, background-color .0s ease-in-out, border-color .0s ease-in-out;}
+.booking_history .nav-item.show .nav-link, .booking_history .nav-link.active{color: #ffffff;background: #ee333a;border-radius: 0px;position: relative;}
+.booking_history .nav-item.show .nav-link:after, .booking_history .nav-link.active:after{content: "";  width: 15px;height: 15px;background: #ee333a;position: absolute;bottom: -10px;left: 50%;transform: rotate(45deg) translate(-50%,0);}
