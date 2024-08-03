@@ -136,21 +136,21 @@ function Myaccount() {
                       </div>
                       <div className='p-4'>
                         <div className="text-muted m-b-30">
-                            <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"><b>Lunch (Default)</b></h5><a href="#"><i className="bi bi-pencil"></i> Edit</a></div>
+                            <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"><b>Lunch (Default)</b></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
                             <h5 className="font-size-15 mb-2">Preston Miller</h5>
                             <p className="mb-1">4068 Post Avenue Newfolden, MN 56738</p>
                             <p className="mb-1">PrestonMiller@armyspy.com</p>
                             <p>001-234-5678</p>
                         </div>
                         <div className="text-muted m-b-30">
-                        <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"><b>Dinner</b></h5><a href="#"><i className="bi bi-pencil"></i> Edit</a></div>
+                        <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"><b>Dinner</b></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
                             <h5 className="font-size-15 mb-2">Preston Miller</h5>
                             <p className="mb-1">4068 Post Avenue Newfolden, MN 56738</p>
                             <p className="mb-1">PrestonMiller@armyspy.com</p>
                             <p>001-234-5678</p>
                         </div>
                         <div className="text-muted ">
-                        <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"><b>Instant Order</b></h5><a href="#"><i className="bi bi-pencil"></i> Edit</a></div>
+                        <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"><b>Instant Order</b></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
                             <h5 className="font-size-15 mb-2">Preston Miller</h5>
                             <p className="mb-1">4068 Post Avenue Newfolden, MN 56738</p>
                             <p className="mb-1">PrestonMiller@armyspy.com</p>
@@ -480,6 +480,48 @@ function Myaccount() {
                             </table>
                           </Tab>
                         </Tabs>
+                      </div>
+                     </div>
+                     <div className="card mb-3  ">
+                      <div className="d-address">
+                        <span className="sub_title  p-l-15 p-r-15">Invoice History</span>
+                      </div>                     
+                      <div className='p-b-14 p-3'>
+                      <table className="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>Invoice No.</th>
+                                  <th>Total Amount</th>
+                                  <th>Invoice Date</th>
+                                  <th>Status</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>KH001234</td>
+                                  <td>₹2600</td>
+                                  <td>27-07-2024</td>
+                                  <td>Bill</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                  <td>KH001234</td>
+                                  <td>₹2600</td>
+                                  <td>27-07-2024</td>
+                                  <td>Bill</td>
+                                  <td>X</td>
+                                </tr>
+                                <tr>
+                                  <td>KH001234</td>
+                                  <td>₹2600</td>
+                                  <td>27-07-2024</td>
+                                  <td>Bill</td>
+                                  <td>X</td>
+                                </tr>
+                                
+                              </tbody>
+                            </table>
                       </div>
                      </div>
                 </div>
