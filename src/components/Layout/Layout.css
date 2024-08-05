@@ -2104,3 +2104,12 @@ ul.summary-list > li:last-child  {
 .booking_history .nav-link{color: #000;font-weight: 600;transition: color .0s ease-in-out, background-color .0s ease-in-out, border-color .0s ease-in-out;}
 .booking_history .nav-item.show .nav-link, .booking_history .nav-link.active{color: #ffffff;background: #ee333a;border-radius: 0px;position: relative;}
 .booking_history .nav-item.show .nav-link:after, .booking_history .nav-link.active:after{content: "";  width: 15px;height: 15px;background: #ee333a;position: absolute;bottom: -10px;left: 50%;transform: rotate(45deg) translate(-50%,0);}
+.custom_dates{    background: #ffffff;    width: auto;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;border: 1px solid #e1e1e1;}
+.custom_dates .form-check-input{background-color: #f9f9f9;}
+.custom_dates .form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}

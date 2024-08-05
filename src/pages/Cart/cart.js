@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import {DateRangePicker} from "@nextui-org/react";
+import Form from 'react-bootstrap/Form';
 
 
 
@@ -36,7 +37,8 @@ function Cart() {
         </div>
         <div class="container pb-5 mb-2 p-t-30">
   
-    <div class="cart-item d-md-flex justify-content-between">
+    <div class="cart-item ">
+        <div className='d-md-flex justify-content-between'>
         <div class="px-3 my-3">
             <a class="cart-item-product" href="#">
                 <div class="cart-item-product-thumb"><img src="assets/images/m_plate3.png" alt="Product"/></div>
@@ -59,6 +61,7 @@ function Cart() {
                     <option>Custom dates</option>
                 </select>
             </div>
+           
         </div>
         <div class="px-3 my-3 text-center">
             <div class="cart-item-label">Quantity</div>
@@ -82,6 +85,62 @@ function Cart() {
         <div class="px-3 my-3 text-center">
             <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">$910.00</span>
         </div>
+        </div>
+        <div className='custom_dates_wrap text-center'>
+            <span className='d-block'>Days of Week:</span>
+            <div className='custom_dates mb-3'>
+            <Form> 
+            {['checkbox'].map((type) => (
+            <div key={`default-${type}`}  >
+              <Form.Check
+                    inline
+                    label="Monday"
+                    name="group1"
+                    type={type}
+                    id={`inline-${type}-1`}
+                />
+                <Form.Check
+                    inline
+                    label="Tuesday"
+                    name="group1"
+                    type={type}
+                    id={`inline-${type}-2`}
+                />
+                <Form.Check
+                    inline            
+                    label="Wednessday"
+                    type={type}
+                    id={`inline-${type}-3`}
+                />
+                <Form.Check
+                    inline            
+                    label="Thursday"
+                    type={type}
+                    id={`inline-${type}-3`}
+                />
+                <Form.Check
+                    inline            
+                    label="Friday"
+                    type={type}
+                    id={`inline-${type}-3`}
+                />
+                <Form.Check
+                    inline            
+                    label="Saturday"
+                    type={type}
+                    id={`inline-${type}-3`}
+                />
+                <Form.Check
+                    inline            
+                    label="Sunday"
+                    type={type}
+                    id={`inline-${type}-3`}
+                />
+                </div>
+            ))}
+          </Form>
+          </div>
+    </div>
     </div>
     {/* <DateRangePicker 
       label="Stay duration" 
