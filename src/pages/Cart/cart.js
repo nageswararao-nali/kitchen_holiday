@@ -9,15 +9,21 @@ import Modal from 'react-bootstrap/Modal';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import {DateRangePicker} from "@nextui-org/react";
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 
 function Cart() {
-    
-  const [show, setShow] = useState(false);
-
+    const [showPopup, setShow] = useState(false);
+    const [selected, setSelected] = useState(0);
+    const handleClick = (divNum) => () => {
+      setSelected(divNum);
+    };
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const active = {backgroundColor: '#2e9a3f',color: '#ffffff'}
+  const inactive = {}
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -43,7 +49,8 @@ function Cart() {
             <a class="cart-item-product" href="#">
                 <div class="cart-item-product-thumb"><img src="assets/images/m_plate3.png" alt="Product"/></div>
                 <div class="cart-item-product-info">
-                    <h4 class="cart-item-product-title">Veg Meal (Trail)</h4>{/* <span><strong>Type:</strong> Mirrorless</span><span><strong>Color:</strong> Black</span> */}
+                    <h4 class="cart-item-product-title">Veg Meal (Trail)</h4>
+                    <span className='add_extra' onClick={handleShow}><strong>+ Add Extra</strong></span>
                 </div>
             </a>
         </div>      
@@ -167,6 +174,56 @@ function Cart() {
        
     </div>
         </div>
+
+        <Modal show={showPopup} onHide={handleClose} centered size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title className='m-l-auto'>Add Extra</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Row>
+            <Col xs={6} md={4}>
+                <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                    <span><img src="assets/images/veg_item1.png" width="40" alt=""/></span><span>Vegetable</span>
+                </div>
+            </Col>
+            <Col xs={6} md={4}>
+                <div className="menu_item" style={selected == 2 ? active : inactive} onClick={handleClick(2)}>
+                    <span><img src="assets/images/veg_item2.png" width="40" alt=""/></span><span>Dal</span>
+                </div>
+            </Col>
+            <Col xs={6} md={4}>
+                <div className="menu_item" style={selected == 3 ? active : inactive} onClick={handleClick(3)}>
+                    <span><img src="assets/images/veg_item3.png" width="40" alt=""/></span><span>3 Chapathi</span>
+                </div>
+            </Col>
+          </Row>
+          <Row className='mt-3'>
+            <Col xs={6} md={4}>
+                <div className="menu_item" style={selected == 4 ? active : inactive} onClick={handleClick(4)}>
+                    <span><img src="assets/images/veg_item4.png" width="40" alt=""/></span><span>1 Salad/Soup</span>
+                </div>
+            </Col>
+            <Col xs={6} md={4}>
+                <div className="menu_item" style={selected == 5 ? active : inactive} onClick={handleClick(5)}>
+                    <span><img src="assets/images/veg_item1.png" width="40" alt=""/></span><span>Rice</span>
+                </div>
+            </Col>
+            <Col xs={6} md={4}>
+                <div className="menu_item" style={selected == 6 ? active : inactive} onClick={handleClick(6)}>
+                    <span><img src="assets/images/veg_item2.png" width="40" alt=""/></span><span>Veg Curry</span>
+                </div>
+            </Col>
+          </Row>
+        </Modal.Body>
+        <Modal.Footer className='justify-content-center'>
+          {/* <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button> */}
+          <Button variant="btn btn2" onClick={handleClose}>
+            Add Items
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Layout>
     
   );
