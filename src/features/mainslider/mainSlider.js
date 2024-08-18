@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import { Link } from 'react-router-dom'
 
 // import "./Layout.css";
 
@@ -29,8 +30,7 @@ export default function MainSlider() {
                                         100%<br /> <span>Organic</span> Food is<small>Waiting for you</small>
                                         
                                                 <div className="wrap-btn-slide1 animated  m-t-32" data-appear="fadeInUp">
-
-                                                <a href="menu.html" className="btn2 flex-c-m size2 txt5 trans-0-4" tabIndex="0">Subscribe Now</a>
+                                                <Link to="/subscription" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10">Subscribe Now</Link>
 
                                         </div>
                                         </h2>

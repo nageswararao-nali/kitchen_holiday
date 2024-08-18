@@ -3,17 +3,51 @@ import React, {useState, useEffect} from 'react';
 // import { Counter } from './features/counter/Counter';
 // import './App.css';
 import Layout from '../../components/Layout/Layout';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { getItems } from '../../store/itemsSlice';
+import { getSubscriptions, setOrderDetails } from '../../store/subscriptionsSlice';
 
 function Subscription() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const { items } = useSelector((state) => state.items)
+  const { subscriptions } = useSelector((state) => state.subscriptions)
+  const { isAuthenticated } = useSelector((state) => state.auth)
+  const [selectedItem, setSelectedItem] = useState({})
+  const [selectedSub, setSelectedSub] = useState({})
+
+  const getItemsData = async () => {
+    await dispatch(getItems())
+    await dispatch(getSubscriptions())
+  }
+  useEffect(() => {
+      getItemsData()
+  }, [])
+  useEffect(() => {
+    if(items.length) {
+      setSelectedItem(items[0])
+    }
+  }, [items])
+
+  const selectSubscription = async (subscription) => {
+    setSelectedSub(subscription);
+    await dispatch(setOrderDetails({item: selectedItem, sub:subscription}))
+    if(isAuthenticated) {
+      navigate('/cart')
+    } else {
+      navigate('/login')
+    }
+    
+  }
   return (
-    <Layout>
+    <div>
        <section className="section-slide banner">
             <div className="row">
                 <div className="banner position-relative" >
@@ -31,20 +65,20 @@ function Subscription() {
                   <div className="col-md-5">
                     <h3>Choose your preferences</h3>
                     <ul className="nav nav-tabs flex-column p-t-22" role="tablist" >
-                      <li className="nav-item">
-                        <a className="nav-link active" data-bs-toggle="tab" href="#home">
-                          <div className="d-flex align-items-center">
-                            <img src="assets/images/menu_veg.png" className="img-fluid" width="200"/>
-                            <span className="tit10 d-block m-t-13">Veg Meal</span>
-                          </div>
-                        </a>
-                      </li>
-                      <li className="nav-item tab_item2">
-                        <a className="nav-link" data-bs-toggle="tab" href="#menu1"> <div className="d-flex align-items-center">
-                          <img src="assets/images/menu_veg.png" className="img-fluid" width="200"/>
-                          <span className="tit10 d-block m-t-13">Non-Veg Meal</span>
-                        </div></a>
-                      </li>
+                      {
+                        (items && items.length) ?
+                          items.map((item, index) => {
+                            return (<li className={"nav-item " + (!item.isVeg ? "tab_item2" : "")} onClick={() => setSelectedItem(item)}>
+                              <a className={"nav-link "+ (index == 0 ? "active" : "")} data-bs-toggle="tab" href={"#" + (item.isVeg ? "home" : "menu1")}>
+                                <div className="d-flex align-items-center">
+                                  <img src={item.image} className="img-fluid" width="200"/>
+                                  <span className="tit10 d-block m-t-13">{item.name}</span>
+                                </div>
+                              </a>
+                            </li>)
+                          })
+                        : null
+                      }
                     </ul>
                   </div>
                   <div className="col-md-7 text-center" >
@@ -52,70 +86,67 @@ function Subscription() {
                     <div className="tab-content">
                       <div id="home" className="container tab-pane active"><br/>                
                         <div className="plan_wrap">
-                          <div className="plan_box h_item1 p-b-22 p-t-22 p-l-20 p-r-20 ">
-                              <div className="d-flex justify-content-between align-items-center">
-                                  <div className="d-lft d-flex flex-column align-items-start">
-                                      <span className="tit11"><span className="m-r-10"><img src="assets/images/veg_icon.png" width="18" alt=""/></span>Veg meal - Trail plan</span>
-                                      {/* <span className="a_price">$ 654</span>
-                                      <span className="f_price">$ 495</span> */}
+                          {
+                            (subscriptions && subscriptions.length) ?
+                              subscriptions.map((subscription) => {
+                                if(subscription.isVeg) {
+                                  return (
+                                    <div className="plan_box h_item1 m-b-10 p-b-22 p-t-22 p-l-20 p-r-20 ">
+                                      <div className="d-flex justify-content-between align-items-center">
+                                          <div className="d-lft d-flex flex-column align-items-start">
+                                              <span className="tit11">
+                                                <span className="m-r-10">
+                                                  <img src="assets/images/veg_icon.png" width="18" alt=""/>
+                                                </span>{subscription.name}</span>
+                                              {/* <span className="a_price">$ 654</span>
+                                              <span className="f_price">$ 495</span> */}
+                                          </div>
+                                        
+                                          <div className="d-ryt">
+                                            <div className='text-decoration-none'><span className="add_btn" id="addBtn1" onClick={() => selectSubscription(subscription)}>ADD</span></div> 
+                                              {/* <div className="added_count" id="addedCount1" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div> */}
+                                          </div>
+                                      </div>
+                                      {/* <Link to="/checkout" className="text-center m-t-32 m-b-13" id="selectBtn" ><span className="select_btn">Select this Plan</span></Link> */}
                                   </div>
+                                  )
+                                }
                                 
-                                  <div className="d-ryt">
-                                     <Link to="/cart" className='text-decoration-none'><span className="add_btn" id="addBtn1" >ADD</span></Link> 
-                                      {/* <div className="added_count" id="addedCount1" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div> */}
-                                  </div>
-                              </div>
-                              {/* <Link to="/checkout" className="text-center m-t-32 m-b-13" id="selectBtn" ><span className="select_btn">Select this Plan</span></Link> */}
-                          </div>
-                          <div className="plan_box h_item1 p-b-22 p-t-22 p-l-20 p-r-20 m-t-32">
-                              <div className="d-flex justify-content-between align-items-center">
-                                  <div className="d-lft d-flex flex-column align-items-start">
-                                      <span className="tit11"><span className="m-r-10"><img src="assets/images/veg_icon.png" width="18" alt=""/></span>Veg meal  - Subscription plan</span>
-                                      {/* <span className="a_price">$ 2150</span>
-                                      <span className="f_price">$ 1750</span> */}
-                                  </div>
-                                  <div className="d-ryt">
-                                      <span className="add_btn">ADD</span>
-                                      {/* <div className="added_count" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div> */}
-                                  </div>
-                              </div>
-                          </div>
-                         
+                              })
+                            : null
+                          }
                         </div>
                        
                       </div>
-                      <div id="menu1" className="container tab-pane fade"><br/>
+                      { <div id="menu1" className="container tab-pane fade"><br/>
                         <div className="plan_wrap">
-                          <div className="plan_box h_item1 p-b-22 p-t-22 p-l-20 p-r-20 ">
-                              <div className="d-flex justify-content-between align-items-center">
-                                  <div className="d-lft d-flex flex-column align-items-start">
-                                      <span className="tit11"><span className="m-r-10"><img src="assets/images/non-veg_icon.png" width="18" alt=""/></span>Non-veg meal - Trail plan</span>
-                                     
-                                  </div>
-                                
-                                  <div className="d-ryt">
-                                      <span className="add_btn" id="addBtn2">ADD</span>
+                        {
+                            (subscriptions && subscriptions.length) ?
+                              subscriptions.map((subscription) => {
+                                if(!subscription.isVeg) {
+                                  return (
+                                    <div className="plan_box h_item1 m-b-10 p-b-22 p-t-22 p-l-20 p-r-20 ">
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className="d-lft d-flex flex-column align-items-start">
+                                                <span className="tit11"><span className="m-r-10"><img src="assets/images/non-veg_icon.png" width="18" alt=""/></span>{subscription.name}</span>
+                                              
+                                            </div>
+                                          
+                                            <div className="d-ryt">
+                                                <span className="add_btn" id="addBtn2" onClick={() => selectSubscription(subscription)}>ADD</span>
+                                                
+                                            </div>
+                                        </div>
                                       
-                                  </div>
-                              </div>
-                             
-                          </div>
-                          <div className="plan_box h_item1 p-b-22 p-t-22 p-l-20 p-r-20 m-t-32">
-                              <div className="d-flex justify-content-between align-items-center">
-                                  <div className="d-lft d-flex flex-column align-items-start">
-                                      <span className="tit11"><span className="m-r-10"><img src="assets/images/non-veg_icon.png" width="18" alt=""/></span>Non-Veg meal - Subscription plan</span>
-                                    
-                                  </div>
-                                  <div className="d-ryt">
-                                      <span className="add_btn">ADD</span>
-                                     
-                                  </div>
-                              </div>
-                          </div>
-                         
+                                    </div>
+                                  )
+                                }
+                                
+                              })
+                            : null
+                          }
                         </div>
-                       
-                      </div>
+                      </div> }
                     </div>              
                 </div>
               </div>
@@ -123,7 +154,7 @@ function Subscription() {
              
             </div>
     </section>
-    </Layout>
+    </div>
     
   );
 }

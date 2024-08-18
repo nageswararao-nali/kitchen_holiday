@@ -120,7 +120,7 @@
         if($(this).scrollTop() > 5 && $(this).width() > 992) {
             // $(logo).attr('src',linkLogo2);
             $(header).addClass('header-fixed');
-            console.log("adding class hease came here", $(this).scrollTop(), $(this).width())
+            // console.log("adding class hease came here", $(this).scrollTop(), $(this).width())
         }
         else {
             $(header).removeClass('header-fixed');

@@ -17,10 +17,12 @@ import Payment from './pages/Payment/payment';
 import My_account from './pages/My_account/myaccount';
 import Cart from './pages/Cart/cart';
 import Address from './pages/Address/address';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
-    <Routes>
+    <Layout>
+      <Routes>
         <Route path="/"  element={<Home />} />
         <Route path="/terms"  element={<Terms />} />
         <Route path="/privacy"  element={<Privacy />} />
@@ -37,7 +39,9 @@ function App() {
         <Route path="/address"  element={<Address />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+      </Routes>
+    </Layout>
+    
     
   );
 }

@@ -11,13 +11,13 @@ import Faq from '../../features/faq/faq';
 
 function Home() {
   return (
-    <Layout>
+    <div>
         <MainSlider />
         <WhoChoose />
         <HowWorks />
         <Review />
         <Faq />
-    </Layout>
+    </div>
     
   );
 }

@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 // import { Counter } from './features/counter/Counter';
 // import './App.css';
 import Layout from '../../components/Layout/Layout';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
@@ -11,24 +11,98 @@ import {DateRangePicker} from "@nextui-org/react";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getSubItems, itemMappingsData } from '../../store/itemsSlice';
+import { setOrderData } from '../../store/orderSlice';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Cart() {
+    const { selectedItem, selectedSubscription } = useSelector((state) => state.subscriptions)
     const [showPopup, setShow] = useState(false);
     const [selected, setSelected] = useState(0);
+    const [selectedPlan, setSelectedPlan] = useState('');
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [quantity, setQuantity] = useState(1);
+    const { subItems } = useSelector((state) => state.items)
+    const [mappings, setMappings] = useState([]);
+    const [extraSubItems, setExtraSubItems] = useState([]);
+    const [startDate, setStartDate] = useState(new Date());
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const handleClick = (divNum) => () => {
-      setSelected(divNum);
+    //   setSelected(divNum);
+        console.log(extraSubItems)
+      let index = extraSubItems.indexOf(divNum)
+      if(index > -1) {
+        let eItems = extraSubItems.splice(index, 1);
+        setExtraSubItems(eItems)
+      } else {
+        setExtraSubItems([...extraSubItems, divNum])
+      }
+      
     };
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    if(extraSubItems.length) {
+        console.log("hhhh")
+        extraSubItems.map((extraSubItem) => {
+            let subItemData = subItems.filter((subItem) => {
+                return subItem.id == extraSubItem
+            })[0]
+            setTotalPrice(totalPrice+subItemData.price)
+        })
+    }
+    
+  } 
   const handleShow = () => setShow(true);
   const active = {backgroundColor: '#2e9a3f',color: '#ffffff'}
   const inactive = {}
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    if(selectedSubscription.id) {
+        setTotalPrice(selectedSubscription.price)
+    }
+  }, [selectedSubscription])
+
+  const getItemsData = async () => {
+    await dispatch(getSubItems())
+    let mps = await dispatch(itemMappingsData({itemId: selectedItem.id}))
+    console.log("mps", selectedItem.id)
+    console.log(mps)
+    if(mps.payload) {
+        setMappings(mps.payload.data.items)
+    }
+  }
+  useEffect(() => {
+      getItemsData()
+  }, [])
+
+  const checkOut = async() => {
+    if(selectedPlan && quantity) {
+        let orderDetails = {
+            item: selectedItem,
+            subscription: selectedSubscription,
+            itemId: selectedItem.id,
+            extraSubItems: extraSubItems,
+            subscriptionId: selectedSubscription.id,
+            quantity,
+            totalPrice,
+            startDate
+        }
+        await dispatch(setOrderData(orderDetails))
+        navigate('/checkout')
+    }
+    
+  }
+
   return (
-    <Layout>
+    <div>
         <div className='container p-t-120'>
         <Breadcrumb className='p-t-30'>
             <Breadcrumb.Item href="/home">Home</Breadcrumb.Item>
@@ -47,9 +121,9 @@ function Cart() {
         <div className='d-md-flex justify-content-between'>
         <div class="px-3 my-3">
             <a class="cart-item-product" href="#">
-                <div class="cart-item-product-thumb"><img src="assets/images/m_plate3.png" alt="Product"/></div>
+                <div class="cart-item-product-thumb"><img src={selectedItem.image} alt="Product"/></div>
                 <div class="cart-item-product-info">
-                    <h4 class="cart-item-product-title">Veg Meal (Trail)</h4>
+                    <h4 class="cart-item-product-title">{selectedItem.name} ({selectedSubscription.shortName})</h4>
                     <span className='add_extra' onClick={handleShow}><strong>+ Add Extra</strong></span>
                 </div>
             </a>
@@ -59,101 +133,94 @@ function Cart() {
             <div class="cart-item-label">Choose your plan</div>
             <div class="count-input position-relative">
                 <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
-                <select class="form-control">
-                    <option>Trail plan (3days)</option>
-                    <option>1 Week</option>
-                    <option>2 Weeks</option>
-                    <option>3 Weeks</option>
-                    <option>1 Month (30 days)</option>
-                    <option>Custom dates</option>
+                <select class="form-control" onChange={(e) => setSelectedPlan(e.target.value)}>
+                    <option value="">Select Plan</option>
+                    <option value="mf">Mon-Fri</option>
+                    <option value="ms">Mon-Sat</option>
+                    <option value="custom">Custom</option>
                 </select>
             </div>
            
         </div>
         <div class="px-3 my-3 text-center">
             <div class="cart-item-label">Quantity</div>
-            {/* <div class="count-input position-relative">
-                <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
-                <select class="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                </select>
-            </div> */}
-            <div className="added_count" ><span className="count_minus">-</span><span className="count_total">1</span><span className="count_plus">+</span></div>
+            <div className="added_count" ><span className="count_minus" onClick={() => setQuantity(quantity > 0 ? quantity-1 : 0)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => setQuantity(quantity+1)}>+</span></div>
         </div>
         <div class="px-3 my-3 text-center">
-            <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">$910.00</span>
+            <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">${totalPrice}</span>
         </div>
         </div>
+        <div>
+            <span>Start From:</span>
+            <span>
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            </span>
+        </div>
+        {
+            selectedPlan == 'custom' ? 
+        
         <div className='custom_dates_wrap text-center'>
             <span className='d-block'>Days of Week:</span>
             <div className='custom_dates mb-3'>
-            <Form> 
-            {['checkbox'].map((type) => (
-            <div key={`default-${type}`}  >
-              <Form.Check
-                    inline
-                    label="Monday"
-                    name="group1"
-                    type={type}
-                    id={`inline-${type}-1`}
-                />
+                <Form> 
+                {['checkbox'].map((type) => (
+                <div key={`default-${type}`}  >
                 <Form.Check
-                    inline
-                    label="Tuesday"
-                    name="group1"
-                    type={type}
-                    id={`inline-${type}-2`}
-                />
-                <Form.Check
-                    inline            
-                    label="Wednessday"
-                    type={type}
-                    id={`inline-${type}-3`}
-                />
-                <Form.Check
-                    inline            
-                    label="Thursday"
-                    type={type}
-                    id={`inline-${type}-3`}
-                />
-                <Form.Check
-                    inline            
-                    label="Friday"
-                    type={type}
-                    id={`inline-${type}-3`}
-                />
-                <Form.Check
-                    inline            
-                    label="Saturday"
-                    type={type}
-                    id={`inline-${type}-3`}
-                />
-                <Form.Check
-                    inline            
-                    label="Sunday"
-                    type={type}
-                    id={`inline-${type}-3`}
-                />
-                </div>
-            ))}
-          </Form>
+                        inline
+                        label="Monday"
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-1`}
+                    />
+                    <Form.Check
+                        inline
+                        label="Tuesday"
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-2`}
+                    />
+                    <Form.Check
+                        inline            
+                        label="Wednessday"
+                        type={type}
+                        id={`inline-${type}-3`}
+                    />
+                    <Form.Check
+                        inline            
+                        label="Thursday"
+                        type={type}
+                        id={`inline-${type}-3`}
+                    />
+                    <Form.Check
+                        inline            
+                        label="Friday"
+                        type={type}
+                        id={`inline-${type}-3`}
+                    />
+                    <Form.Check
+                        inline            
+                        label="Saturday"
+                        type={type}
+                        id={`inline-${type}-3`}
+                    />
+                    <Form.Check
+                        inline            
+                        label="Sunday"
+                        type={type}
+                        id={`inline-${type}-3`}
+                    />
+                    </div>
+                ))}
+            </Form>
           </div>
-    </div>
+        </div> : null
+        }
     </div>
     {/* <DateRangePicker 
       label="Stay duration" 
       className="max-w-xs" 
     /> */}
-    <div class="d-sm-flex justify-content-between align-items-center text-center text-sm-left px-4">
+    {/* <div class="d-sm-flex justify-content-between align-items-center text-center text-sm-left px-4">
         <form class="row py-2">
             <div className='col-md-6 px-0'>
                 <label class="sr-only">Coupon code</label>
@@ -163,12 +230,12 @@ function Cart() {
                 <button class="btn btn-style-1 btn-secondary btn-sm my-2 mx-auto mx-sm-0" type="submit">Apply Coupon</button>
             </div>
         </form>
-        <div class="py-2"><span class="d-inline-block align-middle text-sm text-muted font-weight-medium text-uppercase mr-2">Subtotal:</span><span class="d-inline-block align-middle text-xl font-weight-medium">$188.50</span></div>
-    </div>
+        <div class="py-2"><span class="d-inline-block align-middle text-sm text-muted font-weight-medium text-uppercase mr-2">Subtotal:</span><span class="d-inline-block align-middle text-xl font-weight-medium">${totalPrice}</span></div>
+    </div> */}
     <hr class="my-2"/>
     <div class="row pt-3 pb-5 mb-2">
         <div class="col-sm-6 mb-3"></div>
-        <div class="col-sm-6 mb-3"><a class="btn2 btn-style-1 btn-primary btn-block" href="/checkout"><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
+        <div class="col-sm-6 mb-3"><a class="btn2 btn-style-1 btn-primary btn-block" onClick={() => checkOut()}><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
     </div>
     
        
@@ -181,38 +248,23 @@ function Cart() {
         </Modal.Header>
         <Modal.Body>
         <Row>
-            <Col xs={6} md={4}>
-                <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                    <span><img src="assets/images/veg_item1.png" width="40" alt=""/></span><span>Vegetable</span>
-                </div>
-            </Col>
-            <Col xs={6} md={4}>
-                <div className="menu_item" style={selected == 2 ? active : inactive} onClick={handleClick(2)}>
-                    <span><img src="assets/images/veg_item2.png" width="40" alt=""/></span><span>Dal</span>
-                </div>
-            </Col>
-            <Col xs={6} md={4}>
-                <div className="menu_item" style={selected == 3 ? active : inactive} onClick={handleClick(3)}>
-                    <span><img src="assets/images/veg_item3.png" width="40" alt=""/></span><span>3 Chapathi</span>
-                </div>
-            </Col>
-          </Row>
-          <Row className='mt-3'>
-            <Col xs={6} md={4}>
-                <div className="menu_item" style={selected == 4 ? active : inactive} onClick={handleClick(4)}>
-                    <span><img src="assets/images/veg_item4.png" width="40" alt=""/></span><span>1 Salad/Soup</span>
-                </div>
-            </Col>
-            <Col xs={6} md={4}>
-                <div className="menu_item" style={selected == 5 ? active : inactive} onClick={handleClick(5)}>
-                    <span><img src="assets/images/veg_item1.png" width="40" alt=""/></span><span>Rice</span>
-                </div>
-            </Col>
-            <Col xs={6} md={4}>
-                <div className="menu_item" style={selected == 6 ? active : inactive} onClick={handleClick(6)}>
-                    <span><img src="assets/images/veg_item2.png" width="40" alt=""/></span><span>Veg Curry</span>
-                </div>
-            </Col>
+            {
+                (subItems.length && mappings.length) ? 
+                    subItems.map((subItem) => {
+                        let mps = JSON.parse(mappings[0].subItemIds)
+                        if(mps.indexOf(subItem.id.toString()) > -1) {
+                            return (
+                                <Col xs={6} md={4}>
+                                    <div className="menu_item" style={extraSubItems.indexOf(subItem.id) > -1 ? active : inactive} onClick={handleClick(subItem.id)}>
+                                        <span><img src={subItem.image} width="40" alt=""/></span><span>{subItem.name}</span>
+                                    </div>
+                                </Col>
+                            )
+                        }
+                        
+                    })
+                : null
+            }
           </Row>
         </Modal.Body>
         <Modal.Footer className='justify-content-center'>
@@ -224,7 +276,7 @@ function Cart() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </Layout>
+    </div>
     
   );
 }

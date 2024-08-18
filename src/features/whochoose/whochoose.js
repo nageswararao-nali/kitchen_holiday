@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 // import "./Layout.css";
 
 // Pass the child props
 export default function WhoChoose() {
+        const navigate = useNavigate()
   return (
     <section className="section-welcome  p-t-120 p-b-105">
         <div className="container-fluid position-relative">
@@ -19,7 +21,7 @@ export default function WhoChoose() {
                                 <div className="d-flex flex-column" style={{justifyContent: "center", height: "80%"}}>
                                         <h2 className="tit5 p-r-15 p-t-3">Veg Meals</h2>
                                         <p className="p-r-60" style={{paddingRight: "140px",fontSize: "24px"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                                        <div className="subscribe_btn m-t-32"><span>Subscribe now</span></div>
+                                        <div className="subscribe_btn m-t-32"><span onClick={() => navigate('/subscription')}>Subscribe now</span></div>
 
                                 </div>
                         </div>
@@ -32,7 +34,7 @@ export default function WhoChoose() {
                                 <div className="d-flex flex-column" style={{justifyContent: "center", height: "80%"}}>
                                         <h2 className="tit5 p-l-15 p-t-3 text-end">Non-Veg Meals</h2>
                                         <p className=" text-end" style={{paddingLeft: "80px",fontSize: "24px"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
-                                        <div className="subscribe_btn m-t-32 text-end"><span>Subscribe now</span></div>
+                                        <div className="subscribe_btn m-t-32 text-end"><span onClick={() => navigate('/subscription')}>Subscribe now</span></div>
                                 </div>
                         </div>
                         <div className="col-md-6 p-t-45 p-b-30">

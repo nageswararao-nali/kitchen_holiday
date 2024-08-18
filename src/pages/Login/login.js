@@ -3,15 +3,37 @@ import React, {useState, useEffect} from "react";
 // import { Counter } from './features/counter/Counter';
 // import './App.css';
 import Layout from '../../components/Layout/Layout';
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { login } from '../../store/authSlice';
 
 function Login() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const { isAuthenticated, error } = useSelector((state) => state.auth)
+    const { selectedItem } = useSelector((state) => state.subscriptions)
+    const [username, setUsername] = useState(null)
+    const [password, setPassword] = useState(null)
+    const [isError, setIsError] = useState(false)
+    const loginAction = async () => {
+        if(username && password) {
+            let loginDetails = await dispatch(login({username, password}))
+            if(loginDetails.payload.success && selectedItem.id) {
+                navigate('/cart')
+            }
+        } else {
+            setIsError(true)
+        }
+    }
+    useEffect(() => {
+        if(isAuthenticated) {
+            navigate('/')
+        }
+    }, [isAuthenticated])
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
   return (
-    <Layout>
         <section className="section-welcome p-t-45 p-b-105 ">    
             <div className="container p-t-120">
                 <div className="row">
@@ -28,12 +50,20 @@ function Login() {
                     <form action="#" method="post">
                     <div className="form-group first m-b-15">
                     <label for="username">Username</label>
-                    <input type="text" className="form-control" id="username"/>
+                    <input type="text" className="form-control" id="username" onChange={(e) => {
+                                setUsername(e.target.value); 
+                                e.target.value ? setIsError(false) : setIsError(true);
+                                }} />
                     <span className="text-danger fs-13 d-none">Please enter username</span>
                     </div>
                     <div className="form-group last mb-4">
                     <label for="password">Password</label>
-                    <input type="password" className="form-control" id="password"/>
+                    <input type="password" className="form-control" id="password"
+                     onChange={(e) => {
+                        setPassword(e.target.value); 
+                        e.target.value ? setIsError(false) : setIsError(true);
+                        }}
+                        />
                     <span className="text-danger fs-13 d-none">Please enter correct Password</span>
                     </div>
                     <div className="d-flex mb-5 align-items-center justify-content-between">
@@ -78,7 +108,6 @@ function Login() {
                     </div>               
             </div>
         </section>
-    </Layout>
     
   );
 }
