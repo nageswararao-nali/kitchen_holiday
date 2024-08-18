@@ -2120,3 +2120,19 @@ ul.summary-list > li:last-child  {
 .menu_item:hover{background: #ec1d25;color: #ffffff;}
 .m-l-auto{margin-left: auto;}
 .menu_item.active{background: #ec1d25;}
+.react-datepicker-wrapper{margin-bottom: 20px;}
+.react-datepicker-wrapper input{display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  appearance: none;
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
+.add_address{font-size: 16px;
+  padding: 10px 20px;}
