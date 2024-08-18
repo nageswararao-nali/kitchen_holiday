@@ -20,7 +20,9 @@ function Login() {
             let loginDetails = await dispatch(login({username, password}))
             if(loginDetails.payload.success && selectedItem.id) {
                 navigate('/cart')
-            }
+            } else if(loginDetails.payload.success){
+                navigate('/')
+            }   
         } else {
             setIsError(true)
         }
@@ -47,7 +49,6 @@ function Login() {
                     <h2 className='form-title m-b-13'>Login</h2>
                     <p className="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
                     </div>
-                    <form action="#" method="post">
                     <div className="form-group first m-b-15">
                     <label for="username">Username</label>
                     <input type="text" className="form-control" id="username" onChange={(e) => {
@@ -74,7 +75,7 @@ function Login() {
                         <span className="ml-auto"><a href="#" className="forgot-pass">Forgot Password</a></span>
                     </div>
                     <div className="d-flex mb-4 flex-column justify-content-between">
-                        <input type="submit" value="Login" className="btn btn-block btn_signin m-b-13"/>
+                        <input type="submit" value="Login" onClick={() => loginAction()} className="btn btn-block btn_signin m-b-13"/>
                     
                     </div>
                     <div className="row">
@@ -101,7 +102,6 @@ function Login() {
                     </div>
                 
                 
-                    </form>
                     </div>
                     </div>
                     </div>
