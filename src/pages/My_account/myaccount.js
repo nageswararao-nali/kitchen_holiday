@@ -3,13 +3,16 @@ import React, {useState, useEffect} from "react";
 // import { Counter } from './features/counter/Counter';
 // import './App.css';
 import Layout from '../../components/Layout/Layout';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAddresses } from "../../store/usersSlice";
+import { getOrders, clearOrders } from "../../store/orderSlice";
+import * as moment from 'moment';
 
 const heighstyle = {
     height: '5px', 
@@ -21,11 +24,49 @@ const profile = () => {
 
 
 function Myaccount() {
+  const { user } = useSelector((state) => state.auth)
+  const { userAddresses } = useSelector((state) => state.users)
+  const { orders } = useSelector((state) => state.orders)
+console.log("orders")
+console.log(orders)
+  const navigate = useNavigate()
+    const dispatch = useDispatch()
+  const getMyOrders = async (reqObj) => {
+    console.log("reqObj")
+    console.log(reqObj)
+    await dispatch(clearOrders())
+    await dispatch(getOrders(reqObj))
+  }
+  const getUserAddressesData = async () => {
+    await dispatch(getUserAddresses({userId: user.id}))
+    
+  }
   useEffect(() => {
+    getUserAddressesData()
+    getUserTodayOrders()
     window.scrollTo(0, 0)
   }, [])
+  
+  const handleTabClick = async(e) => {
+    console.log(e)
+    if(e == "TodayDelivery") {
+      getUserTodayOrders()
+    }
+    if(e == "SubscriptionPlan") {
+      getMyOrders({userId: user.id, orderType: 'subscription'})
+    }
+    if(e == "DeliveredOrder") {
+      getMyOrders({userId: user.id, status: 'Delivered'})
+    }
+    if(e == "CancelOrder") {
+      getMyOrders({userId: user.id, status: 'Canceled'})
+    }
+  }
+  const getUserTodayOrders = async () => {
+    getMyOrders({userId: user.id, orderDate: moment().format('YYYY-MM-DD')})
+  }
   return (
-    <Layout>
+    <div>
       <div className='container p-t-120'>
         <Breadcrumb>
             <Breadcrumb.Item href="/home">Home</Breadcrumb.Item>
@@ -50,7 +91,7 @@ function Myaccount() {
                 <img src="assets/images/avatar-01.webp" alt="IGM-AVATAR"/>
               </a>
               <h1>Marie Simmons</h1>
-              <p className="text-white">marie@theEmail.com</p>
+              <p className="text-white">{user.username}</p>
           </div>
 
           <ul className="nav nav-pills nav-stacked">
@@ -75,7 +116,7 @@ function Myaccount() {
                           <h6 className="mb-0">Full Name</h6>
                         </div>
                         <div className="col-sm-9 text-secondary">
-                          <span>Kenneth Valdez</span> 
+                          <span>{user.fName + " " +user.lName}</span> 
                           <div data-mdb-input-init className="form-outline d-none">
                             <input type="text"  className="form-control" placeholder="Name" />
                           </div> 
@@ -88,7 +129,7 @@ function Myaccount() {
                           <h6 className="mb-0">Email</h6>
                         </div>
                         <div className="col-sm-9 text-secondary">
-                          <span>fip@jukmuh.al</span>
+                          <span>{user.email}</span>
                           <div data-mdb-input-init className="form-outline d-none">
                             <input type="email" id="form3Example3" className="form-control" placeholder="Email address" />
                             <span className="text-danger fs-13 d-none">Please enter valid Email id</span>
@@ -102,7 +143,7 @@ function Myaccount() {
                           <h6 className="mb-0">Mobile</h6>
                         </div>
                         <div className="col-sm-9 text-secondary">
-                         <span> (320) 380-4539</span>
+                         <span> {user.mobile}</span>
                          <div data-mdb-input-init className="form-outline d-none">
                             <input type="mobile" id="form3Example4" className="form-control" placeholder="Mobile number" />
                             <span className="text-danger fs-13 d-none">Please enter mobile number</span>
@@ -113,10 +154,10 @@ function Myaccount() {
                       <hr/>
                       <div className="row">
                         <div className="col-sm-3">
-                          <h6 className="mb-0">City</h6>
+                          <h6 className="mb-0">State</h6>
                         </div>
                         <div className="col-sm-9 text-secondary">
-                           <span>San Francisco</span>
+                           <span>{user.state}</span>
                            <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
                         </div>
                       </div>
@@ -135,30 +176,24 @@ function Myaccount() {
                         <span className="sub_title  p-l-15 p-r-15">Delivery Addresses</span>
                       </div>
                       <div className='p-4'>
-                        <div className="text-muted m-b-30">
-                            <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"><b>Lunch (Default)</b></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
-                            <h5 className="font-size-15 mb-2">Preston Miller</h5>
-                            <p className="mb-1">4068 Post Avenue Newfolden, MN 56738</p>
-                            <p className="mb-1">PrestonMiller@armyspy.com</p>
-                            <p>001-234-5678</p>
-                        </div>
-                        <div className="text-muted m-b-30">
-                        <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"><b>Dinner</b></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
-                            <h5 className="font-size-15 mb-2">Preston Miller</h5>
-                            <p className="mb-1">4068 Post Avenue Newfolden, MN 56738</p>
-                            <p className="mb-1">PrestonMiller@armyspy.com</p>
-                            <p>001-234-5678</p>
-                        </div>
-                        <div className="text-muted ">
-                        <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"><b>Instant Order</b></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
-                            <h5 className="font-size-15 mb-2">Preston Miller</h5>
-                            <p className="mb-1">4068 Post Avenue Newfolden, MN 56738</p>
-                            <p className="mb-1">PrestonMiller@armyspy.com</p>
-                            <p>001-234-5678</p>
-                        </div>
+                        {
+                          userAddresses.length ? 
+                          userAddresses.map((userAddress) => {
+                            return (
+                              <div className="text-muted m-b-30">
+                                  <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
+                                  <h5 className="font-size-15 mb-2">{userAddress.fName + " " + userAddress.lName}</h5>
+                                  <p className="mb-1">{userAddress.address}</p>
+                                  <p className="mb-1">{userAddress.email}</p>
+                                  <p>{userAddress.zipcode}</p>
+                              </div>
+                            )
+                          })
+                          : null
+                        }
                       </div>
                     </div>
-                    <div className="card mb-3  ">
+                    {/* <div className="card mb-3  ">
                       <div className="d-address">
                         <span className="sub_title  p-l-15 p-r-15">Wallet Details</span>
                       </div>
@@ -200,8 +235,8 @@ function Myaccount() {
                           </div>  
                         </div>   
                       </div>
-                    </div>
-                    <div className="card mb-3  ">
+                    </div> */}
+                    {/* <div className="card mb-3  ">
                       <div className="d-address">
                         <span className="sub_title  p-l-15 p-r-15">Wallet History</span>
                       </div>
@@ -285,7 +320,7 @@ function Myaccount() {
                         </div>
                       </div>
                       </div>
-                     </div>
+                     </div> */}
                      <div className="card mb-3  ">
                       <div className="d-address">
                         <span className="sub_title  p-l-15 p-r-15">Booking History</span>
@@ -295,8 +330,9 @@ function Myaccount() {
                           defaultActiveKey="TodayDelivery"
                           id="uncontrolled-tab-example"
                           className="mb-3 booking_history"
+                          onSelect={(e) => handleTabClick(e)}
                         >
-                          <Tab eventKey="TodayDelivery" title="Today's Delivery">
+                          <Tab eventKey="TodayDelivery" title="Today's Delivery" onClick={() => getUserTodayOrders()}>
                             <table className="table table-hover">
                               <thead>
                                 <tr>
@@ -310,55 +346,27 @@ function Myaccount() {
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <td>KH001234</td>
-                                  <td>27-07-2024</td>
-                                  <td>Trail meal(2)</td>
-                                  <td> Dinner </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
-                                <tr>
-                                <td>KH001234</td>
-                                  <td>27-07-2024</td>
-                                  <td>Trail meal(2)</td>
-                                  <td> Dinner </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
-                                <tr>
-                                <td>KH001234</td>
-                                  <td>27-07-2024</td>
-                                  <td>Trail meal(2)</td>
-                                  <td> Dinner </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
-                                <tr>
-                                <td>KH001234</td>
-                                  <td>27-07-2024</td>
-                                  <td>Trail meal(2)</td>
-                                  <td> Dinner </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
-                                <tr>
-                                <td>KH001234</td>
-                                  <td>27-07-2024</td>
-                                  <td>Trail meal(2)</td>
-                                  <td> Dinner </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
+                                {
+                                  (orders && orders.length) ?
+                                    orders.map((order) => {
+                                      return(<tr>
+                                        <td>{order.id}</td>
+                                        <td>{order.orderDate}</td>
+                                        <td>{order.itemName}</td>
+                                        <td> {order.orderType} </td>
+                                        <td>{order.status}</td>
+                                        <td>{order.address}</td>
+                                        <td>X</td>
+                                      </tr>)
+                                    })
+                                  : null
+                                }
+                                
+                                
                               </tbody>
                             </table>
                           </Tab>
-                          <Tab eventKey="SubscriptionPlan" title="Subscription Plan">
+                          <Tab eventKey="SubscriptionPlan" title="Subscription Plan"  onClick={() => getMyOrders({userId: user.id, orderType: 'subscription'})}>
                           <table className="table table-hover">
                               <thead>
                                 <tr>
@@ -372,41 +380,60 @@ function Myaccount() {
                                 </tr>
                               </thead>
                               <tbody>
+                                {
+                                  (orders && orders.length) ?
+                                    orders.map((order) => {
+                                      return(<tr>
+                                        <td>{order.id}</td>
+                                        <td>{order.orderDate}</td>
+                                        <td>{order.itemName}</td>
+                                        <td> {order.orderType} </td>
+                                        <td>{order.status}</td>
+                                        <td>{order.address}</td>
+                                        <td>X</td>
+                                      </tr>)
+                                    })
+                                  : null
+                                }
+                                
+                              </tbody>
+                            </table>
+                          </Tab>
+                          
+                          <Tab eventKey="DeliveredOrder" title="Delivered Order"  onClick={() => getMyOrders({userId: user.id, status: 'Delivered'})}>
+                          <table className="table table-hover">
+                              <thead>
                                 <tr>
-                                  <td>KH001234</td>
-                                  <td>03-08-2024</td>
-                                  <td>Veg meal</td>
-                                  <td> Lunch </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
+                                  <th>Order No.</th>
+                                  <th>Order Date</th>
+                                  <th>Your Order</th>
+                                  <th>Order Type</th>
+                                  <th>Deliverry/Pickup</th>
+                                  <th>Location</th>
+                                  <th>Action</th>
                                 </tr>
-                                <tr>
-                                <td>KH001234</td>
-                                  <td>27-07-2024</td>
-                                  <td>Non-veg meal</td>
-                                  <td> Dinner </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
-                                <tr>
-                                <td>KH001234</td>
-                                  <td>27-07-2024</td>
-                                  <td>Veg Meal</td>
-                                  <td> Dinner </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
+                              </thead>
+                              <tbody>
+                              {
+                                  (orders && orders.length) ?
+                                    orders.map((order) => {
+                                      return(<tr>
+                                        <td>{order.id}</td>
+                                        <td>{order.orderDate}</td>
+                                        <td>{order.itemName}</td>
+                                        <td> {order.orderType} </td>
+                                        <td>{order.status}</td>
+                                        <td>{order.address}</td>
+                                        <td>X</td>
+                                      </tr>)
+                                    })
+                                  : null
+                                }
                                
                               </tbody>
                             </table>
                           </Tab>
-                          <Tab eventKey="SwappableOrder" title="Swappable Order">
-                            No Swappable orders
-                          </Tab>
-                          <Tab eventKey="DeliveredOrder" title="Delivered Order">
+                          <Tab eventKey="CancelOrder" title="Cancel Order"  onClick={() => getMyOrders({userId: user.id, status: 'canceled'})}>
                           <table className="table table-hover">
                               <thead>
                                 <tr>
@@ -420,60 +447,21 @@ function Myaccount() {
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <td>KH001234</td>
-                                  <td>03-08-2024</td>
-                                  <td>Veg meal</td>
-                                  <td> Lunch </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
-                                <tr>
-                                <td>KH001234</td>
-                                  <td>27-07-2024</td>
-                                  <td>Non-veg meal</td>
-                                  <td> Dinner </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
-                                <tr>
-                                <td>KH001234</td>
-                                  <td>27-07-2024</td>
-                                  <td>Veg Meal</td>
-                                  <td> Dinner </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
-                               
-                              </tbody>
-                            </table>
-                          </Tab>
-                          <Tab eventKey="CancelOrder" title="Cancel Order">
-                          <table className="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>Order No.</th>
-                                  <th>Order Date</th>
-                                  <th>Your Order</th>
-                                  <th>Order Type</th>
-                                  <th>Deliverry/Pickup</th>
-                                  <th>Location</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>KH001234</td>
-                                  <td>03-08-2024</td>
-                                  <td>Veg meal</td>
-                                  <td> Lunch </td>
-                                  <td>Delivery</td>
-                                  <td>SanFro</td>
-                                  <td>X</td>
-                                </tr>
+                              {
+                                  (orders && orders.length) ?
+                                    orders.map((order) => {
+                                      return(<tr>
+                                        <td>{order.id}</td>
+                                        <td>{order.orderDate}</td>
+                                        <td>{order.itemName}</td>
+                                        <td> {order.orderType} </td>
+                                        <td>{order.status}</td>
+                                        <td>{order.address}</td>
+                                        <td>X</td>
+                                      </tr>)
+                                    })
+                                  : null
+                                }
                                 
                                
                               </tbody>
@@ -533,7 +521,7 @@ function Myaccount() {
           
         
       </div>
-    </Layout>
+    </div>
     
   );
 }

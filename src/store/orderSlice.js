@@ -31,6 +31,9 @@ const itemsSlice = createSlice({
   reducers: {
     setOrderData: (state, action) => {
       state.orderDetails = action.payload
+    },
+    clearOrders: (state) => {
+      state.orders = []
     }
   },
   extraReducers: (builder) => {
@@ -51,8 +54,10 @@ const itemsSlice = createSlice({
         state.loading = true;
       })
       .addCase(getOrders.fulfilled, (state, action) => {
+        console.log(action.payload)
         if(action.payload.success) {
             state.orders = action.payload.data.items
+            console.log(action.payload.data.items)
         } else {
           state.error = action.payload.message
           state.orders = []
@@ -94,6 +99,6 @@ const itemsSlice = createSlice({
   },
 });
 
-export const { setOrderData } = itemsSlice.actions;
+export const { setOrderData, clearOrders } = itemsSlice.actions;
 
 export default itemsSlice.reducer;

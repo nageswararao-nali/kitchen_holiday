@@ -22,7 +22,9 @@ function Cart() {
     const [showPopup, setShow] = useState(false);
     const [selected, setSelected] = useState(0);
     const [selectedPlan, setSelectedPlan] = useState('');
+    const [plan, setPlan] = useState();
     const [totalPrice, setTotalPrice] = useState(0);
+    const [price, setPrice] = useState(0);
     const [quantity, setQuantity] = useState(1);
     const { subItems } = useSelector((state) => state.items)
     const [mappings, setMappings] = useState([]);
@@ -52,7 +54,8 @@ function Cart() {
             let subItemData = subItems.filter((subItem) => {
                 return subItem.id == extraSubItem
             })[0]
-            setTotalPrice(totalPrice+subItemData.price)
+            setTotalPrice(price+subItemData.price)
+            setPrice(price+subItemData.price)
         })
     }
     
@@ -64,8 +67,15 @@ function Cart() {
     window.scrollTo(0, 0)
   }, [])
 
+  const updateQuantity = async(num) => {
+    let qty = quantity+num;
+    setQuantity(qty > 0 ? qty : 0)
+    setTotalPrice(price*qty)
+    
+  }
   useEffect(() => {
     if(selectedSubscription.id) {
+        setPrice(selectedSubscription.price)
         setTotalPrice(selectedSubscription.price)
     }
   }, [selectedSubscription])
@@ -90,17 +100,29 @@ function Cart() {
             subscription: selectedSubscription,
             itemId: selectedItem.id,
             extraSubItems: extraSubItems,
+            subItems: mappings,
             subscriptionId: selectedSubscription.id,
             quantity,
             totalPrice,
-            startDate
+            startDate,
+            selectedPlan
         }
+        console.log(orderDetails)
         await dispatch(setOrderData(orderDetails))
         navigate('/checkout')
     }
     
   }
-
+  const updatePlan = async (num) => {
+    let index = selectedPlan.indexOf(num)
+    if(index > -1) {
+        let sp = selectedPlan.splice(index, 1);
+        setSelectedPlan(sp)
+      } else {
+        setSelectedPlan([...selectedPlan, num])
+      }
+    console.log(selectedPlan)
+  }
   return (
     <div>
         <div className='container p-t-120'>
@@ -133,18 +155,18 @@ function Cart() {
             <div class="cart-item-label">Choose your plan</div>
             <div class="count-input position-relative">
                 <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
-                <select class="form-control" onChange={(e) => setSelectedPlan(e.target.value)}>
+                <select class="form-control" onChange={(e) => {setPlan(e.target.value); setSelectedPlan(e.target.value)}}>
                     <option value="">Select Plan</option>
-                    <option value="mf">Mon-Fri</option>
-                    <option value="ms">Mon-Sat</option>
-                    <option value="custom">Custom</option>
+                    <option value={[1,2,3,4,5]}>Mon-Fri</option>
+                    <option value={[1,2,3,4,5,6]}>Mon-Sat</option>
+                    <option value={[]}>Custom</option>
                 </select>
             </div>
            
         </div>
         <div class="px-3 my-3 text-center">
             <div class="cart-item-label">Quantity</div>
-            <div className="added_count" ><span className="count_minus" onClick={() => setQuantity(quantity > 0 ? quantity-1 : 0)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => setQuantity(quantity+1)}>+</span></div>
+            <div className="added_count" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
         </div>
         <div class="px-3 my-3 text-center">
             <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">${totalPrice}</span>
@@ -157,7 +179,7 @@ function Cart() {
             </span>
         </div>
         {
-            selectedPlan == 'custom' ? 
+            (plan != undefined && plan.length == 0) ? 
         
         <div className='custom_dates_wrap text-center'>
             <span className='d-block'>Days of Week:</span>
@@ -171,6 +193,7 @@ function Cart() {
                         name="group1"
                         type={type}
                         id={`inline-${type}-1`}
+                        onChange={() => updatePlan(1)}
                     />
                     <Form.Check
                         inline
@@ -178,36 +201,42 @@ function Cart() {
                         name="group1"
                         type={type}
                         id={`inline-${type}-2`}
+                        onChange={() => updatePlan(2)}
                     />
                     <Form.Check
                         inline            
                         label="Wednessday"
                         type={type}
                         id={`inline-${type}-3`}
+                        onChange={() => updatePlan(3)}
                     />
                     <Form.Check
                         inline            
                         label="Thursday"
                         type={type}
                         id={`inline-${type}-3`}
+                        onChange={() => updatePlan(4)}
                     />
                     <Form.Check
                         inline            
                         label="Friday"
                         type={type}
                         id={`inline-${type}-3`}
+                        onChange={() => updatePlan(5)}
                     />
                     <Form.Check
                         inline            
                         label="Saturday"
                         type={type}
                         id={`inline-${type}-3`}
+                        onChange={() => updatePlan(6)}
                     />
                     <Form.Check
                         inline            
                         label="Sunday"
                         type={type}
                         id={`inline-${type}-3`}
+                        onChange={() => updatePlan(7)}
                     />
                     </div>
                 ))}

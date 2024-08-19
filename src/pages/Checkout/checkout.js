@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import Map from './map';
 import { addUserAddress, getUserAddresses } from "../../store/usersSlice";
+import { addOrder } from "../../store/orderSlice";
 
 const displaystyle = {
     display: 'none', 
@@ -32,6 +33,7 @@ function Checkout() {
     const [location, setLocation] = useState()
     const [newAddress, setNewAddress] = useState(false)
     const [addressId, setAddressId] = useState(0)
+    const [address, setAddress] = useState()
     const allowedZipCodes = ["523001"]
 
     const navigate = useNavigate()
@@ -45,8 +47,32 @@ function Checkout() {
         window.scrollTo(0, 0)
       }, [])
 
-    const goToPayment = () => {
+    const goToPayment = async () => {
         console.log("welcome ")
+        console.log("orderDetails")
+        console.log(orderDetails)
+        let orderObj = {
+            userId: user.id,
+            itemId: orderDetails.item.id,
+            itemName: orderDetails.item.name,
+            subItems: JSON.parse(orderDetails.subItems[0].subItemIds),
+            quantity: orderDetails.quantity,
+            addressId: addressId,
+            totalAmount: orderDetails.totalPrice,
+            customerName: address.fName + " " + address.lName,
+            customerMobile: address.mobile,
+            address: address.address + " " + address.address1 + " " + address.state + " " + address.zipcode,
+            startDate: orderDetails.startDate,
+            selectedPlan: orderDetails.selectedPlan,
+            status: 'new',
+            orderType: 'subscription',
+            extraSubItems: orderDetails.extraSubItems,
+            noOrders: orderDetails.subscription.days,
+            subscriptionId: orderDetails.subscription.id,
+        }
+        console.log("oreder req")
+        console.log(orderObj)
+        await dispatch(addOrder(orderObj))
         navigate('/payment')
     }
 
@@ -82,8 +108,9 @@ function Checkout() {
             longitude: location.lng
         }
         let addressDataRes = await dispatch(addUserAddress(addressData))
-        if(addressDataRes.payload.id){
-            setAddressId(addressDataRes.payload.id)
+        if(addressDataRes.payload.success){
+            setAddressId(addressDataRes.payload.data.id)
+            setAddress(addressDataRes.payload.data)
             await getUserAddressesData()
         }
     }
@@ -150,7 +177,7 @@ function Checkout() {
                                     {
                                         userAddresses.map((userAddress) => {
                                             return (
-                                                <div className="row" onClick={() => {setAddressId(userAddress.id)}}>
+                                                <div className="row" onClick={() => {setAddressId(userAddress.id); setAddress(userAddress)}}>
                                                     {userAddress.address}
                                                 </div>
                                             )

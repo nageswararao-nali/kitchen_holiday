@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useSelector } from "react-redux";
 
 // import "./Layout.css";
 
@@ -13,6 +14,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 export default function Header() {
   const isHome = useMatch({path: '/', end: true})
   const navigate = useNavigate();
+  const {isAuthenticated} = useSelector((state) => state.auth)
   const navigateToRoute = (routeName) => {
     console.log("welcome to navigation")
 
@@ -80,8 +82,17 @@ export default function Header() {
               </Nav>
             </Navbar.Collapse>
             <div className="social flex-w flex-l-m p-r-20 trans-0-4">
-          <Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Sign in</Link>
-          <a href="#" className="cart_icon"><i className="fa fa-shopping-cart" aria-hidden="true" style={{fontSize: '28px'}}></i><span className="count">1</span></a>
+              {
+                isAuthenticated ?
+                <Link to="/myaccount" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">
+                  <i className="fa fa-user" aria-hidden="true" style={{fontSize: '28px'}}></i>
+                </Link>
+                :
+                <Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Sign in</Link>
+              }
+          
+          {/* <a href="#" className="cart_icon"><i className="fa fa-shopping-cart" aria-hidden="true" style={{fontSize: '28px'}}></i><span className="count">1</span></a> */}
+          <a className="cart_icon"></a>
           </div>
           </div>
         </div>
