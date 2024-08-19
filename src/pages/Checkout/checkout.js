@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Map from './map';
 import { addUserAddress, getUserAddresses } from "../../store/usersSlice";
 import { addOrder } from "../../store/orderSlice";
+import Form from 'react-bootstrap/Form';
 
 const displaystyle = {
     display: 'none', 
@@ -172,13 +173,37 @@ function Checkout() {
                             {
                                 userAddresses.length ?
                                 <div className="row">
-                                    Address list 
-                                    <span className="btn btn2 btn-lg btn-block" onClick={() => setNewAddress(!newAddress)}  id="goToPayment">New Address</span>
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <span> Address list </span>
+                                        <span className="btn btn2 btn-lg btn-block add_address" onClick={() => setNewAddress(!newAddress)}  id="goToPayment">+ New Address</span>
+                                    </div>
                                     {
                                         userAddresses.map((userAddress) => {
                                             return (
-                                                <div className="row" onClick={() => {setAddressId(userAddress.id); setAddress(userAddress)}}>
-                                                    {userAddress.address}
+                                                <div className="row" onClick={() => {setAddressId(userAddress.id); setAddress(userAddress); setNewAddress(false)}}>
+                                                    {/* {userAddress.address} */}
+                                                    <div className="container">
+                                                        <div className="address_block">
+                                                        <Form>
+                                                            {['radio'].map((type) => (
+                                                                <div key={`inline-${type}`} className="mb-3">
+                                                                    <div className="d-flex">
+                                                                    <Form.Check
+                                                                        inline
+                                                                        name="group1"
+                                                                        type={type}
+                                                                        id={`inline-${type}-1`}
+                                                                    />
+                                                                    <address>
+                                                                    {userAddress.fName + " " + userAddress.lName},<br />
+                                                                        {userAddress.address},<br></br> {userAddress.address1}, <br></br>{userAddress.zipcode} </address>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                            </Form>
+                                                            
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             )
                                         })
@@ -192,12 +217,12 @@ function Checkout() {
                             <form className="needs-validation" novalidate="">
                                 <div className="row">
                                     <div className="col-md-6 mb-3">
-                                        <label for="firstName">* First name</label>
+                                        <label for="firstName"><span className="text-danger">*</span> First name</label>
                                         <input type="text" className="form-control" id="firstName" placeholder="" value={fName} onChange={(e) => setFName(e.target.value)} required=""/>
                                         <div className="invalid-feedback"> Valid first name is required. </div>
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label for="lastName">* Last name</label>
+                                        <label for="lastName"><span className="text-danger">*</span> Last name</label>
                                         <input type="text" className="form-control" id="lastName" placeholder="" value={lName} onChange={(e) => setLName(e.target.value)} required=""/>
                                         <div className="invalid-feedback"> Valid last name is required. </div>
                                     </div>
@@ -213,27 +238,27 @@ function Checkout() {
                                     </div>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="email">* Email </label>
+                                    <label for="email"><span className="text-danger">*</span> Email </label>
                                     <input type="email" className="form-control" id="email" placeholder="you@example.com"  value={email} onChange={(e) => setEmail(e.target.value)} />
                                     <div className="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="mobile">* Mobile </label>
+                                    <label for="mobile"><span className="text-danger">*</span> Mobile </label>
                                     <input type="mobile" className="form-control" id="mobile" placeholder="Enetr your mobile number"  value={mobile} onChange={(e) => setMobile(e.target.value)} />
                                     <div className="invalid-feedback"> Please enter a valid mobile for shipping updates. </div>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="address">* Address</label>
+                                    <label for="address"><span className="text-danger">*</span> Address</label>
                                     <input type="text" className="form-control" id="address" placeholder="1234 Main St" required=""  value={address1} onChange={(e) => setAddress1(e.target.value)} />
                                     <div className="invalid-feedback"> Please enter your shipping address. </div>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="address2">* Address 2 </label>
+                                    <label for="address2"><span className="text-danger">*</span> Address 2 </label>
                                     <input type="text" className="form-control" id="address2" placeholder="Apartment or suite"  value={address2} onChange={(e) => setAddress2(e.target.value)}/>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-5 mb-3">
-                                        <label for="country">* Country</label>
+                                        <label for="country"><span className="text-danger">*</span> Country</label>
                                         <select className="custom-select d-block w-100" id="country" required=""  value={country} onChange={(e) => setCountry(e.target.value)}>
                                             <option value="">Choose...</option>
                                             <option>United States</option>
@@ -241,7 +266,7 @@ function Checkout() {
                                         <div className="invalid-feedback"> Please select a valid country. </div>
                                     </div>
                                     <div className="col-md-4 mb-3">
-                                        <label for="state">* State</label>
+                                        <label for="state"><span className="text-danger">*</span> State</label>
                                         <select className="custom-select d-block w-100" id="state" required=""  value={stateValue} onChange={(e) => setStateValue(e.target.value)}>
                                             <option value="">Choose...</option>
                                             <option>California</option>
@@ -249,7 +274,7 @@ function Checkout() {
                                         <div className="invalid-feedback"> Please provide a valid state. </div>
                                     </div>
                                     <div className="col-md-3 mb-3">
-                                        <label for="zip">* Zip</label>
+                                        <label for="zip"><span className="text-danger">*</span> Zip</label>
                                         <input type="text" className="form-control" id="zip" placeholder="" required=""  value={zip} onChange={(e) => setZip(e.target.value)} />
                                         <div className="invalid-feedback"> Zip code required. </div>
                                     </div>
@@ -257,7 +282,7 @@ function Checkout() {
                                 <div>
                                     <Map setLocation={setLocation}></Map>
                                 </div>
-                                <div ><span className="btn btn2 btn-lg btn-block" onClick={() => saveAddress()}  id="goToPayment">Save Address</span></div>
+                                <div className="mt-4"><span className="btn btn2 btn-lg btn-block" onClick={() => saveAddress()}  id="goToPayment">Save Address</span></div>
                                 <hr className="mb-4"/>
                                 {/* <div className="custom-control custom-checkbox">
                                     <input type="checkbox" className="custom-control-input" id="same-address"/>

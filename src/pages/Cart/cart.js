@@ -172,8 +172,8 @@ function Cart() {
             <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">${totalPrice}</span>
         </div>
         </div>
-        <div>
-            <span>Start From:</span>
+        <div className='px-3'>
+            <span className='d-block'>Start From:</span>
             <span>
             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
             </span>
