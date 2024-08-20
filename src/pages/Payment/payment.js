@@ -13,7 +13,7 @@ const fullwidth = {
 
 function Payment() {
   return (
-    <Layout>
+    <div>
         <section className="section-slide banner">
         <div className="row">
             <div className="banner position-relative" >
@@ -153,7 +153,7 @@ function Payment() {
             </div>
         </div>     
     </section>
-    </Layout>
+    </div>
     
   );
 }

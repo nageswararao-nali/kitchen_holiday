@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import orderService from '../services/orderService';
 import { handleAuthApiCall } from '../utils/apiUtils';
 
+const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
 export const addOrder = createAsyncThunk('orders/addOrder', async (order, thunkAPI) => {
   return handleAuthApiCall(orderService.addOrder, order, thunkAPI);
 });
@@ -19,18 +20,19 @@ export const updateOrderStatus = createAsyncThunk('orders/updateOrderStatus', as
   });
 
 
-const itemsSlice = createSlice({
-  name: 'items',
+const orderSlice = createSlice({
+  name: 'orders',
   initialState: {
     loading: false,
     orders: [],
     order: null,
-    orderDetails: {},
+    orderDetails: orderDetails ? orderDetails : {},
     error: null
   },
   reducers: {
     setOrderData: (state, action) => {
       state.orderDetails = action.payload
+      localStorage.setItem('orderDetails', JSON.stringify(action.payload))
     },
     clearOrders: (state) => {
       state.orders = []
@@ -45,6 +47,9 @@ const itemsSlice = createSlice({
         if(!action.payload.success) {
           state.error = action.payload.message
         }
+        localStorage.removeItem('orderDetails');
+        localStorage.removeItem('selectedItem');
+        localStorage.removeItem('selectedSubscription');
         state.loading = false;
       })
       .addCase(addOrder.rejected, (state, action) => {
@@ -99,6 +104,6 @@ const itemsSlice = createSlice({
   },
 });
 
-export const { setOrderData, clearOrders } = itemsSlice.actions;
+export const { setOrderData, clearOrders } = orderSlice.actions;
 
-export default itemsSlice.reducer;
+export default orderSlice.reducer;

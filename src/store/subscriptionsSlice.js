@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import subscriptionService from '../services/subscriptionService';
 import { handleAuthApiCall } from '../utils/apiUtils';
 
+const selectedItem = JSON.parse(localStorage.getItem('selectedItem'));
+const selectedSubscription = JSON.parse(localStorage.getItem('selectedSubscription'));
 export const addSubscription = createAsyncThunk('subscriptions/addSubscription', async (reqObj, thunkAPI) => {
   return handleAuthApiCall(subscriptionService.addSubscription, reqObj, thunkAPI);
 });
@@ -14,9 +16,6 @@ export const addZone = createAsyncThunk('subscriptions/addZone', async (reqObj, 
     return handleAuthApiCall(subscriptionService.addZone, reqObj, thunkAPI);
   });
   
-  export const getZones = createAsyncThunk('subscriptions/getZones', async (reqObj, thunkAPI) => {
-    return handleAuthApiCall(subscriptionService.getZones, reqObj, thunkAPI);
-  });
 
 
 const subscriptionSlice = createSlice({
@@ -25,8 +24,8 @@ const subscriptionSlice = createSlice({
     loading: false,
     subscriptions: [],
     zones: [],
-    selectedItem: {},
-    selectedSubscription: {},
+    selectedItem: selectedItem ? selectedItem : {},
+    selectedSubscription: selectedSubscription ? selectedSubscription : {},
     error: null
   },
   reducers: {
@@ -34,6 +33,8 @@ const subscriptionSlice = createSlice({
       // console.log(action)
       state.selectedItem = action.payload.item
       state.selectedSubscription = action.payload.sub
+      localStorage.setItem('selectedItem', JSON.stringify(action.payload.item))
+      localStorage.setItem('selectedSubscription', JSON.stringify(action.payload.sub))
     }
   },
   extraReducers: (builder) => {
@@ -77,21 +78,7 @@ const subscriptionSlice = createSlice({
       .addCase(addZone.rejected, (state, action) => {
         state.loading = false;
       })
-      .addCase(getZones.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(getZones.fulfilled, (state, action) => {
-        if(action.payload.success) {
-            state.zones = action.payload.data.items
-        } else {
-          state.error = action.payload.message
-          state.zones = []
-        }
-        state.loading = false;
-      })
-      .addCase(getZones.rejected, (state, action) => {
-        state.loading = false;
-      })
+      
   },
 });
 

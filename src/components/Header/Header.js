@@ -6,7 +6,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/authSlice";
 
 // import "./Layout.css";
 
@@ -14,6 +15,7 @@ import { useSelector } from "react-redux";
 export default function Header() {
   const isHome = useMatch({path: '/', end: true})
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {isAuthenticated} = useSelector((state) => state.auth)
   const navigateToRoute = (routeName) => {
     console.log("welcome to navigation")
@@ -35,7 +37,12 @@ export default function Header() {
     return () => {
         window.removeEventListener('scroll', isSticky);
     };
-});
+  });
+
+  const logoutHandler = async() => {
+    await dispatch(logout())
+    navigate('/')
+  }
 
        
 /* Method that will fix header after a specific scrollable */
@@ -84,9 +91,13 @@ export default function Header() {
             <div className="social flex-w flex-l-m p-r-20 trans-0-4">
               {
                 isAuthenticated ?
-                <Link to="/myaccount" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">
-                  <i className="fa fa-user" aria-hidden="true" style={{fontSize: '28px'}}></i>
-                </Link>
+                <div>
+                  <Link to="/myaccount" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">
+                    <i className="fa fa-user" aria-hidden="true" style={{fontSize: '28px'}}></i>
+                  </Link>
+                  <span onClick={logoutHandler}>Logout</span>
+                </div>
+                
                 :
                 <Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Sign in</Link>
               }

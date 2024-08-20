@@ -17,7 +17,7 @@ function Login() {
     const [isError, setIsError] = useState(false)
     const loginAction = async () => {
         if(username && password) {
-            let loginDetails = await dispatch(login({username, password}))
+            let loginDetails = await dispatch(login({username, password, userType: 'customer'}))
             if(loginDetails.payload.success && selectedItem.id) {
                 navigate('/cart')
             } else if(loginDetails.payload.success){

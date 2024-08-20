@@ -3,13 +3,44 @@ import React, {useState, useEffect} from "react";
 // import { Counter } from './features/counter/Counter';
 // import './App.css';
 import Layout from '../../components/Layout/Layout';
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../store/usersSlice";
 
 function Signup() {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+
+  const [userType, setUserType] = useState('customer');
+  const [fName, setfName] = useState('');
+  const [lName, setlName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [username, setUsername] = useState('');
+
+  const handleSubmit = async (event) => {
+    if(!fName || !lName || !email || !mobile || !username || !password) {
+      alert("Please enter all the fields!")
+      return false
+    }
+    let userObj = {
+      fName,
+      lName,
+      email,
+      mobile,
+      username,
+      password,
+      user_type: userType
+    }
+    let userDetails = await dispatch(addUser(userObj));
+    if(userDetails.payload.success) {
+      navigate('/login')
+    }
+    
+  };
   return (
-    <Layout>
+    <div>
         <section className="section-welcome p-t-45 p-b-105">    
         <div className="container p-t-120">
             <div className="row">
@@ -21,34 +52,38 @@ function Signup() {
                 <div className="col-md-8">
                     <div className="signup-form">
                         <h2 className="form-title m-b-13">Sign up</h2>
-                        <form>
                             <div className="row">
                               <div className="col-md-6 mb-4">
                                 <div data-mdb-input-init className="form-outline">
-                                  <input type="text" id="form3Example1" className="form-control" placeholder="First name" />
+                                  <input onChange={(e) => setfName(e.target.value)} type="text" id="form3Example1" className="form-control" placeholder="First name" />
                                 </div>
                                 <span className="text-danger fs-13 d-none">Please enter first name</span>
                               </div>
                               <div className="col-md-6 mb-4">
                                 <div data-mdb-input-init className="form-outline">
-                                  <input type="text" id="form3Example2" className="form-control" placeholder="Last name"/>
+                                  <input onChange={(e) => setlName(e.target.value)} type="text" id="form3Example2" className="form-control" placeholder="Last name"/>
                                 </div>
                                 <span className="text-danger fs-13 d-none">Please enter last name</span>
                               </div>
                             </div>
               
                             <div data-mdb-input-init className="form-outline mb-4">
-                              <input type="email" id="form3Example3" className="form-control" placeholder="Email address" />
+                              <input onChange={(e) => setUsername(e.target.value)} type="text" id="form3Example3" className="form-control" placeholder="Email address" />
+                              <span className="text-danger fs-13 d-none">Please enter username</span>
+                            </div>
+
+                            <div data-mdb-input-init className="form-outline mb-4">
+                              <input onChange={(e) => setEmail(e.target.value)} type="email" id="form3Example3" className="form-control" placeholder="Email address" />
                               <span className="text-danger fs-13 d-none">Please enter valid Email id</span>
                             </div>
                             
                              <div data-mdb-input-init className="form-outline mb-4">
-                                <input type="mobile" id="form3Example4" className="form-control" placeholder="Mobile number" />
+                                <input  onChange={(e) => setMobile(e.target.value)} type="mobile" id="form3Example4" className="form-control" placeholder="Mobile number" />
                                 <span className="text-danger fs-13 d-none">Please enter mobile number</span>
                               </div>
               
                             <div data-mdb-input-init className="form-outline mb-4">
-                              <input type="password" id="form3Example5" className="form-control" placeholder="Password"/>
+                              <input  onChange={(e) => setPassword(e.target.value)} type="password" id="form3Example5" className="form-control" placeholder="Password"/>
                               <span className="text-danger fs-13 d-none">Please enter Password</span>
                             </div>
               
@@ -59,7 +94,7 @@ function Signup() {
                               </label>
                             </div>
               
-                            <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn_signin btn-block mb-4">
+                            <button onClick={handleSubmit} data-mdb-button-init data-mdb-ripple-init className="btn btn_signin btn-block mb-4">
                               Sign up
                             </button>
               
@@ -81,7 +116,6 @@ function Signup() {
                                 <i className="fa fa-github"></i>
                               </button>
                             </div>
-                          </form>
                         </div>
                 </div>
                 </div>
@@ -89,7 +123,7 @@ function Signup() {
                 </div>               
         </div>
         </section>
-    </Layout>
+    </div>
     
   );
 }

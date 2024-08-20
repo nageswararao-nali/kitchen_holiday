@@ -16,9 +16,11 @@ import { getSubItems, itemMappingsData } from '../../store/itemsSlice';
 import { setOrderData } from '../../store/orderSlice';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { getDeliverySlots } from '../../store/adminSlice';
 
 function Cart() {
     const { selectedItem, selectedSubscription } = useSelector((state) => state.subscriptions)
+    const { deliverySlots } = useSelector((state) => state.admin)
     const [showPopup, setShow] = useState(false);
     const [selected, setSelected] = useState(0);
     const [selectedPlan, setSelectedPlan] = useState('');
@@ -29,6 +31,7 @@ function Cart() {
     const { subItems } = useSelector((state) => state.items)
     const [mappings, setMappings] = useState([]);
     const [extraSubItems, setExtraSubItems] = useState([]);
+    const [deliverySlot, setDeliverySlot] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
 
     const dispatch = useDispatch()
@@ -77,6 +80,9 @@ function Cart() {
     if(selectedSubscription.id) {
         setPrice(selectedSubscription.price)
         setTotalPrice(selectedSubscription.price)
+    } else {
+        setPrice(selectedItem.price)
+        setTotalPrice(selectedItem.price)
     }
   }, [selectedSubscription])
 
@@ -89,25 +95,62 @@ function Cart() {
         setMappings(mps.payload.data.items)
     }
   }
+  const getAdminData = async () => {
+    await dispatch(getDeliverySlots())
+  }
+  
   useEffect(() => {
       getItemsData()
+      getAdminData()
   }, [])
 
   const checkOut = async() => {
-    if(selectedPlan && quantity) {
-        let orderDetails = {
+    console.log("1")
+    let orderDetails = {};
+    if(selectedPlan  != '' && quantity && deliverySlot) {
+        if(selectedSubscription) {
+            console.log("2")
+            orderDetails = {
+                item: selectedItem,
+                subscription: selectedSubscription,
+                itemId: selectedItem.id,
+                extraSubItems: extraSubItems,
+                subItems: mappings,
+                subscriptionId: selectedSubscription.id,
+                quantity,
+                totalPrice,
+                startDate,
+                selectedPlan,
+                deliverySlot
+            }
+        } else {
+            console.log("3")
+            orderDetails = {
+                item: selectedItem,
+                itemId: selectedItem.id,
+                extraSubItems: extraSubItems,
+                subItems: mappings,
+                quantity,
+                totalPrice,
+                selectedPlan,
+                deliverySlot
+            }
+        }
+        console.log(orderDetails)
+        await dispatch(setOrderData(orderDetails))
+        navigate('/checkout')
+    } else if(!selectedSubscription && quantity && deliverySlot){
+        console.log("4")
+        orderDetails = {
             item: selectedItem,
-            subscription: selectedSubscription,
             itemId: selectedItem.id,
             extraSubItems: extraSubItems,
             subItems: mappings,
-            subscriptionId: selectedSubscription.id,
             quantity,
             totalPrice,
-            startDate,
-            selectedPlan
+            selectedPlan,
+            deliverySlot
         }
-        console.log(orderDetails)
         await dispatch(setOrderData(orderDetails))
         navigate('/checkout')
     }
@@ -141,29 +184,37 @@ function Cart() {
   
     <div class="cart-item ">
         <div className='d-md-flex justify-content-between'>
-        <div class="px-3 my-3">
-            <a class="cart-item-product" href="#">
-                <div class="cart-item-product-thumb"><img src={selectedItem.image} alt="Product"/></div>
-                <div class="cart-item-product-info">
-                    <h4 class="cart-item-product-title">{selectedItem.name} ({selectedSubscription.shortName})</h4>
-                    <span className='add_extra' onClick={handleShow}><strong>+ Add Extra</strong></span>
+            
+                <div class="px-3 my-3">
+                    <a class="cart-item-product" href="#">
+                        <div class="cart-item-product-thumb"><img src={selectedItem.image} alt="Product"/></div>
+                        <div class="cart-item-product-info">
+                            <h4 class="cart-item-product-title">{selectedItem.name} ({selectedItem.shortName})</h4>
+                            <span className='add_extra' onClick={handleShow}><strong>+ Add Extra</strong></span>
+                        </div>
+                    </a>
+                </div> 
+                
+             
+            {
+                selectedSubscription ?
+                <div class="px-3 my-3 text-center">
+                    <div class="cart-item-label">Choose your plan</div>
+                    <div class="count-input position-relative">
+                        <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
+                        <select class="form-control" onChange={(e) => {setPlan(e.target.value); setSelectedPlan(e.target.value)}}>
+                            <option value="">Select Plan</option>
+                            <option value={[1,2,3,4,5]}>Mon-Fri</option>
+                            <option value={[1,2,3,4,5,6]}>Mon-Sat</option>
+                            <option value={[]}>Custom</option>
+                        </select>
+                    </div>
+                
                 </div>
-            </a>
-        </div>      
-       
-        <div class="px-3 my-3 text-center">
-            <div class="cart-item-label">Choose your plan</div>
-            <div class="count-input position-relative">
-                <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
-                <select class="form-control" onChange={(e) => {setPlan(e.target.value); setSelectedPlan(e.target.value)}}>
-                    <option value="">Select Plan</option>
-                    <option value={[1,2,3,4,5]}>Mon-Fri</option>
-                    <option value={[1,2,3,4,5,6]}>Mon-Sat</option>
-                    <option value={[]}>Custom</option>
-                </select>
-            </div>
-           
-        </div>
+                : null
+            }
+        
+        
         <div class="px-3 my-3 text-center">
             <div class="cart-item-label">Quantity</div>
             <div className="added_count" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
@@ -172,12 +223,41 @@ function Cart() {
             <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">${totalPrice}</span>
         </div>
         </div>
-        <div className='px-3'>
-            <span className='d-block'>Start From:</span>
-            <span>
-            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-            </span>
+        <div className='d-md-flex'>
+            {
+                selectedSubscription ? 
+                <div className='px-3'>
+                    <div class="cart-item-label">Start Date</div>
+                    <div class="count-input position-relative">
+                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                    </div>
+                </div>
+                : null
+            }
+            
+            {
+                (deliverySlots && deliverySlots.length) ?
+                <div class="px-3 my-3 text-center">
+                    <div class="cart-item-label">Choose Delivery Slot</div>
+                    <div class="count-input position-relative">
+                        <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
+                        <select class="form-control" onChange={(e) => {setDeliverySlot(e.target.value);}}>
+                            <option value="">Select Delivery Slot</option>
+                            {
+                                deliverySlots.map((deliverySlot) => {
+                                    return (<option value={deliverySlot.id}>{deliverySlot.name}</option>)
+                                })
+                            }
+                            
+                        </select>
+                    </div>
+                
+                </div>
+                : null
+            }
         </div>
+        
+        
         {
             (plan != undefined && plan.length == 0) ? 
         

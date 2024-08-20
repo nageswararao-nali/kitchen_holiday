@@ -97,8 +97,8 @@ console.log(orders)
           <ul className="nav nav-pills nav-stacked">
               <li className='active' onClick={profile}><a href="#"> <i className="fa fa-user"></i> Profile</a></li>
               <li><a href="#"> <i className="fa fa-calendar"></i> Delivery Addresses <span className="label label-warning pull-right r-activity">9</span></a></li>
-              <li><a href="#"> <i className="fa fa-edit"></i> Wallet details</a></li>
-              <li><a href="#"> <i className="fa fa-edit"></i> Wallet history</a></li>
+              {/* <li><a href="#"> <i className="fa fa-edit"></i> Wallet details</a></li> */}
+              {/* <li><a href="#"> <i className="fa fa-edit"></i> Wallet history</a></li> */}
               <li><a href="#"> <i className="fa fa-edit"></i> Booking history</a></li>
           </ul>
       </div>

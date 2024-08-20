@@ -86,6 +86,21 @@ function Subscription() {
                     <div className="tab-content">
                       <div id="home" className="container tab-pane active"><br/>                
                         <div className="plan_wrap">
+                          <div className="plan_box h_item1 m-b-10 p-b-22 p-t-22 p-l-20 p-r-20 ">
+                              <div className="d-flex justify-content-between align-items-center">
+                                  <div className="d-lft d-flex flex-column align-items-start">
+                                      <span className="tit11">
+                                        <span className="m-r-10">
+                                          <img src="assets/images/veg_icon.png" width="18" alt=""/>
+                                        </span>
+                                        {'Veg Meal (Trail)'}
+                                      </span>
+                                  </div>
+                                  <div className="d-ryt">
+                                    <div className='text-decoration-none'><span className="add_btn" id="addBtn1" onClick={() => selectSubscription(0)}>ADD</span></div> 
+                                  </div>
+                              </div>
+                          </div>
                           {
                             (subscriptions && subscriptions.length) ?
                               subscriptions.map((subscription) => {
@@ -120,6 +135,17 @@ function Subscription() {
                       </div>
                       { <div id="menu1" className="container tab-pane fade"><br/>
                         <div className="plan_wrap">
+                          <div className="plan_box h_item1 m-b-10 p-b-22 p-t-22 p-l-20 p-r-20 ">
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div className="d-lft d-flex flex-column align-items-start">
+                                    <span className="tit11"><span className="m-r-10"><img src="assets/images/non-veg_icon.png" width="18" alt=""/></span>{'Non Veg Meal (Trail)'}</span>
+                                </div>
+                                <div className="d-ryt">
+                                    <span className="add_btn" id="addBtn2" onClick={() => selectSubscription(0)}>ADD</span>
+                                </div>
+                            </div>
+                          
+                        </div>
                         {
                             (subscriptions && subscriptions.length) ?
                               subscriptions.map((subscription) => {

@@ -52,28 +52,54 @@ function Checkout() {
         console.log("welcome ")
         console.log("orderDetails")
         console.log(orderDetails)
-        let orderObj = {
-            userId: user.id,
-            itemId: orderDetails.item.id,
-            itemName: orderDetails.item.name,
-            subItems: JSON.parse(orderDetails.subItems[0].subItemIds),
-            quantity: orderDetails.quantity,
-            addressId: addressId,
-            totalAmount: orderDetails.totalPrice,
-            customerName: address.fName + " " + address.lName,
-            customerMobile: address.mobile,
-            address: address.address + " " + address.address1 + " " + address.state + " " + address.zipcode,
-            startDate: orderDetails.startDate,
-            selectedPlan: orderDetails.selectedPlan,
-            status: 'new',
-            orderType: 'subscription',
-            extraSubItems: orderDetails.extraSubItems,
-            noOrders: orderDetails.subscription.days,
-            subscriptionId: orderDetails.subscription.id,
+        if(orderDetails.subscription) {
+            let orderObj = {
+                userId: user.id,
+                itemId: orderDetails.item.id,
+                itemName: orderDetails.item.name,
+                subItems: JSON.parse(orderDetails.subItems[0].subItemIds),
+                quantity: orderDetails.quantity,
+                addressId: addressId,
+                totalAmount: orderDetails.totalPrice,
+                customerName: address.fName + " " + address.lName,
+                customerMobile: address.mobile,
+                address: address.address + " " + address.address1 + " " + address.state + " " + address.zipcode,
+                startDate: orderDetails.startDate,
+                selectedPlan: orderDetails.selectedPlan,
+                status: 'new',
+                orderType: 'subscription',
+                extraSubItems: orderDetails.extraSubItems,
+                noOrders: orderDetails.subscription.days,
+                subscriptionId: orderDetails.subscription.id,
+                latitude: address.latitude,
+                longitude: address.longitude
+            }
+            console.log("oreder req")
+            console.log(orderObj)
+            await dispatch(addOrder(orderObj))
+        } else {
+            let orderObj = {
+                userId: user.id,
+                itemId: orderDetails.item.id,
+                itemName: orderDetails.item.name,
+                subItems: JSON.parse(orderDetails.subItems[0].subItemIds),
+                quantity: orderDetails.quantity,
+                addressId: addressId,
+                totalAmount: orderDetails.totalPrice,
+                customerName: address.fName + " " + address.lName,
+                customerMobile: address.mobile,
+                address: address.address + " " + address.address1 + " " + address.state + " " + address.zipcode,
+                status: 'new',
+                orderType: 'normal',
+                extraSubItems: orderDetails.extraSubItems,
+                latitude: address.latitude,
+                longitude: address.longitude
+            }
+            console.log("oreder req")
+            console.log(orderObj)
+            await dispatch(addOrder(orderObj))
         }
-        console.log("oreder req")
-        console.log(orderObj)
-        await dispatch(addOrder(orderObj))
+        
         navigate('/payment')
     }
 
@@ -210,7 +236,7 @@ function Checkout() {
                                     }
                                     
                                 </div>
-                                : null
+                                : <span className="btn btn2 btn-lg btn-block add_address" onClick={() => setNewAddress(!newAddress)}  id="goToPayment">+ New Address</span>
                             }
                             {
                                 newAddress ?

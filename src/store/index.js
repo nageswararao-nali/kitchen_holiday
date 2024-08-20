@@ -4,6 +4,7 @@ import authReducer from './authSlice';
 import usersReducer from './usersSlice';
 import itemsReducer from './itemsSlice';
 import ordersReducer from './orderSlice';
+import adminReducer from './adminSlice';
 import subscriptionsReducer from './subscriptionsSlice';
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     users: usersReducer,
     items: itemsReducer,
     orders: ordersReducer,
-    subscriptions: subscriptionsReducer
+    subscriptions: subscriptionsReducer,
+    admin: adminReducer
   },
 });
