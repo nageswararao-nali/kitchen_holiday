@@ -377,7 +377,40 @@ function Cart() {
           <Modal.Title className='m-l-auto'>Add Extra</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Row>
+        <Row className='justify-content-center'>
+            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
+                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+            </div>
+            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
+                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+            </div>
+            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
+                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+            </div>
+            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
+                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+            </div>
+            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
+                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+            </div>
+            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
+                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+            </div>
+            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
+                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+            </div>
+            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
+                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+            </div>
+                
             {
                 (subItems.length && mappings.length) ? 
                     subItems.map((subItem) => {
@@ -388,6 +421,7 @@ function Cart() {
                                     <div className="menu_item" style={extraSubItems.indexOf(subItem.id) > -1 ? active : inactive} onClick={handleClick(subItem.id)}>
                                         <span><img src={subItem.image} width="40" alt=""/></span><span>{subItem.name}</span>
                                     </div>
+                                    
                                 </Col>
                             )
                         }
