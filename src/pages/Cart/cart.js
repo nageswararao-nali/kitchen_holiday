@@ -17,9 +17,10 @@ import { setOrderData } from '../../store/orderSlice';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getDeliverySlots } from '../../store/adminSlice';
+import { getOrderDates } from '../../store/subscriptionsSlice';
 
 function Cart() {
-    const { selectedItem, selectedSubscription } = useSelector((state) => state.subscriptions)
+    const { selectedItem, selectedSubscription, lastSubDate } = useSelector((state) => state.subscriptions)
     const { deliverySlots } = useSelector((state) => state.admin)
     const [showPopup, setShow] = useState(false);
     const [selected, setSelected] = useState(0);
@@ -166,6 +167,17 @@ function Cart() {
       }
     console.log(selectedPlan)
   }
+
+  const getLastOrderDate = async () => {
+    if(selectedPlan && startDate) {
+        let reqObj ={
+            noOrders: selectedSubscription.days,
+            startDate,
+            selectedPlan,
+        }
+        await dispatch(getOrderDates(reqObj))
+    }
+  }
   return (
     <div>
         <div className='container p-t-120'>
@@ -202,7 +214,7 @@ function Cart() {
                     <div class="cart-item-label">Choose your plan</div>
                     <div class="count-input position-relative">
                         <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
-                        <select class="form-control" onChange={(e) => {setPlan(e.target.value); setSelectedPlan(e.target.value)}}>
+                        <select class="form-control" onChange={(e) => {setPlan(e.target.value); setSelectedPlan(e.target.value); getLastOrderDate()}}>
                             <option value="">Select Plan</option>
                             <option value={[1,2,3,4,5]}>Mon-Fri</option>
                             <option value={[1,2,3,4,5,6]}>Mon-Sat</option>
@@ -225,17 +237,6 @@ function Cart() {
         </div>
         <div className='d-md-flex'>
             {
-                selectedSubscription ? 
-                <div className='px-3'>
-                    <div class="cart-item-label">Start Date</div>
-                    <div class="count-input position-relative">
-                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                    </div>
-                </div>
-                : null
-            }
-            
-            {
                 (deliverySlots && deliverySlots.length) ?
                 <div class="px-3 my-3 text-center">
                     <div class="cart-item-label">Choose Delivery Slot</div>
@@ -252,6 +253,26 @@ function Cart() {
                         </select>
                     </div>
                 
+                </div>
+                : null
+            }
+            {
+                selectedSubscription ? 
+                <div className='px-3'>
+                    <div class="cart-item-label">Start Date</div>
+                    <div class="count-input position-relative">
+                        <DatePicker selected={startDate} onChange={(date) => {setStartDate(date); getLastOrderDate()}} />
+                    </div>
+                </div>
+                : null
+            }
+            {
+                lastSubDate ? 
+                <div className='px-3'>
+                    <div class="cart-item-label">End Date</div>
+                    <div class="count-input position-relative">
+                        {lastSubDate}
+                    </div>
                 </div>
                 : null
             }

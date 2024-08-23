@@ -2136,3 +2136,9 @@ ul.summary-list > li:last-child  {
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
 .add_address{font-size: 16px;
   padding: 10px 20px;}
+
+.selected-date {
+  background-color: #2196f3 !important;
+  color: white !important;
+  border-radius: 50%;
+}

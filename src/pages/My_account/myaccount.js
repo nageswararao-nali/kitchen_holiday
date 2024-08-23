@@ -13,7 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserAddresses } from "../../store/usersSlice";
 import { getOrders, clearOrders } from "../../store/orderSlice";
 import * as moment from 'moment';
-import { getMySubscriptions } from "../../store/subscriptionsSlice";
+import { getMySubscriptions, updateMySubscription } from "../../store/subscriptionsSlice";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import CalendarComponent from './calendarcomponent';
 
 const heighstyle = {
     height: '5px', 
@@ -29,6 +32,11 @@ function Myaccount() {
   const { userAddresses } = useSelector((state) => state.users)
   const { orders } = useSelector((state) => state.orders)
   const { mySubscriptions } = useSelector((state) => state.subscriptions)
+  const [show, setShow] = useState(false);
+  const [selectedSub, setSelectedSub] = useState({});
+  const [rDates, setrDates] = useState([]);
+  const [mySubLastDate, setMySubLastDate] = useState();
+
 console.log("orders")
 console.log(orders)
   const navigate = useNavigate()
@@ -67,6 +75,26 @@ console.log(orders)
   }
   const getUserTodayOrders = async () => {
     getMyOrders({userId: user.id, orderDate: moment().format('YYYY-MM-DD')})
+  }
+  const showSubscription = async (sub) => {
+    setSelectedSub(sub)
+    setShow(true)
+  }
+  const updateMySubscriptions = async (mySubId) => {
+    console.log(mySubId)
+    setShow(false)
+    if(rDates.length) {
+      await dispatch(updateMySubscription({subId: mySubId, dates:rDates, mySubLastDate}))
+      await dispatch(getMySubscriptions({userId: user.id}))
+    }
+  }
+
+  const removedDates = async (dtData) => {
+    console.log(dtData.dt)
+    let rrDates = rDates
+    rrDates.push(dtData.dt) 
+    setrDates(rrDates)
+    setMySubLastDate(dtData.lastDate)
   }
   return (
     <div>
@@ -393,7 +421,7 @@ console.log(orders)
                                         <td> {sub.startDate} </td>
                                         <td>{sub.endDate}</td>
                                         <td>{sub.price}</td>
-                                        <td>X</td>
+                                        <td><span onClick={() => showSubscription(sub)}>X</span></td>
                                       </tr>)
                                     })
                                   : null
@@ -524,6 +552,22 @@ console.log(orders)
           
         
       </div>
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedSub.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <CalendarComponent selectedDates={selectedSub.orderDates ? JSON.parse(selectedSub.orderDates) : []} removedDated={removedDates} />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShow(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={() => updateMySubscriptions(selectedSub.id)}>
+            Swap Orders
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
     
   );

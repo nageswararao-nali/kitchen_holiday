@@ -16,9 +16,18 @@ export const addZone = createAsyncThunk('subscriptions/addZone', async (reqObj, 
     return handleAuthApiCall(subscriptionService.addZone, reqObj, thunkAPI);
   });
   
-  export const getMySubscriptions = createAsyncThunk('subscriptions/getMySubscriptions', async (reqObj, thunkAPI) => {
-    return handleAuthApiCall(subscriptionService.getMySubscriptions, reqObj, thunkAPI);
-  });
+export const getMySubscriptions = createAsyncThunk('subscriptions/getMySubscriptions', async (reqObj, thunkAPI) => {
+  return handleAuthApiCall(subscriptionService.getMySubscriptions, reqObj, thunkAPI);
+});
+
+export const updateMySubscription = createAsyncThunk('subscriptions/updateMySubscription', async (reqObj, thunkAPI) => {
+  return handleAuthApiCall(subscriptionService.updateMySubscription, reqObj, thunkAPI);
+});
+
+export const getOrderDates = createAsyncThunk('subscriptions/getOrderDates', async (reqObj, thunkAPI) => {
+  return handleAuthApiCall(subscriptionService.getOrderDates, reqObj, thunkAPI);
+});
+
 
 const subscriptionSlice = createSlice({
   name: 'items',
@@ -29,7 +38,8 @@ const subscriptionSlice = createSlice({
     zones: [],
     selectedItem: selectedItem ? selectedItem : {},
     selectedSubscription: selectedSubscription ? selectedSubscription: {},
-    error: null
+    error: null,
+    lastSubDate: ''
   },
   reducers: {
     setOrderDetails: (state, action) => {
@@ -38,6 +48,9 @@ const subscriptionSlice = createSlice({
       state.selectedSubscription = action.payload.sub
       localStorage.setItem('selectedItem', JSON.stringify(action.payload.item))
       localStorage.setItem('selectedSubscription', JSON.stringify(action.payload.sub))
+    },
+    clearData: (state) => {
+      state.lastSubDate = ''
     }
   },
   extraReducers: (builder) => {
@@ -96,9 +109,41 @@ const subscriptionSlice = createSlice({
       .addCase(getMySubscriptions.rejected, (state, action) => {
         state.loading = false;
       })
+      .addCase(updateMySubscription.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateMySubscription.fulfilled, (state, action) => {
+        if(action.payload.success) {
+            // state.mySubscriptions = action.payload.data
+        } else {
+          state.error = action.payload.message
+          // state.mySubscriptions = []
+        }
+        state.loading = false;
+      })
+      .addCase(updateMySubscription.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(getOrderDates.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getOrderDates.fulfilled, (state, action) => {
+        if(action.payload.success) {
+          let orderDates = action.payload.data
+            state.lastSubDate = orderDates[orderDates.length -1]
+        } else {
+          state.error = action.payload.message
+          // state.mySubscriptions = []
+        }
+        state.loading = false;
+      })
+      .addCase(getOrderDates.rejected, (state, action) => {
+        state.loading = false;
+      })
+      
   },
 });
 
-export const { setOrderDetails } = subscriptionSlice.actions;
+export const { setOrderDetails, clearData } = subscriptionSlice.actions;
 
 export default subscriptionSlice.reducer;

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Map from './map';
 import { addUserAddress, getUserAddresses } from "../../store/usersSlice";
 import { addOrder } from "../../store/orderSlice";
+import { clearData } from "../../store/subscriptionsSlice";
 import Form from 'react-bootstrap/Form';
 
 const displaystyle = {
@@ -66,6 +67,7 @@ function Checkout() {
                 address: address.address + " " + address.address1 + " " + address.state + " " + address.zipcode,
                 startDate: orderDetails.startDate,
                 selectedPlan: orderDetails.selectedPlan,
+                deliverySlot: orderDetails.deliverySlot,
                 status: 'new',
                 orderType: 'subscription',
                 extraSubItems: orderDetails.extraSubItems,
@@ -77,6 +79,7 @@ function Checkout() {
             console.log("oreder req")
             console.log(orderObj)
             await dispatch(addOrder(orderObj))
+            await dispatch(clearData())
         } else {
             let orderObj = {
                 userId: user.id,
@@ -84,6 +87,7 @@ function Checkout() {
                 itemName: orderDetails.item.name,
                 subItems: JSON.parse(orderDetails.subItems[0].subItemIds),
                 quantity: orderDetails.quantity,
+                deliverySlot: orderDetails.deliverySlot,
                 addressId: addressId,
                 totalAmount: orderDetails.totalPrice,
                 customerName: address.fName + " " + address.lName,
