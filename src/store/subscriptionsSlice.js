@@ -16,16 +16,19 @@ export const addZone = createAsyncThunk('subscriptions/addZone', async (reqObj, 
     return handleAuthApiCall(subscriptionService.addZone, reqObj, thunkAPI);
   });
   
-
+  export const getMySubscriptions = createAsyncThunk('subscriptions/getMySubscriptions', async (reqObj, thunkAPI) => {
+    return handleAuthApiCall(subscriptionService.getMySubscriptions, reqObj, thunkAPI);
+  });
 
 const subscriptionSlice = createSlice({
   name: 'items',
   initialState: {
     loading: false,
     subscriptions: [],
+    mySubscriptions: [],
     zones: [],
     selectedItem: selectedItem ? selectedItem : {},
-    selectedSubscription: selectedSubscription ? selectedSubscription : {},
+    selectedSubscription: selectedSubscription ? selectedSubscription: {},
     error: null
   },
   reducers: {
@@ -78,7 +81,21 @@ const subscriptionSlice = createSlice({
       .addCase(addZone.rejected, (state, action) => {
         state.loading = false;
       })
-      
+      .addCase(getMySubscriptions.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getMySubscriptions.fulfilled, (state, action) => {
+        if(action.payload.success) {
+            state.mySubscriptions = action.payload.data.items
+        } else {
+          state.error = action.payload.message
+          state.mySubscriptions = []
+        }
+        state.loading = false;
+      })
+      .addCase(getMySubscriptions.rejected, (state, action) => {
+        state.loading = false;
+      })
   },
 });
 

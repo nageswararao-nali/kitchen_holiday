@@ -16,6 +16,7 @@ export const GET_ORDER = 'orders/getOrder';
 export const UPDATE_ORDER = 'orders/updateOrderStatus';
 export const ADD_SUBSCRIPTION = 'subscriptions/addSubscription';
 export const GET_SUBSCRIPTIONS = 'subscriptions/getSubscriptions';
+export const GET_MY_SUBSCRIPTIONS = 'subscriptions/getMySubscriptions';
 export const ADD_ZONE = 'zones/addZone';
 export const GET_ZONES = 'zones/getZones';
 export const GET_ITEM_MAPPINGS = 'items/getItemMappings';

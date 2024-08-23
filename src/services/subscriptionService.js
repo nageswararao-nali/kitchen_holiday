@@ -1,6 +1,6 @@
 
 import apiRequest from '../utils/api';
-import { ADD_SUBSCRIPTION, GET_SUBSCRIPTIONS, ADD_ZONE, GET_ZONES} from '../utils/apiRoutes'
+import { ADD_SUBSCRIPTION, GET_SUBSCRIPTIONS, ADD_ZONE, GET_ZONES, GET_MY_SUBSCRIPTIONS } from '../utils/apiRoutes'
 
 
 const addSubscription = async (reqObj, userToken) => {
@@ -19,11 +19,16 @@ const getZones = async (reqObj, userToken) => {
     return await apiRequest(GET_ZONES, 'POST', reqObj, userToken);
 };
 
+const getMySubscriptions = async (reqObj, userToken) => {
+  return await apiRequest(GET_MY_SUBSCRIPTIONS, 'POST', reqObj, userToken);
+};
+
 const usersService = {
     addSubscription,
     getSubscriptions,
     addZone,
-    getZones
+    getZones,
+    getMySubscriptions
 };
 
 export default usersService;

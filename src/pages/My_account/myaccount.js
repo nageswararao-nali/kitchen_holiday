@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserAddresses } from "../../store/usersSlice";
 import { getOrders, clearOrders } from "../../store/orderSlice";
 import * as moment from 'moment';
+import { getMySubscriptions } from "../../store/subscriptionsSlice";
 
 const heighstyle = {
     height: '5px', 
@@ -27,6 +28,7 @@ function Myaccount() {
   const { user } = useSelector((state) => state.auth)
   const { userAddresses } = useSelector((state) => state.users)
   const { orders } = useSelector((state) => state.orders)
+  const { mySubscriptions } = useSelector((state) => state.subscriptions)
 console.log("orders")
 console.log(orders)
   const navigate = useNavigate()
@@ -53,7 +55,8 @@ console.log(orders)
       getUserTodayOrders()
     }
     if(e == "SubscriptionPlan") {
-      getMyOrders({userId: user.id, orderType: 'subscription'})
+      console.log("calling subscriptions ...")
+      await dispatch(getMySubscriptions({userId: user.id}))
     }
     if(e == "DeliveredOrder") {
       getMyOrders({userId: user.id, status: 'Delivered'})
@@ -370,26 +373,26 @@ console.log(orders)
                           <table className="table table-hover">
                               <thead>
                                 <tr>
-                                  <th>Order No.</th>
-                                  <th>Order Date</th>
-                                  <th>Your Order</th>
-                                  <th>Order Type</th>
-                                  <th>Deliverry/Pickup</th>
-                                  <th>Location</th>
+                                  <th>Subscription Name</th>
+                                  <th>Item Name</th>
+                                  <th>Quantity</th>
+                                  <th>Start Date</th>
+                                  <th>End Date</th>
+                                  <th>Price</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 {
-                                  (orders && orders.length) ?
-                                    orders.map((order) => {
+                                  (mySubscriptions && mySubscriptions.length) ?
+                                  mySubscriptions.map((sub) => {
                                       return(<tr>
-                                        <td>{order.id}</td>
-                                        <td>{order.orderDate}</td>
-                                        <td>{order.itemName}</td>
-                                        <td> {order.orderType} </td>
-                                        <td>{order.status}</td>
-                                        <td>{order.address}</td>
+                                        <td>{sub.subName}</td>
+                                        <td>{sub.itemName}</td>
+                                        <td>{sub.quantity}</td>
+                                        <td> {sub.startDate} </td>
+                                        <td>{sub.endDate}</td>
+                                        <td>{sub.price}</td>
                                         <td>X</td>
                                       </tr>)
                                     })
