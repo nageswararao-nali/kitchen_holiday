@@ -255,7 +255,7 @@ console.log(orders)
                     
                 </div>
           
-    <Tab.Container id="left-tabs-example" defaultActiveKey="profile">
+    <Tab.Container id="left-tabs-example" defaultActiveKey="booking_history">
       <Row>
         <Col sm={3}>
         <div className="profile-nav">           
@@ -326,6 +326,20 @@ console.log(orders)
                         <div data-mdb-input-init className="form-outline d-none">
                           <input type="mobile" id="form3Example4" className="form-control" placeholder="Mobile number" />
                           <span className="text-danger fs-13 d-none">Please enter mobile number</span>
+                        </div>
+                        <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Password</h6>
+                      </div>
+                      <div className="col-sm-9 text-secondary">
+                        <span> *******</span>
+                        <div data-mdb-input-init className="form-outline d-none">
+                          <input type="password" id="form3Example4" className="form-control" placeholder="Password" />
+                          <span className="text-danger fs-13 d-none">Please enter password</span>
                         </div>
                         <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
                       </div>
@@ -582,7 +596,7 @@ console.log(orders)
         <Modal.Header closeButton>
           <Modal.Title>{selectedSub.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="text-center">
           <CalendarComponent selectedDates={selectedSub.orderDates ? JSON.parse(selectedSub.orderDates) : []} removedDated={removedDates} />
         </Modal.Body>
         <Modal.Footer>
