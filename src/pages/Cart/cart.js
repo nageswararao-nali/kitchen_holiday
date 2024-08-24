@@ -378,38 +378,59 @@ function Cart() {
         </Modal.Header>
         <Modal.Body>
         <Row className='justify-content-center'>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+            <div className='d-flex flex-wrap justify-content-between'>
+                <div className="menu_item d-flex align-items-center justify-content-between" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                    <span className='d-flex align-items-center'>
+                        <img src="assets/images/veg_item1.png" width="60" alt=""/>
+                        <span className='d-block'>Veg curry</span>
+                    </span>
+                    <div className='d-flex flex-column flex_ryt'>
+                        <span className='price mb-2'>$90</span>
+                        <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+                    </div>
+                </div>
+                <div className="menu_item d-flex align-items-center justify-content-between" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                    <span className='d-flex align-items-center'>
+                        <img src="assets/images/veg_item1.png" width="60" alt=""/>
+                        <span className='d-block'>Veg curry</span>
+                    </span>
+                    <div className='d-flex flex-column flex_ryt'>
+                        <span className='price mb-2'>$90</span>
+                        <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+                    </div>
+                </div>
+                <div className="menu_item d-flex align-items-center justify-content-between" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                    <span className='d-flex align-items-center'>
+                        <img src="assets/images/veg_item1.png" width="60" alt=""/>
+                        <span className='d-block'>Veg curry</span>
+                    </span>
+                    <div className='d-flex flex-column flex_ryt'>
+                        <span className='price mb-2'>$90</span>
+                        <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+                    </div>
+                </div>
+                <div className="menu_item d-flex align-items-center justify-content-between" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                    <span className='d-flex align-items-center'>
+                        <img src="assets/images/veg_item1.png" width="60" alt=""/>
+                        <span className='d-block'>Veg curry</span>
+                    </span>
+                    <div className='d-flex flex-column flex_ryt'>
+                        <span className='price mb-2'>$90</span>
+                        <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+                    </div>
+                </div>
+                <div className="menu_item d-flex align-items-center justify-content-between" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+                    <span className='d-flex align-items-center'>
+                        <img src="assets/images/veg_item1.png" width="60" alt=""/>
+                        <span className='d-block'>Veg curry</span>
+                    </span>
+                    <div className='d-flex flex-column flex_ryt'>
+                        <span className='price mb-2'>$90</span>
+                        <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
+                    </div>
+                </div>
             </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
+            
                 
             {
                 (subItems.length && mappings.length) ? 

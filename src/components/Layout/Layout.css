@@ -2116,9 +2116,12 @@ ul.summary-list > li:last-child  {
   border-color: #0d6efd;
 }
 .cart-item .cart-item-product-info > span.add_extra{color: #ec1d25;}
-.menu_item{background: #eeeeee;border-radius: 6px;padding: 5px 10px;margin: 5px;border: 1px solid #dee2e6;transition: all 0.3s ease-in-out;cursor: pointer;width: auto;  min-width: 150px;  min-height: 150px;  text-align: center;}
+.menu_item{background: #eeeeee;border-radius: 6px;padding: 5px 10px;margin: 5px;border: 1px solid #dee2e6;transition: all 0.3s ease-in-out;cursor: pointer;width: auto;    min-height: 80px;
+  text-align: center;width: 48%;
+  height: 80px; text-align: center;}
 .menu_item:hover{background: #ec1d25;color: #ffffff;}
 .m-l-auto{margin-left: auto;}
+.menu_item .price{font-size: 18px;}
 .menu_item.active{background: #ec1d25;}
 .react-datepicker-wrapper{margin-bottom: 20px;}
 .react-datepicker-wrapper input{display: block;
