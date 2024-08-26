@@ -50,7 +50,7 @@ function MenuItem(props) {
             </h3>
 
             <div className="menu_items">
-            <ul className="d-flex flex-column">
+            <ul className="d-flex">
                 {
                     (subItems.length && mappings.length) ? 
                         subItems.map((subItem) => {

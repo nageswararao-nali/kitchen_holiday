@@ -258,7 +258,7 @@ function Cart() {
             }
             {
                 selectedSubscription ? 
-                <div className='px-3'>
+                <div className='px-3 my-3 text-center'>
                     <div class="cart-item-label">Start Date</div>
                     <div class="count-input position-relative">
                         <DatePicker selected={startDate} onChange={(date) => {setStartDate(date); getLastOrderDate()}} />
@@ -268,7 +268,7 @@ function Cart() {
             }
             {
                 lastSubDate ? 
-                <div className='px-3'>
+                <div className='px-3 my-3 text-center'>
                     <div class="cart-item-label">End Date</div>
                     <div class="count-input position-relative">
                         {lastSubDate}

@@ -797,7 +797,7 @@ input[type="date" i] {
 .btn2,.btn4 {
   background-color: #ec1d25;
   border-radius: 10px;    padding: 15px 20px;
-  opacity: 0.9;color: #fff;text-decoration: none;display: inline-block;
+  opacity: 0.9;color: #fff;text-decoration: none;display: inline-block;border: none;
 }
 .btn4{padding: 8px 20px;}
 
@@ -808,7 +808,8 @@ input[type="date" i] {
 .slide_cnt span{display: block;color: #2e9a3f;}
 .slide_cnt small{display: block;font-size: 30px;font-weight: 500;}
 
-
+.btn5{background-color: #8c8c8c;}
+.btn5:hover{background-color: #707070;}
 
 /*[ Intro ]
 ///////////////////////////////////////////////////////////

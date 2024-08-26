@@ -91,6 +91,10 @@ console.log(orders)
       await dispatch(getMySubscriptions({userId: user.id}))
     }
   }
+  const [show2, setShow2] = useState(false);
+
+  const handleClose = () => setShow2(false);
+  const handleShow = () => setShow2(true);
 
   const removedDates = async (dtData) => {
     console.log(dtData.dt)
@@ -600,16 +604,16 @@ console.log(orders)
           <CalendarComponent selectedDates={selectedSub.orderDates ? JSON.parse(selectedSub.orderDates) : []} removedDated={removedDates} />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={() => updateMySubscriptions(selectedSub.id)}>
+        <Button variant="primary" className="btn2 txt3 text-white" onClick={() => updateMySubscriptions(selectedSub.id)}>
             Swap Orders
           </Button>
+          <Button variant="secondary" className="btn2 btn5 txt3" onClick={() => setShow(false)}>
+            Close
+          </Button>         
         </Modal.Footer>
       </Modal>
     </div>
-    
+  
   );
 }
 
