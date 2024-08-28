@@ -17,6 +17,9 @@ import { getMySubscriptions, updateMySubscription } from "../../store/subscripti
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import CalendarComponent from './calendarcomponent';
+import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+import Row from 'react-bootstrap/Row';
 
 const heighstyle = {
     height: '5px', 
@@ -88,6 +91,10 @@ console.log(orders)
       await dispatch(getMySubscriptions({userId: user.id}))
     }
   }
+  const [show2, setShow2] = useState(false);
+
+  const handleClose = () => setShow2(false);
+  const handleShow = () => setShow2(true);
 
   const removedDates = async (dtData) => {
     console.log(dtData.dt)
@@ -115,115 +122,12 @@ console.log(orders)
         </div>
         <div className="row gutters-sm m-b-30">
            
-        <div className="profile-nav col-md-3">
-      <div className="panel">
-          <div className="user-heading round">
-              <a href="#">
-                <img src="assets/images/avatar-01.webp" alt="IGM-AVATAR"/>
-              </a>
-              <h1>Marie Simmons</h1>
-              <p className="text-white">{user.username}</p>
-          </div>
-
-          <ul className="nav nav-pills nav-stacked">
-              <li className='active' onClick={profile}><a href="#"> <i className="fa fa-user"></i> Profile</a></li>
-              <li><a href="#"> <i className="fa fa-calendar"></i> Delivery Addresses <span className="label label-warning pull-right r-activity">9</span></a></li>
-              {/* <li><a href="#"> <i className="fa fa-edit"></i> Wallet details</a></li> */}
-              {/* <li><a href="#"> <i className="fa fa-edit"></i> Wallet history</a></li> */}
-              <li><a href="#"> <i className="fa fa-edit"></i> Booking history</a></li>
-          </ul>
-      </div>
-  </div>
+       
  
    <div className="profile-info col-md-9" >
    
-   <div className="card mb-3  ">
-                        <div className="d-address">
-                        <span className="sub_title  p-l-15 p-r-15">Profile</span>
-                        </div>
-                        <div className='p-4'>
-                        <div className="row">
-                        <div className="col-sm-3">
-                          <h6 className="mb-0">Full Name</h6>
-                        </div>
-                        <div className="col-sm-9 text-secondary">
-                          <span>{user.fName + " " +user.lName}</span> 
-                          <div data-mdb-input-init className="form-outline d-none">
-                            <input type="text"  className="form-control" placeholder="Name" />
-                          </div> 
-                          <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
-                        </div>
-                      </div>
-                      <hr/>
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <h6 className="mb-0">Email</h6>
-                        </div>
-                        <div className="col-sm-9 text-secondary">
-                          <span>{user.email}</span>
-                          <div data-mdb-input-init className="form-outline d-none">
-                            <input type="email" id="form3Example3" className="form-control" placeholder="Email address" />
-                            <span className="text-danger fs-13 d-none">Please enter valid Email id</span>
-                          </div>
-                          <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
-                        </div>
-                      </div>
-                      <hr/>
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <h6 className="mb-0">Mobile</h6>
-                        </div>
-                        <div className="col-sm-9 text-secondary">
-                         <span> {user.mobile}</span>
-                         <div data-mdb-input-init className="form-outline d-none">
-                            <input type="mobile" id="form3Example4" className="form-control" placeholder="Mobile number" />
-                            <span className="text-danger fs-13 d-none">Please enter mobile number</span>
-                          </div>
-                          <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
-                        </div>
-                      </div>
-                      <hr/>
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <h6 className="mb-0">State</h6>
-                        </div>
-                        <div className="col-sm-9 text-secondary">
-                           <span>{user.state}</span>
-                           <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
-                        </div>
-                      </div>
-                      <hr/>
-                      {/* <div className="row">
-                        <div className="col-sm-12">
-                          <a className="btn btn-info text-white"  href="#">Edit</a>
-                        </div>
-                      </div> */}
-                        </div>
-                        
-                    </div> 
                    
-                    <div className="card mb-3  ">
-                      <div className="d-address">
-                        <span className="sub_title  p-l-15 p-r-15">Delivery Addresses</span>
-                      </div>
-                      <div className='p-4'>
-                        {
-                          userAddresses.length ? 
-                          userAddresses.map((userAddress) => {
-                            return (
-                              <div className="text-muted m-b-30">
-                                  <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
-                                  <h5 className="font-size-15 mb-2">{userAddress.fName + " " + userAddress.lName}</h5>
-                                  <p className="mb-1">{userAddress.address}</p>
-                                  <p className="mb-1">{userAddress.email}</p>
-                                  <p>{userAddress.zipcode}</p>
-                              </div>
-                            )
-                          })
-                          : null
-                        }
-                      </div>
-                    </div>
+                    
                     {/* <div className="card mb-3  ">
                       <div className="d-address">
                         <span className="sub_title  p-l-15 p-r-15">Wallet Details</span>
@@ -352,201 +256,341 @@ console.log(orders)
                       </div>
                       </div>
                      </div> */}
-                     <div className="card mb-3  ">
-                      <div className="d-address">
-                        <span className="sub_title  p-l-15 p-r-15">Booking History</span>
-                      </div>                     
-                      <div className='p-b-14 p-3'>
-                        <Tabs
-                          defaultActiveKey="TodayDelivery"
-                          id="uncontrolled-tab-example"
-                          className="mb-3 booking_history"
-                          onSelect={(e) => handleTabClick(e)}
-                        >
-                          <Tab eventKey="TodayDelivery" title="Today's Delivery" onClick={() => getUserTodayOrders()}>
-                            <table className="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>Order No.</th>
-                                  <th>Order Date</th>
-                                  <th>Your Order</th>
-                                  <th>Order Type</th>
-                                  <th>Deliverry/Pickup</th>
-                                  <th>Location</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {
-                                  (orders && orders.length) ?
-                                    orders.map((order) => {
-                                      return(<tr>
-                                        <td>{order.id}</td>
-                                        <td>{order.orderDate}</td>
-                                        <td>{order.itemName}</td>
-                                        <td> {order.orderType} </td>
-                                        <td>{order.status}</td>
-                                        <td>{order.address}</td>
-                                        <td>X</td>
-                                      </tr>)
-                                    })
-                                  : null
-                                }
-                                
-                                
-                              </tbody>
-                            </table>
-                          </Tab>
-                          <Tab eventKey="SubscriptionPlan" title="Subscription Plan"  onClick={() => getMyOrders({userId: user.id, orderType: 'subscription'})}>
-                          <table className="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>Subscription Name</th>
-                                  <th>Item Name</th>
-                                  <th>Quantity</th>
-                                  <th>Start Date</th>
-                                  <th>End Date</th>
-                                  <th>Price</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {
-                                  (mySubscriptions && mySubscriptions.length) ?
-                                  mySubscriptions.map((sub) => {
-                                      return(<tr>
-                                        <td>{sub.subName}</td>
-                                        <td>{sub.itemName}</td>
-                                        <td>{sub.quantity}</td>
-                                        <td> {sub.startDate} </td>
-                                        <td>{sub.endDate}</td>
-                                        <td>{sub.price}</td>
-                                        <td><span onClick={() => showSubscription(sub)}>X</span></td>
-                                      </tr>)
-                                    })
-                                  : null
-                                }
-                                
-                              </tbody>
-                            </table>
-                          </Tab>
-                          
-                          <Tab eventKey="DeliveredOrder" title="Delivered Order"  onClick={() => getMyOrders({userId: user.id, status: 'Delivered'})}>
-                          <table className="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>Order No.</th>
-                                  <th>Order Date</th>
-                                  <th>Your Order</th>
-                                  <th>Order Type</th>
-                                  <th>Deliverry/Pickup</th>
-                                  <th>Location</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              {
-                                  (orders && orders.length) ?
-                                    orders.map((order) => {
-                                      return(<tr>
-                                        <td>{order.id}</td>
-                                        <td>{order.orderDate}</td>
-                                        <td>{order.itemName}</td>
-                                        <td> {order.orderType} </td>
-                                        <td>{order.status}</td>
-                                        <td>{order.address}</td>
-                                        <td>X</td>
-                                      </tr>)
-                                    })
-                                  : null
-                                }
-                               
-                              </tbody>
-                            </table>
-                          </Tab>
-                          <Tab eventKey="CancelOrder" title="Cancel Order"  onClick={() => getMyOrders({userId: user.id, status: 'canceled'})}>
-                          <table className="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>Order No.</th>
-                                  <th>Order Date</th>
-                                  <th>Your Order</th>
-                                  <th>Order Type</th>
-                                  <th>Deliverry/Pickup</th>
-                                  <th>Location</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              {
-                                  (orders && orders.length) ?
-                                    orders.map((order) => {
-                                      return(<tr>
-                                        <td>{order.id}</td>
-                                        <td>{order.orderDate}</td>
-                                        <td>{order.itemName}</td>
-                                        <td> {order.orderType} </td>
-                                        <td>{order.status}</td>
-                                        <td>{order.address}</td>
-                                        <td>X</td>
-                                      </tr>)
-                                    })
-                                  : null
-                                }
-                                
-                               
-                              </tbody>
-                            </table>
-                          </Tab>
-                        </Tabs>
-                      </div>
-                     </div>
-                     <div className="card mb-3  ">
-                      <div className="d-address">
-                        <span className="sub_title  p-l-15 p-r-15">Invoice History</span>
-                      </div>                     
-                      <div className='p-b-14 p-3'>
-                      <table className="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>Invoice No.</th>
-                                  <th>Total Amount</th>
-                                  <th>Invoice Date</th>
-                                  <th>Status</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>KH001234</td>
-                                  <td>₹2600</td>
-                                  <td>27-07-2024</td>
-                                  <td>Bill</td>
-                                  <td>X</td>
-                                </tr>
-                                <tr>
-                                  <td>KH001234</td>
-                                  <td>₹2600</td>
-                                  <td>27-07-2024</td>
-                                  <td>Bill</td>
-                                  <td>X</td>
-                                </tr>
-                                <tr>
-                                  <td>KH001234</td>
-                                  <td>₹2600</td>
-                                  <td>27-07-2024</td>
-                                  <td>Bill</td>
-                                  <td>X</td>
-                                </tr>
-                                
-                              </tbody>
-                            </table>
-                      </div>
-                     </div>
-                </div>
                     
-               
-  
+                </div>
+          
+    <Tab.Container id="left-tabs-example" defaultActiveKey="booking_history">
+      <Row>
+        <Col sm={3}>
+        <div className="profile-nav">           
+          <div className="user-heading round">
+            <a href="#">
+              <img src="assets/images/avatar-01.webp" alt="IGM-AVATAR"/>
+            </a>
+            <h1>Marie Simmons</h1>
+            <p className="text-white">{user.username}</p>
+          </div>  
+        </div>   
+          <Nav variant="pills" className="flex-column myaccount_lft">
+            <Nav.Item>
+              <Nav.Link eventKey="profile" ><i className="fa fa-user"></i> Profile</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="delivery_address"><i className="fa fa-map-marker"></i> Delivery Address</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="booking_history"><i className="fa fa-history"></i> Booking History</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="invoice_history"><i className="fa fa-sticky-note"></i> Invoice History</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Col>
+        <Col sm={9}>
+          <Tab.Content>
+            <Tab.Pane eventKey="profile">
+              <div className="card mb-3  " >
+                <div className="d-address">
+                  <span className="sub_title  p-l-15 p-r-15">Profile</span>
+                </div>
+                <div className='p-4'>
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <h6 className="mb-0">Full Name</h6>
+                    </div>
+                    <div className="col-sm-9 text-secondary">
+                      <span>{user.fName + " " +user.lName}</span> 
+                      <div data-mdb-input-init className="form-outline d-none">
+                        <input type="text"  className="form-control" placeholder="Name" />
+                      </div> 
+                        <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Email</h6>
+                      </div>
+                      <div className="col-sm-9 text-secondary">
+                        <span>{user.email}</span>
+                        <div data-mdb-input-init className="form-outline d-none">
+                          <input type="email" id="form3Example3" className="form-control" placeholder="Email address" />
+                          <span className="text-danger fs-13 d-none">Please enter valid Email id</span>
+                        </div>
+                        <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Mobile</h6>
+                      </div>
+                      <div className="col-sm-9 text-secondary">
+                        <span> {user.mobile}</span>
+                        <div data-mdb-input-init className="form-outline d-none">
+                          <input type="mobile" id="form3Example4" className="form-control" placeholder="Mobile number" />
+                          <span className="text-danger fs-13 d-none">Please enter mobile number</span>
+                        </div>
+                        <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Password</h6>
+                      </div>
+                      <div className="col-sm-9 text-secondary">
+                        <span> *******</span>
+                        <div data-mdb-input-init className="form-outline d-none">
+                          <input type="password" id="form3Example4" className="form-control" placeholder="Password" />
+                          <span className="text-danger fs-13 d-none">Please enter password</span>
+                        </div>
+                        <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">State</h6>
+                      </div>
+                      <div className="col-sm-9 text-secondary">
+                          <span>{user.state}</span>
+                          <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <hr/>
+                      {/* <div className="row">
+                        <div className="col-sm-12">
+                          <a className="btn btn-info text-white"  href="#">Edit</a>
+                        </div>
+                      </div> */}
+                  </div>
+                        
+                </div> 
+            </Tab.Pane>
+            <Tab.Pane eventKey="delivery_address">
+              <div className="card mb-3  " id="pills-profile">
+                <div className="d-address d-flex justify-content-between">
+                  <span className="sub_title  p-l-15 p-r-15">Delivery Addresses</span>
+                  <span className="p-r-15 address_btn"><a href="/address">Add new</a></span>
+                </div>
+                <div className='p-4'>
+                  {
+                    userAddresses.length ? 
+                    userAddresses.map((userAddress) => {
+                      return (
+                        <div className="text-muted m-b-30">
+                            <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
+                            <h5 className="font-size-15 mb-2">{userAddress.fName + " " + userAddress.lName}</h5>
+                            <p className="mb-1">{userAddress.address}</p>
+                            <p className="mb-1">{userAddress.email}</p>
+                            <p>{userAddress.zipcode}</p>
+                        </div>
+                      )
+                    })
+                    : null
+                  }
+                </div>
+              </div>
+            </Tab.Pane>
+            <Tab.Pane eventKey="booking_history">
+              <div className="card mb-3  ">
+                <div className="d-address">
+                  <span className="sub_title  p-l-15 p-r-15">Booking History</span>
+                </div>                     
+                <div className='p-b-14 p-3'>
+                  <Tabs
+                    defaultActiveKey="TodayDelivery"
+                    id="uncontrolled-tab-example"
+                    className="mb-3 booking_history"
+                    onSelect={(e) => handleTabClick(e)}
+                  >
+                    <Tab eventKey="TodayDelivery" title="Today's Delivery" onClick={() => getUserTodayOrders()}>
+                      <table className="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Order No.</th>
+                            <th>Order Date</th>
+                            <th>Your Order</th>
+                            <th>Order Type</th>
+                            <th>Deliverry/Pickup</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            (orders && orders.length) ?
+                              orders.map((order) => {
+                                return(<tr>
+                                  <td>{order.id}</td>
+                                  <td>{order.orderDate}</td>
+                                  <td>{order.itemName}</td>
+                                  <td> {order.orderType} </td>
+                                  <td>{order.status}</td>
+                                  <td>{order.address}</td>
+                                  <td>X</td>
+                                </tr>)
+                              })
+                            : null
+                          }
+                          
+                          
+                        </tbody>
+                      </table>
+                    </Tab>
+                    <Tab eventKey="SubscriptionPlan" title="Subscription Plan"  onClick={() => getMyOrders({userId: user.id, orderType: 'subscription'})}>
+                    <table className="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Subscription Name</th>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            (mySubscriptions && mySubscriptions.length) ?
+                            mySubscriptions.map((sub) => {
+                                return(<tr>
+                                  <td>{sub.subName}</td>
+                                  <td>{sub.itemName}</td>
+                                  <td>{sub.quantity}</td>
+                                  <td> {sub.startDate} </td>
+                                  <td>{sub.endDate}</td>
+                                  <td>{sub.price}</td>
+                                  <td><span onClick={() => showSubscription(sub)}>X</span></td>
+                                </tr>)
+                              })
+                            : null
+                          }
+                          
+                        </tbody>
+                      </table>
+                    </Tab>
+                    
+                    <Tab eventKey="DeliveredOrder" title="Delivered Order"  onClick={() => getMyOrders({userId: user.id, status: 'Delivered'})}>
+                    <table className="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Order No.</th>
+                            <th>Order Date</th>
+                            <th>Your Order</th>
+                            <th>Order Type</th>
+                            <th>Deliverry/Pickup</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            (orders && orders.length) ?
+                              orders.map((order) => {
+                                return(<tr>
+                                  <td>{order.id}</td>
+                                  <td>{order.orderDate}</td>
+                                  <td>{order.itemName}</td>
+                                  <td> {order.orderType} </td>
+                                  <td>{order.status}</td>
+                                  <td>{order.address}</td>
+                                  <td>X</td>
+                                </tr>)
+                              })
+                            : null
+                          }
+                          
+                        </tbody>
+                      </table>
+                    </Tab>
+                    <Tab eventKey="CancelOrder" title="Cancel Order"  onClick={() => getMyOrders({userId: user.id, status: 'canceled'})}>
+                    <table className="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Order No.</th>
+                            <th>Order Date</th>
+                            <th>Your Order</th>
+                            <th>Order Type</th>
+                            <th>Deliverry/Pickup</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            (orders && orders.length) ?
+                              orders.map((order) => {
+                                return(<tr>
+                                  <td>{order.id}</td>
+                                  <td>{order.orderDate}</td>
+                                  <td>{order.itemName}</td>
+                                  <td> {order.orderType} </td>
+                                  <td>{order.status}</td>
+                                  <td>{order.address}</td>
+                                  <td>X</td>
+                                </tr>)
+                              })
+                            : null
+                          }
+                          
+                          
+                        </tbody>
+                      </table>
+                    </Tab>
+                  </Tabs>
+                </div>
+              </div>
+            </Tab.Pane>
+            <Tab.Pane eventKey="invoice_history">
+              <div className="card mb-3  ">
+                <div className="d-address">
+                  <span className="sub_title  p-l-15 p-r-15">Invoice History</span>
+                </div>                     
+                <div className='p-b-14 p-3'>
+                  <table className="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Invoice No.</th>
+                        <th>Total Amount</th>
+                        <th>Invoice Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td>KH001234</td>
+                          <td>₹2600</td>
+                          <td>27-07-2024</td>
+                          <td>Bill</td>
+                          <td>X</td>
+                        </tr>
+                        <tr>
+                          <td>KH001234</td>
+                          <td>₹2600</td>
+                          <td>27-07-2024</td>
+                          <td>Bill</td>
+                          <td>X</td>
+                        </tr>
+                        <tr>
+                          <td>KH001234</td>
+                          <td>₹2600</td>
+                          <td>27-07-2024</td>
+                          <td>Bill</td>
+                          <td>X</td>
+                        </tr>                        
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </Tab.Pane>
+          </Tab.Content>
+        </Col>
+      </Row>
+    </Tab.Container>
            
           </div>
           
@@ -556,20 +600,20 @@ console.log(orders)
         <Modal.Header closeButton>
           <Modal.Title>{selectedSub.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="text-center">
           <CalendarComponent selectedDates={selectedSub.orderDates ? JSON.parse(selectedSub.orderDates) : []} removedDated={removedDates} />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={() => updateMySubscriptions(selectedSub.id)}>
+        <Button variant="primary" className="btn2 txt3 text-white" onClick={() => updateMySubscriptions(selectedSub.id)}>
             Swap Orders
           </Button>
+          <Button variant="secondary" className="btn2 btn5 txt3" onClick={() => setShow(false)}>
+            Close
+          </Button>         
         </Modal.Footer>
       </Modal>
     </div>
-    
+  
   );
 }
 

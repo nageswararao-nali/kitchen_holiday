@@ -30,7 +30,7 @@ const CalendarComponent = (props) => {
   };
   return (
     <div>
-      <h2>Select Dates</h2>
+      {/* <h2>Select Dates</h2> */}
       <DatePicker
         inline
         selected={null}

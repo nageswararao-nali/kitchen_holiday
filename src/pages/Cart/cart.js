@@ -296,7 +296,7 @@ function Cart() {
             }
             {
                 selectedSubscription ? 
-                <div className='px-3'>
+                <div className='px-3 my-3 text-center'>
                     <div class="cart-item-label">Start Date</div>
                     <div class="count-input position-relative">
                         <DatePicker selected={startDate} onChange={(date) => {setStartDate(date); getLastOrderDate()}} />
@@ -306,7 +306,7 @@ function Cart() {
             }
             {
                 lastSubDate ? 
-                <div className='px-3'>
+                <div className='px-3 my-3 text-center'>
                     <div class="cart-item-label">End Date</div>
                     <div class="count-input position-relative">
                         {lastSubDate}
@@ -416,38 +416,6 @@ function Cart() {
         </Modal.Header>
         <Modal.Body>
         <Row className='justify-content-center'>
-            {/* <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
-                <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
-                <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div> */}
             {
                 (subItems.length && mappings.length) ? 
                     subItems.map((subItem) => {

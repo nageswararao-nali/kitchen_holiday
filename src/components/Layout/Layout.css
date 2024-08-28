@@ -797,7 +797,7 @@ input[type="date" i] {
 .btn2,.btn4 {
   background-color: #ec1d25;
   border-radius: 10px;    padding: 15px 20px;
-  opacity: 0.9;color: #fff;text-decoration: none;display: inline-block;
+  opacity: 0.9;color: #fff;text-decoration: none;display: inline-block;border: none;
 }
 .btn4{padding: 8px 20px;}
 
@@ -808,7 +808,8 @@ input[type="date" i] {
 .slide_cnt span{display: block;color: #2e9a3f;}
 .slide_cnt small{display: block;font-size: 30px;font-weight: 500;}
 
-
+.btn5{background-color: #8c8c8c;}
+.btn5:hover{background-color: #707070;}
 
 /*[ Intro ]
 ///////////////////////////////////////////////////////////
@@ -1496,6 +1497,16 @@ details[open] .accordion-icon svg {
 .add_btn{background: #fff;border: 2px solid rgb(46 154 63);border-radius: 6px;padding: 5px 15px;font-size: 16px;font-weight: 600;color: #333;
 transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.2);}
 .add_btn:hover{background: rgb(46 154 63);color: #fff;}
+.address_btn{background: #ffffff;
+  color: #27963c;
+  padding: 0 15px;
+  margin: 10px;
+  line-height: 36px;
+  border-radius: 20px;cursor: pointer;}
+  .address_btn a{text-decoration: none;font-weight: 600;line-height: 40px;
+    font-size: 14px;}
+.address_btn:hover{background: #cf2227;}
+.address_btn:hover a{color: #fff;}
 .plan_box.h_item1{border: 1px solid #f6f6f6;border-radius: 10px;}
 .added_count{    background: rgb(255 255 255);
   font-size: 18px;
@@ -1678,7 +1689,7 @@ transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgb
   box-shadow: 0px 25px 65px 0px rgba(0, 0, 0, 0.1) !important;
 }
 .wallet-item{border: 1px solid #efefef;}
-.profile-nav, .profile-info{
+.profile-info{
   margin-top:30px;   
 }
 
@@ -2103,7 +2114,8 @@ ul.summary-list > li:last-child  {
 }
 .d-arrow{pointer-events: none;}
 .booking_history{background: #e5e5e5;}
-.booking_history .nav-link{color: #000;font-weight: 600;transition: color .0s ease-in-out, background-color .0s ease-in-out, border-color .0s ease-in-out;}
+.booking_history .nav-link{color: #000;font-weight: 600;transition: color .0s ease-in-out; border-color: 0.2s ease-in-out;font-size: 14px;}
+.table>:not(caption)>*>*{font-size: 14px;}
 .booking_history .nav-item.show .nav-link, .booking_history .nav-link.active{color: #ffffff;background: #ee333a;border-radius: 0px;position: relative;}
 .booking_history .nav-item.show .nav-link:after, .booking_history .nav-link.active:after{content: "";  width: 15px;height: 15px;background: #ee333a;position: absolute;bottom: -10px;left: 50%;transform: rotate(45deg) translate(-50%,0);}
 .custom_dates{    background: #ffffff;    width: auto;
@@ -2116,9 +2128,12 @@ ul.summary-list > li:last-child  {
   border-color: #0d6efd;
 }
 .cart-item .cart-item-product-info > span.add_extra{color: #ec1d25;}
-.menu_item{background: #eeeeee;border-radius: 6px;padding: 5px 10px;margin: 5px;border: 1px solid #dee2e6;transition: all 0.3s ease-in-out;cursor: pointer;width: auto;  min-width: 150px;  min-height: 150px;  text-align: center;}
+.menu_item{background: #eeeeee;border-radius: 6px;padding: 5px 10px;margin: 5px;border: 1px solid #dee2e6;transition: all 0.3s ease-in-out;cursor: pointer;width: auto;    min-height: 80px;
+  text-align: center;width: 48%;
+  height: 80px; text-align: center;}
 .menu_item:hover{background: #ec1d25;color: #ffffff;}
 .m-l-auto{margin-left: auto;}
+.menu_item .price{font-size: 18px;}
 .menu_item.active{background: #ec1d25;}
 .react-datepicker-wrapper{margin-bottom: 20px;}
 .react-datepicker-wrapper input{display: block;
@@ -2153,3 +2168,15 @@ ul.summary-list > li:last-child  {
   vertical-align: middle;
   margin: 0 15px;
 } */
+.myaccount_lft .nav-link{    border-bottom: 1px solid #ebeae6;
+  margin-top: 0;
+  line-height: 30px;
+  width: 100%;-webkit-border-radius: 0;
+  color: #89817f;
+  border-left: 5px solid #fff;
+  padding: 10px 15px;border-radius: 0;
+  display: block;}
+.myaccount_lft.nav-pills .nav-link.active, .nav-pills .show>.nav-link{background: #f8f7f5 !important;
+  border-left: 5px solid #27963c;border-radius: 0;
+  color: #89817f !important;}
+.myaccount_lft .nav-link i{margin-right: 5px;}
