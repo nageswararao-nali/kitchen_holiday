@@ -18,6 +18,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getDeliverySlots } from '../../store/adminSlice';
 import { getOrderDates } from '../../store/subscriptionsSlice';
+import { id } from 'date-fns/locale';
 
 function Cart() {
     const { selectedItem, selectedSubscription, lastSubDate } = useSelector((state) => state.subscriptions)
@@ -34,33 +35,54 @@ function Cart() {
     const [extraSubItems, setExtraSubItems] = useState([]);
     const [deliverySlot, setDeliverySlot] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
-
+    const [extraItemCountData, setExtraItemCountData] = useState({});
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleClick = (divNum) => () => {
-    //   setSelected(divNum);
-        console.log(extraSubItems)
-      let index = extraSubItems.indexOf(divNum)
-      if(index > -1) {
-        let eItems = extraSubItems.splice(index, 1);
-        setExtraSubItems(eItems)
-      } else {
-        setExtraSubItems([...extraSubItems, divNum])
-      }
+    // const handleClick = (divNum) => () => {
+    // //   setSelected(divNum);
+    //     console.log(extraSubItems)
+    //   let index = extraSubItems.indexOf(divNum)
+    //   if(index > -1) {
+    //     let eItems = extraSubItems.splice(index, 1);
+    //     setExtraSubItems(eItems)
+    //   } else {
+    //     setExtraSubItems([...extraSubItems, divNum])
+    //   }
       
-    };
-  const handleClose = () => {
+    // };
+  const handleClose = async () => {
     setShow(false);
-    if(extraSubItems.length) {
-        console.log("hhhh")
-        extraSubItems.map((extraSubItem) => {
+    let extraSubData = []
+    console.log("extraSubItems")
+    console.log(extraSubItems)
+    let extraSubItemsData = Object.keys(extraItemCountData)
+    console.log(extraItemCountData)
+    if(extraSubItemsData.length) {
+        // console.log("hhhh")
+        // extraSubItemsData.map((extraSubItem) => {
+        let totoalPrice = selectedSubscription ? selectedSubscription.price : selectedItem.price
+        for(let extraSubItem of extraSubItemsData){
+            // console.log(extraSubItem)
             let subItemData = subItems.filter((subItem) => {
                 return subItem.id == extraSubItem
             })[0]
-            setTotalPrice(price+subItemData.price)
-            setPrice(price+subItemData.price)
-        })
+            if(extraItemCountData[extraSubItem]) {
+                console.log("data ", extraItemCountData[extraSubItem], totoalPrice)
+                totoalPrice = totoalPrice + (subItemData.price * extraItemCountData[extraSubItem])
+                extraSubData.push({itemId: extraSubItem, quantity: extraItemCountData[extraSubItem]})
+                // setExtraSubItems([...extraSubItems, {itemId: extraSubItem, quantity: extraItemCountData[extraSubItem]}])
+                
+            } else {
+                totoalPrice = totoalPrice - (subItemData.price * 0)
+                // setExtraSubItems([...extraSubItems, {itemId: extraSubItem, quantity: 0}])
+            }
+        }
+        setExtraSubItems(extraSubData)
+        console.log("totoalPrice")
+        console.log(totoalPrice)
+        setTotalPrice(totoalPrice*quantity)
+        setPrice(totoalPrice)
     }
     
   } 
@@ -72,11 +94,25 @@ function Cart() {
   }, [])
 
   const updateQuantity = async(num) => {
+    console.log(price)
     let qty = quantity+num;
     setQuantity(qty > 0 ? qty : 0)
     setTotalPrice(price*qty)
     
   }
+
+  const updateItemQuantity = async(num, itemId) => {
+    // console.log(extraItemCountData)
+    let extraItemCount = extraItemCountData
+    if(!extraItemCount[itemId]) {
+        extraItemCount[itemId] = 0
+    }
+    extraItemCount[itemId] = (extraItemCount[itemId]+num) > 0 ? (extraItemCount[itemId]+num) : 0;
+    // console.log(extraItemCount)
+    extraItemCount = JSON.parse(JSON.stringify(extraItemCount))
+    setExtraItemCountData(extraItemCount)
+  }
+  
   useEffect(() => {
     if(selectedSubscription.id) {
         setPrice(selectedSubscription.price)
@@ -107,6 +143,8 @@ function Cart() {
 
   const checkOut = async() => {
     console.log("1")
+    console.log("extraSubItems")
+    console.log(extraSubItems)
     let orderDetails = {};
     if(selectedPlan  != '' && quantity && deliverySlot) {
         if(selectedSubscription) {
@@ -378,7 +416,7 @@ function Cart() {
         </Modal.Header>
         <Modal.Body>
         <Row className='justify-content-center'>
-            <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
+            {/* <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
                 <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
                 <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
             </div>
@@ -409,9 +447,24 @@ function Cart() {
             <div className="menu_item" style={selected == 1 ? active : inactive} onClick={handleClick(1)}>
                 <span><img src="assets/images/veg_item1.png" width="100" alt=""/></span><span className='d-block'>Veg curry</span>
                 <div class="added_count"><span class="count_minus">-</span><span class="count_total">0</span><span class="count_plus">+</span></div>
-            </div>
-                
+            </div> */}
             {
+                (subItems.length && mappings.length) ? 
+                    subItems.map((subItem) => {
+                        let mps = JSON.parse(mappings[0].subItemIds)
+                        if(mps.indexOf(subItem.id.toString()) > -1) {
+                            return (
+                                <div className="menu_item">
+                                    <span><img src={subItem.image} width="100" alt=""/></span><span className='d-block'>{subItem.name}</span>
+                                    <div class="added_count"><span class="count_minus" onClick={() => updateItemQuantity(-1, subItem.id)}>-</span><span class="count_total">{extraItemCountData[subItem.id] ? extraItemCountData[subItem.id] : 0}</span><span class="count_plus" onClick={() => updateItemQuantity(1, subItem.id)}>+</span></div>
+                                </div>
+                            )
+                        }
+                        
+                    })
+                : null
+            }
+            {/*
                 (subItems.length && mappings.length) ? 
                     subItems.map((subItem) => {
                         let mps = JSON.parse(mappings[0].subItemIds)
@@ -428,7 +481,7 @@ function Cart() {
                         
                     })
                 : null
-            }
+            */}
           </Row>
         </Modal.Body>
         <Modal.Footer className='justify-content-center'>
