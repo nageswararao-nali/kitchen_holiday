@@ -24,5 +24,6 @@ export const GET_ITEM_MAPPINGS = 'items/getItemMappings';
 export const ADD_ITEM_MAPPING = 'items/addItemMapping';
 export const ADD_USER_ADDRESS = 'users/addUserAddress';
 export const GET_USER_ADDRESSES = 'users/getUserAddresses';
+export const GET_USER_ADDRESS = 'users/getUserAddress';
 export const GET_DELIVERY_SLOTS = 'zones/getDeliverySlots';
 export const GET_DELIVERY_ORDER_DATES = 'orders/getOrderDates';

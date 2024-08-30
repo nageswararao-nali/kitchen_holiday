@@ -3,11 +3,12 @@ import React, {useState, useEffect, useCallback } from 'react';
 // import { Counter } from './features/counter/Counter';
 // import './App.css';
 import Layout from '../../components/Layout/Layout';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import GoogleMapReact from 'google-map-react';
 import { useDispatch, useSelector } from 'react-redux';
 import Map from '../Checkout/map'
-import { addUserAddress } from '../../store/usersSlice';
+import { addUserAddress, getUserAddress } from '../../store/usersSlice';
+import { getZones } from '../../store/subscriptionsSlice';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 
@@ -21,7 +22,9 @@ const handleApiLoaded = (map, maps) => {
     // use map and maps objects
   };
 function Address() {
+    const { addressId } = useParams()
     const { user } = useSelector((state) => state.auth)
+    const { userAddress } = useSelector((state) => state.users)
     const [username, setUsername] = useState(user.username)
     const [email, setEmail] = useState(user.email)
     const [mobile, setMobile] = useState(user.mobile)
@@ -33,7 +36,7 @@ function Address() {
     const [stateValue, setStateValue] = useState('')
     const [zip, setZip] = useState('')
     const [location, setLocation] = useState()
-    const allowedZipCodes = ["523001"]
+    const [allowedZipCodes, setAllowedZipCodes] = useState([])
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -45,9 +48,45 @@ function Address() {
         },
         zoom: 11
       };
+    const getZoneData = async () => {
+        let zoneData = await dispatch(getZones())
+        if(zoneData.payload.success) {
+            console.log("zone data....")
+            console.log(zoneData.payload.data.items)
+            let resData = zoneData.payload.data.items
+            let aZips = []
+            if(resData) {
+                for(let zone of resData) {
+                    aZips.push(zone.name)
+                }
+            }
+            setAllowedZipCodes(aZips)
+        }
+    }
     useEffect(() => {
+        getZoneData()
         window.scrollTo(0, 0)
       }, [])
+    const getAddressDataById = async () => {
+        let userAddressResp = await dispatch(getUserAddress({id: addressId}))
+        if(userAddressResp.payload.success) {
+            console.log(userAddressResp.payload.data)
+            const userAddr = userAddressResp.payload.data
+            setEmail(userAddr.email)
+            setMobile(userAddr.mobile)
+            setFName(userAddr.fName)
+            setLName(userAddr.lName)
+            setAddress1(userAddr.address)
+            setAddress2(userAddr.address1)
+            setCountry(userAddr.country)
+            setStateValue(userAddr.state)
+            setZip(userAddr.zipcode)
+            setLocation({lat: userAddr.latitude, lng: userAddr.longitude})
+        }
+    }
+    useEffect(() => {
+        getAddressDataById()
+    }, [addressId])
       const saveAddress = async () => {
         console.log("welcome ")
         console.log(location)

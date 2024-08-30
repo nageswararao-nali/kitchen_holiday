@@ -30,6 +30,10 @@ export const getUserAddresses = createAsyncThunk('users/getUserAddresses', async
   return handleAuthApiCall(usersService.getUserAddresses, reaObj, thunkAPI);
 });
 
+export const getUserAddress = createAsyncThunk('users/getUserAddress', async (reaObj, thunkAPI) => {
+  return handleAuthApiCall(usersService.getUserAddress, reaObj, thunkAPI);
+});
+
 
 const usersSlice = createSlice({
   name: 'users',
@@ -41,6 +45,7 @@ const usersSlice = createSlice({
     users: [],
     userAddresses: [],
     address: {},
+    userAddress: {},
     error: null
   },
   reducers: {
@@ -136,6 +141,20 @@ const usersSlice = createSlice({
         state.loading = false;
         state.error = action.payload
       })
+      .addCase(getUserAddress.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUserAddress.fulfilled, (state, action) => {
+        if(action.payload.success) {
+            state.userAddress = action.payload.data
+        }
+        state.loading = false;
+      })
+      .addCase(getUserAddress.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload
+      })
+      
       
       
   },

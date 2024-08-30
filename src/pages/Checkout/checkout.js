@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Map from './map';
 import { addUserAddress, getUserAddresses } from "../../store/usersSlice";
 import { addOrder } from "../../store/orderSlice";
-import { clearData } from "../../store/subscriptionsSlice";
+import { clearData, getZones } from "../../store/subscriptionsSlice";
 import Form from 'react-bootstrap/Form';
 
 const displaystyle = {
@@ -36,12 +36,27 @@ function Checkout() {
     const [newAddress, setNewAddress] = useState(false)
     const [addressId, setAddressId] = useState(0)
     const [address, setAddress] = useState()
-    const allowedZipCodes = ["523001"]
+    const [allowedZipCodes, setAllowedZipCodes] = useState([])
+    
+    // let allowedZipCodes = []
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const getUserAddressesData = async () => {
+        let zoneData = await dispatch(getZones())
+        if(zoneData.payload.success) {
+            console.log("zone data....")
+            console.log(zoneData.payload.data.items)
+            let resData = zoneData.payload.data.items
+            let aZips = []
+            if(resData) {
+                for(let zone of resData) {
+                    aZips.push(zone.name)
+                }
+            }
+            setAllowedZipCodes(aZips)
+        }
         await dispatch(getUserAddresses({userId: user.id}))
     }
     useEffect(() => {
@@ -61,10 +76,12 @@ function Checkout() {
                 subItems: JSON.parse(orderDetails.subItems[0].subItemIds),
                 quantity: orderDetails.quantity,
                 addressId: addressId,
+                price: orderDetails.price,
                 totalAmount: orderDetails.totalPrice,
                 customerName: address.fName + " " + address.lName,
                 customerMobile: address.mobile,
-                address: address.address + " " + address.address1 + " " + address.state + " " + address.zipcode,
+                address: address.address + ", " + address.address1 + ", " + address.state + ", " + address.zipcode,
+                zipcode: address.zipcode,
                 startDate: orderDetails.startDate,
                 selectedPlan: orderDetails.selectedPlan,
                 deliverySlot: orderDetails.deliverySlot,
@@ -93,6 +110,7 @@ function Checkout() {
                 customerName: address.fName + " " + address.lName,
                 customerMobile: address.mobile,
                 address: address.address + " " + address.address1 + " " + address.state + " " + address.zipcode,
+                zipcode: address.zipcode,
                 status: 'new',
                 orderType: 'normal',
                 extraSubItems: orderDetails.extraSubItems,

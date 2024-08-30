@@ -158,6 +158,7 @@ function Cart() {
                 subscriptionId: selectedSubscription.id,
                 quantity,
                 totalPrice,
+                price,
                 startDate,
                 selectedPlan,
                 deliverySlot
@@ -171,6 +172,7 @@ function Cart() {
                 subItems: mappings,
                 quantity,
                 totalPrice,
+                price,
                 selectedPlan,
                 deliverySlot
             }

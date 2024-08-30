@@ -1,5 +1,5 @@
 import apiRequest from '../utils/api';
-import { TOTAL_USERS, ADD_USER, GET_USERS, ADD_USER_ADDRESS, GET_USER_ADDRESSES } from '../utils/apiRoutes'
+import { TOTAL_USERS, ADD_USER, GET_USERS, ADD_USER_ADDRESS, GET_USER_ADDRESSES, GET_USER_ADDRESS } from '../utils/apiRoutes'
 
 
 const getTotalUsers = async (reqObj, userToken) => {
@@ -22,13 +22,18 @@ const getUserAddresses = async (reqObj, userToken) => {
   return await apiRequest(GET_USER_ADDRESSES, 'POST', reqObj, userToken);
 };
   
+const getUserAddress = async (reqObj, userToken) => {
+  return await apiRequest(GET_USER_ADDRESS, 'POST', reqObj, userToken);
+};
+
 
 const usersService = {
     getTotalUsers,
     addUser,
     getUsers,
     addUserAddress,
-    getUserAddresses
+    getUserAddresses,
+    getUserAddress
 };
 
 export default usersService;

@@ -28,6 +28,9 @@ export const getOrderDates = createAsyncThunk('subscriptions/getOrderDates', asy
   return handleAuthApiCall(subscriptionService.getOrderDates, reqObj, thunkAPI);
 });
 
+export const getZones = createAsyncThunk('subscriptions/getZones', async (reqObj, thunkAPI) => {
+  return handleAuthApiCall(subscriptionService.getZones, reqObj, thunkAPI);
+});
 
 const subscriptionSlice = createSlice({
   name: 'items',
@@ -138,6 +141,21 @@ const subscriptionSlice = createSlice({
         state.loading = false;
       })
       .addCase(getOrderDates.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(getZones.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getZones.fulfilled, (state, action) => {
+        if(action.payload.success) {
+            state.zones = action.payload.data.items
+        } else {
+          state.error = action.payload.message
+          state.zones = []
+        }
+        state.loading = false;
+      })
+      .addCase(getZones.rejected, (state, action) => {
         state.loading = false;
       })
       

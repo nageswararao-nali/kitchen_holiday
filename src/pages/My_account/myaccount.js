@@ -75,6 +75,10 @@ console.log(orders)
     if(e == "CancelOrder") {
       getMyOrders({userId: user.id, status: 'Canceled'})
     }
+    if(e == "myorders") {
+      getMyOrders({userId: user.id})
+    }
+    
   }
   const getUserTodayOrders = async () => {
     getMyOrders({userId: user.id, orderDate: moment().format('YYYY-MM-DD')})
@@ -380,7 +384,9 @@ console.log(orders)
                     userAddresses.map((userAddress) => {
                       return (
                         <div className="text-muted m-b-30">
-                            <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"></h5><a href="/address"><i className="bi bi-pencil"></i> Edit</a></div>
+                            <div className='d-flex justify-content-between'><h5 className="font-size-16 mb-3"></h5>
+                              <a onClick={() => {navigate('/address/'+userAddress.id)}}><i className="bi bi-pencil"></i> Edit</a>
+                            </div>
                             <h5 className="font-size-15 mb-2">{userAddress.fName + " " + userAddress.lName}</h5>
                             <p className="mb-1">{userAddress.address}</p>
                             <p className="mb-1">{userAddress.email}</p>
@@ -472,7 +478,40 @@ console.log(orders)
                         </tbody>
                       </table>
                     </Tab>
-                    
+                    <Tab eventKey="myorders" title="My Orders"  onClick={() => getMyOrders({userId: user.id})}>
+                    <table className="table table-hover">
+                    <thead>
+                          <tr>
+                            <th>Order No.</th>
+                            <th>Order Date</th>
+                            <th>Your Order</th>
+                            <th>Order Type</th>
+                            <th>Deliverry/Pickup</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            (orders && orders.length) ?
+                              orders.map((order) => {
+                                return(<tr>
+                                  <td>{order.id}</td>
+                                  <td>{order.orderDate}</td>
+                                  <td>{order.itemName}</td>
+                                  <td> {order.orderType} </td>
+                                  <td>{order.status}</td>
+                                  <td>{order.address}</td>
+                                  <td>X</td>
+                                </tr>)
+                              })
+                            : null
+                          }
+                          
+                          
+                        </tbody>
+                      </table>
+                    </Tab>
                     <Tab eventKey="DeliveredOrder" title="Delivered Order"  onClick={() => getMyOrders({userId: user.id, status: 'Delivered'})}>
                     <table className="table table-hover">
                         <thead>

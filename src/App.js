@@ -37,6 +37,7 @@ function App() {
         <Route path="/myaccount"  element={<My_account />} />
         <Route path="/cart"  element={<Cart />} />
         <Route path="/address"  element={<Address />} />
+        <Route path="/address/:addressId"  element={<Address />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
