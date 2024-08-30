@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 // import './App.css';
@@ -10,16 +10,17 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useDispatch, useSelector } from "react-redux";
-import { getUserAddresses } from "../../store/usersSlice";
+import { getUserAddresses, updateUserImage } from "../../store/usersSlice";
 import { getOrders, clearOrders } from "../../store/orderSlice";
 import * as moment from 'moment';
-import { getMySubscriptions, updateMySubscription } from "../../store/subscriptionsSlice";
+import { getMySubscriptions, updateMySubscription, deleteMySubscription } from "../../store/subscriptionsSlice";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import CalendarComponent from './calendarcomponent';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
+import { getUser, setUser } from "../../store/authSlice";
 
 const heighstyle = {
     height: '5px', 
@@ -40,6 +41,8 @@ function Myaccount() {
   const [rDates, setrDates] = useState([]);
   const [mySubLastDate, setMySubLastDate] = useState();
 
+  const inputFile = useRef(null) 
+  const [userImage , setUserImage] = useState(null)
 console.log("orders")
 console.log(orders)
   const navigate = useNavigate()
@@ -95,6 +98,16 @@ console.log(orders)
       await dispatch(getMySubscriptions({userId: user.id}))
     }
   }
+  const deleteMySubscriptions = async (mySubId) => {
+    console.log(mySubId)
+    if (window.confirm('Are you sure you want to delete Subscription?')) {
+      setShow(false)
+      await dispatch(deleteMySubscription({subId: mySubId}))
+      await dispatch(getMySubscriptions({userId: user.id}))
+    }
+    
+  }
+  
   const [show2, setShow2] = useState(false);
 
   const handleClose = () => setShow2(false);
@@ -106,6 +119,26 @@ console.log(orders)
     rrDates.push(dtData.dt) 
     setrDates(rrDates)
     setMySubLastDate(dtData.lastDate)
+  }
+  const onButtonClick = () => {
+    // `current` points to the mounted file input element
+    inputFile.current.click();
+  };
+
+  const uploadPhoto = async (e) => {
+    const formData = new FormData();
+    formData.append('userImage', e.target.files[0])
+    formData.append('userId', user.id)
+    let res = await dispatch(updateUserImage(formData))
+    console.log("res.payload")
+    console.log(res.payload)
+    if(res.payload.success) {
+      console.log("calling user details")
+      let userres = await dispatch(getUser({userId: user.id}))
+      if(userres.payload.success) {
+        await dispatch(setUser(userres.payload.data))
+      }
+    }
   }
   return (
     <div>
@@ -268,10 +301,12 @@ console.log(orders)
         <Col sm={3}>
         <div className="profile-nav">           
           <div className="user-heading round">
-            <a href="#">
-              <img src="assets/images/avatar-01.webp" alt="IGM-AVATAR"/>
+            <a>
+              <img src={user.image} alt="IGM-AVATAR"/>
             </a>
-            <h1>Marie Simmons</h1>
+            <input type='file' id='file' ref={inputFile} onChange={(e) => {uploadPhoto(e)}} style={{display: 'none'}}/>
+            <button onClick={onButtonClick}>Update Photo</button>
+            <h1>{user.fName + " " + user.lName}</h1>
             <p className="text-white">{user.username}</p>
           </div>  
         </div>   
@@ -645,6 +680,9 @@ console.log(orders)
         <Modal.Footer>
         <Button variant="primary" className="btn2 txt3 text-white" onClick={() => updateMySubscriptions(selectedSub.id)}>
             Swap Orders
+          </Button>
+          <Button variant="primary" className="btn2 txt3 text-white" onClick={() => deleteMySubscriptions(selectedSub.id)}>
+            Delete Subscription
           </Button>
           <Button variant="secondary" className="btn2 btn5 txt3" onClick={() => setShow(false)}>
             Close

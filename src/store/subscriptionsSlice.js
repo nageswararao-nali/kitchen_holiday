@@ -32,6 +32,11 @@ export const getZones = createAsyncThunk('subscriptions/getZones', async (reqObj
   return handleAuthApiCall(subscriptionService.getZones, reqObj, thunkAPI);
 });
 
+export const deleteMySubscription = createAsyncThunk('subscriptions/deleteMySubscription', async (reqObj, thunkAPI) => {
+  return handleAuthApiCall(subscriptionService.deleteMySubscription, reqObj, thunkAPI);
+});
+
+
 const subscriptionSlice = createSlice({
   name: 'items',
   initialState: {

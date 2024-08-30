@@ -1,6 +1,7 @@
 
 import apiRequest from '../utils/api';
-import { ADD_SUBSCRIPTION, GET_SUBSCRIPTIONS, ADD_ZONE, GET_ZONES, GET_MY_SUBSCRIPTIONS, UPDATE_MY_SUBSCRIPTION, GET_DELIVERY_ORDER_DATES } from '../utils/apiRoutes'
+import { ADD_SUBSCRIPTION, GET_SUBSCRIPTIONS, ADD_ZONE, GET_ZONES, GET_MY_SUBSCRIPTIONS, UPDATE_MY_SUBSCRIPTION, 
+  GET_DELIVERY_ORDER_DATES, DELETE_MY_SUBSCRIPTION } from '../utils/apiRoutes'
 
 
 const addSubscription = async (reqObj, userToken) => {
@@ -31,6 +32,11 @@ const getOrderDates = async (reqObj, userToken) => {
   return await apiRequest(GET_DELIVERY_ORDER_DATES, 'POST', reqObj, userToken);
 };
 
+const deleteMySubscription = async (reqObj, userToken) => {
+  return await apiRequest(DELETE_MY_SUBSCRIPTION, 'POST', reqObj, userToken);
+};
+
+
 const usersService = {
     addSubscription,
     getSubscriptions,
@@ -38,7 +44,8 @@ const usersService = {
     getZones,
     getMySubscriptions,
     updateMySubscription,
-    getOrderDates
+    getOrderDates,
+    deleteMySubscription
 };
 
 export default usersService;

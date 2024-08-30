@@ -34,6 +34,10 @@ export const getUserAddress = createAsyncThunk('users/getUserAddress', async (re
   return handleAuthApiCall(usersService.getUserAddress, reaObj, thunkAPI);
 });
 
+export const updateUserImage = createAsyncThunk('users/updateUserImage', async (reaObj, thunkAPI) => {
+  return handleAuthApiCall(usersService.updateUserImage, reaObj, thunkAPI);
+});
+
 
 const usersSlice = createSlice({
   name: 'users',
