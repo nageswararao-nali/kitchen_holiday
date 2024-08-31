@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 function Contact() {
   return (
-    <Layout>
+    <section>
         <section className="section-slide banner">
         <div className="row">
             <div className="banner position-relative" >
@@ -70,7 +70,7 @@ function Contact() {
                 </div>               
         </div>
     </section>
-    </Layout>
+    </section>
     
   );
 }

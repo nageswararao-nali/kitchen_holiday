@@ -10,7 +10,7 @@ const bdrstyle = {
 };
 function About() {
   return (
-    <Layout>
+    <section>
        <section className="section-slide banner">
         <div className="row">
             <div className="banner position-relative" >
@@ -37,7 +37,7 @@ function About() {
            </div>
         </div>
     </section>
-    </Layout>
+    </section>
     
   );
 }
