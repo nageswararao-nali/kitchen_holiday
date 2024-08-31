@@ -90,6 +90,9 @@ console.log(orders)
     setSelectedSub(sub)
     setShow(true)
   }
+  const showDeletePop = async () =>{
+    setShow2(true)
+  }
   const updateMySubscriptions = async (mySubId) => {
     console.log(mySubId)
     setShow(false)
@@ -408,7 +411,7 @@ console.log(orders)
                       <div className="col-sm-9 text-secondary">
                           {/* <span>{user.state}</span> */}
                           {/* <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a> */}
-                          <span class="delete_btn" id="addBtn1">Delete</span>
+                          <span class="delete_btn" id="addBtn1" onClick={() => showDeletePop()}>Delete</span>
                       </div>
                     </div>
                     <hr/>
@@ -460,7 +463,7 @@ console.log(orders)
                     className="mb-3 booking_history"
                     onSelect={(e) => handleTabClick(e)}
                   >
-                    <Tab eventKey="TodayDelivery" title="Today's Delivery" onClick={() => getUserTodayOrders()}>
+                  {/*   <Tab eventKey="TodayDelivery" title="Today's Delivery" onClick={() => getUserTodayOrders()}>
                       <div className="overflow-auto">
                       <table className="table table-hover">
                         <thead>
@@ -495,7 +498,7 @@ console.log(orders)
                         </tbody>
                       </table>
                       </div>
-                    </Tab>
+                    </Tab> */}
                     <Tab eventKey="SubscriptionPlan" title="Subscription Plan"  onClick={() => getMyOrders({userId: user.id, orderType: 'subscription'})}>
                     <table className="table table-hover">
                         <thead>
@@ -563,7 +566,7 @@ console.log(orders)
                         </tbody>
                       </table>
                     </Tab>
-                    <Tab eventKey="DeliveredOrder" title="Delivered Order"  onClick={() => getMyOrders({userId: user.id, status: 'Delivered'})}>
+                   {/*  <Tab eventKey="DeliveredOrder" title="Delivered Order"  onClick={() => getMyOrders({userId: user.id, status: 'Delivered'})}>
                     <table className="table table-hover">
                         <thead>
                           <tr>
@@ -595,8 +598,8 @@ console.log(orders)
                           
                         </tbody>
                       </table>
-                    </Tab>
-                    <Tab eventKey="CancelOrder" title="Cancel Order"  onClick={() => getMyOrders({userId: user.id, status: 'canceled'})}>
+                    </Tab> */}
+                   {/*  <Tab eventKey="CancelOrder" title="Cancel Order"  onClick={() => getMyOrders({userId: user.id, status: 'canceled'})}>
                     <table className="table table-hover">
                         <thead>
                           <tr>
@@ -629,7 +632,7 @@ console.log(orders)
                           
                         </tbody>
                       </table>
-                    </Tab>
+                    </Tab> */}
                   </Tabs>
                 </div>
               </div>
@@ -677,6 +680,72 @@ console.log(orders)
                 </div>
               </div>
             </Tab.Pane>
+            <Tab.Pane eventKey="payments_refunds">
+              <div className="card mb-3  ">
+                <div className="d-address">
+                  <span className="sub_title  p-l-15 p-r-15">Payments and Refunds</span>
+                </div>                     
+                <div className='p-b-14 p-3'>
+                  <Tabs
+                    defaultActiveKey="Payments"
+                    id="uncontrolled-tab-example"
+                    className="mb-3 txt5 booking_history"
+                    onSelect={(e) => handleTabClick(e)}
+                  >
+                    <Tab eventKey="Payments" title="Payments" >
+                      <span className="txt_title">Saved cards</span>
+                      <div className="row">
+                        <div class="credit-card visa selectable  m-3">
+                          <div class="credit-card-last4">
+                            4242
+                          </div>
+                          <div class="credit-card-expiry ">
+                            08/25
+                          </div>
+                        </div>
+                        <div class="credit-card mastercard selectable m-3">
+                          <div class="credit-card-last4">
+                            8210
+                          </div>
+                          <div class="credit-card-expiry">
+                            10/22
+                          </div>
+                        </div>
+                        <div className="add_new my-3">
+                          <i class="bi bi-plus-square"></i>
+                          <span className="m-2">ADD NEW CARD</span>
+                        </div>
+                      </div>   
+                      <hr></hr>                   
+                      <span className="txt_title mt-3">PayPal</span>
+                      <div className="d-flex align-items-center mt-2">
+                        <img src="https://i.imgur.com/7kQEsHU.png" style={{width:'30px'}}/>
+                        <span className="m-2">ve********@hotmail.com</span>
+                        <div className="flex_ryt flex-1">
+                          <a href="#" class="float-end"><i class="bi bi-pencil"></i> Edit</a>
+                        </div>
+                      </div>
+                    </Tab>
+                    <Tab eventKey="Refunds" title="Refunds" >
+                      <div className="d-flex justify-content-between">
+                        <span className="txt_title">Veg-meals</span>
+                        <span className="status_info">Processing</span>
+                      </div>
+                      <div className="refund_details mt-2">
+                        <div><span>To:</span><span className="m-2">PayPal</span></div>
+                        <div><span>Amount:</span><span className="m-2">$120</span></div>
+                        <div><span>Expected by:</span><span className="m-2">1st Sep, 2024</span></div>
+                        <small className="error mt-3 d-block">Your refund is taking longer than usual. We are working to get it resolve at the earliest.</small>
+                      </div>
+                      <hr></hr>
+                        <span>Order ID: #17548524568</span>
+                      <hr></hr>
+
+                    </Tab>
+                  </Tabs>
+                </div>
+              </div>
+            </Tab.Pane>
           </Tab.Content>
         </Col>
       </Row>
@@ -694,15 +763,30 @@ console.log(orders)
           <CalendarComponent selectedDates={selectedSub.orderDates ? JSON.parse(selectedSub.orderDates) : []} removedDated={removedDates} />
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="primary" className="btn2 txt3 text-white" onClick={() => updateMySubscriptions(selectedSub.id)}>
+        <Button variant="primary" className="btn2 btn6 txt3 text-white" onClick={() => updateMySubscriptions(selectedSub.id)}>
             Swap Orders
           </Button>
           <Button variant="primary" className="btn2 txt3 text-white" onClick={() => deleteMySubscriptions(selectedSub.id)}>
             Delete Subscription
           </Button>
-          <Button variant="secondary" className="btn2 btn5 txt3" onClick={() => setShow(false)}>
-            Close
-          </Button>         
+             
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={show2} onHide={() => setShow2(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Account</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-left">
+          <label for="password" className="d-block">Account password</label>
+          <input type="password" className="form-control" id="password" placeholder="Enter Password"/>
+        </Modal.Body>
+        <Modal.Footer>
+        
+          <Button variant="primary" className="btn2 txt3 text-white" >
+            Delete Account
+          </Button>
+             
         </Modal.Footer>
       </Modal>
     </div>
