@@ -241,9 +241,9 @@ function Cart() {
                                         <a class="cart-item-product d-flex " href="#">
                                             <div class="cart-item-product-thumb"><img src={selectedItem.image} alt="Product" width={100}/></div>
                                             <div class="cart-item-product-info">
-                                                <div class="cart-item-product-title">{selectedItem.name} ({selectedItem.shortName})</div>                                               
+                                                <div class="cart-item-product-title">{selectedItem.name} ({selectedSubscription ? selectedSubscription.name : selectedItem.shortName})</div>                                               
                                                 <span className='add_extra' onClick={handleShow}><strong>+ Add Extra</strong></span>
-                                                <div className='extra_items_block mt-3'>
+                                                {/* <div className='extra_items_block mt-3'>
                                                     <span className='sub_title d-block'><b>Extra items:</b></span>
                                                     <span class="d-flex align-items-center extra_item ">
                                                         <img src="https://kitchen-holiday-images.s3.us-east-2.amazonaws.com/veg_item1.png" width="40" alt=""/>
@@ -262,7 +262,7 @@ function Cart() {
                                                         <span class="d-block">Chapathi</span>
                                                     </span>
                                                    
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </a>
                                     </div> 
@@ -290,28 +290,28 @@ function Cart() {
                             <div class="px-3 my-3 text-center">
                                 <div class="cart-item-label">Quantity</div>
                                 <div className="added_count" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
-                                <div className='extra_items_block d-inline-block mt-3'>
+                                {/* <div className='extra_items_block d-inline-block mt-3'>
                                     <div className="added_count mt-4" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
                                     <div className="added_count mt-4" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
                                     <div className="added_count mt-4" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
                                     <div className="added_count mt-4" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
-                                </div>
+                                </div> */}
                             </div>
                             <div class="px-3 my-3 text-center">
                                 <div class="cart-item-label">Subtotal</div>
                                 <span class="text-xl font-weight-medium sub_total">${totalPrice}</span>
-                                <div className='extra_items_block d-inline-block mt-3'>
+                                {/* <div className='extra_items_block d-inline-block mt-3'>
                                     <span class="text-xl font-weight-medium sub_total mt-4">${totalPrice}</span>
                                     <span class="text-xl font-weight-medium sub_total mt-4">${totalPrice}</span>
                                     <span class="text-xl font-weight-medium sub_total mt-4">${totalPrice}</span>
                                     <span class="text-xl font-weight-medium sub_total mt-4">${totalPrice}</span>
-                                </div> 
+                                </div>  */}
                             </div>
                             </div>
                             <hr></hr>
                             <div className='total_amt_block d-flex justify-content-end mx-3'>
                                 <span  className='mx-4'><b>Total:</b></span>
-                                <span className='mx-4'>$0</span>
+                                <span className='mx-4'>${totalPrice}</span>
                             </div>
                             <div className='d-md-flex'>
                                 {

@@ -179,7 +179,7 @@ function Address() {
                                         <label for="country"><span className='error'>*</span> Country</label>
                                         <select className="custom-select d-block w-100" id="country" required=""  value={country} onChange={(e) => setCountry(e.target.value)}>
                                             <option value="">Choose...</option>
-                                            <option>United States</option>
+                                            <option value="United States">United States</option>
                                         </select>
                                         <div className="invalid-feedback"> Please select a valid country. </div>
                                     </div>
@@ -187,7 +187,7 @@ function Address() {
                                         <label for="state"><span className='error'>*</span> State</label>
                                         <select className="custom-select d-block w-100" id="state" required=""  value={stateValue} onChange={(e) => setStateValue(e.target.value)}>
                                             <option value="">Choose...</option>
-                                            <option>California</option>
+                                            <option value="Texas">Texas</option>
                                         </select>
                                         <div className="invalid-feedback"> Please provide a valid state. </div>
                                     </div>
