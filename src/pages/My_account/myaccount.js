@@ -21,6 +21,8 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import { getUser, setUser } from "../../store/authSlice";
+import Accordion from 'react-bootstrap/Accordion';
+
 
 const heighstyle = {
     height: '5px', 
@@ -458,7 +460,7 @@ console.log(orders)
                 </div>                     
                 <div className='p-b-14 p-3'>
                   <Tabs
-                    defaultActiveKey="TodayDelivery"
+                    defaultActiveKey="SubscriptionPlan"
                     id="uncontrolled-tab-example"
                     className="mb-3 booking_history"
                     onSelect={(e) => handleTabClick(e)}
@@ -727,22 +729,120 @@ console.log(orders)
                       </div>
                     </Tab>
                     <Tab eventKey="Refunds" title="Refunds" >
-                      <div className="d-flex justify-content-between">
-                        <span className="txt_title">Veg-meals</span>
-                        <span className="status_info">Processing</span>
+                      <div className="refunds_wrap">
+                        <div className="d-flex justify-content-between">
+                          <span className="txt_title">Veg-meals</span>
+                          <span className="status_info">Processing</span>
+                        </div>
+                        <div className="refund_details mt-2">
+                          <div><span>To:</span><span className="m-2">PayPal</span></div>
+                          <div><span>Amount:</span><span className="m-2">$120</span></div>
+                          <div><span>Expected by:</span><span className="m-2">1st Sep, 2024</span></div>
+                          <small className="error mt-3 d-block">Your refund is taking longer than usual. We are working to get it resolve at the earliest.</small>
+                        </div>
+                        <hr></hr>
+                          <span>Order ID: #17548524568</span>
+                        <hr></hr>
                       </div>
-                      <div className="refund_details mt-2">
-                        <div><span>To:</span><span className="m-2">PayPal</span></div>
-                        <div><span>Amount:</span><span className="m-2">$120</span></div>
-                        <div><span>Expected by:</span><span className="m-2">1st Sep, 2024</span></div>
-                        <small className="error mt-3 d-block">Your refund is taking longer than usual. We are working to get it resolve at the earliest.</small>
+                      <div className="refunds_wrap mt-4">
+                        <div className="d-flex justify-content-between">
+                          <span className="txt_title">Non veg-meals</span>
+                          <span className="status_info status_completed">Completed</span>
+                        </div>
+                        <div className="refund_details mt-2">
+                          <div><span>To:</span><span className="m-2">CARD</span></div>
+                          <div><span>Amount:</span><span className="m-2">$20</span></div>
+                          <div><span>Completed on:</span><span className="m-2">31st Aug, 2024</span></div>
+                          
+                        </div>
+                        <hr></hr>
+                          <span>Order ID: #17548524568</span>
+                        <hr></hr>
                       </div>
-                      <hr></hr>
-                        <span>Order ID: #17548524568</span>
-                      <hr></hr>
-
                     </Tab>
                   </Tabs>
+                </div>
+              </div>
+            </Tab.Pane>
+            <Tab.Pane eventKey="post_review">
+              <div className="card mb-3  ">
+                <div className="d-address">
+                  <span className="sub_title  p-l-15 p-r-15">Post Review</span>
+                </div>                     
+                <div className='p-b-14 p-3'>
+                <div class="form-group mb-3"><label for="comment" class="text-black font-w600">Message</label><textarea rows="4" class="form-control" name="comment" placeholder="Type your message" id="comment"></textarea></div>
+                <div class="col-lg-12"><div class="form-group"><input type="submit" class="submit btn btn2" id="submit" name="submit" value="Post Review"/></div></div>
+                </div>
+              </div>
+            </Tab.Pane>
+            <Tab.Pane eventKey="help">
+              <div className="card mb-3  ">
+                <div className="d-address">
+                  <span className="sub_title  p-l-15 p-r-15">Help</span>
+                </div>                     
+                <div className='p-b-14 p-3'>
+                  <address className='m-t-13'>
+                    <i className="bi bi-phone m-2"></i>
+                    <span>+91-9999 999 999<br/>                        
+                    <i className="bi bi-envelope m-2 my-2 d-inline-block"></i>
+                    help@kitchenholiday.com <br/>
+                    
+                    <i className="bi bi-map m-2"></i>
+                    8th floor, 379 Hudson St, New York, NY 10018</span></address>
+                    <hr></hr>
+                    <div className="row title_sec mt-4">
+                      <h3 className="sub_title tit4 p-l-15 p-r-15 t-center p-l-20 p-r-15 p-t-3">Frequently Asked Questions</h3>
+                    <Accordion defaultActiveKey="0">
+                      <Accordion.Item eventKey="0">
+                        <Accordion.Header>Accordion Item #1</Accordion.Header>
+                        <Accordion.Body>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                          aliquip ex ea commodo consequat. Duis aute irure dolor in
+                          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                          culpa qui officia deserunt mollit anim id est laborum.
+                        </Accordion.Body>
+                      </Accordion.Item>
+                      <Accordion.Item eventKey="1">
+                        <Accordion.Header>Accordion Item #2</Accordion.Header>
+                        <Accordion.Body>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                          aliquip ex ea commodo consequat. Duis aute irure dolor in
+                          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                          culpa qui officia deserunt mollit anim id est laborum.
+                        </Accordion.Body>
+                      </Accordion.Item>
+                      <Accordion.Item eventKey="2">
+                        <Accordion.Header>Accordion Item #3</Accordion.Header>
+                        <Accordion.Body>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                          aliquip ex ea commodo consequat. Duis aute irure dolor in
+                          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                          culpa qui officia deserunt mollit anim id est laborum.
+                        </Accordion.Body>
+                      </Accordion.Item>
+                      <Accordion.Item eventKey="3">
+                        <Accordion.Header>Accordion Item #4</Accordion.Header>
+                        <Accordion.Body>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                          aliquip ex ea commodo consequat. Duis aute irure dolor in
+                          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                          culpa qui officia deserunt mollit anim id est laborum.
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
+                    </div>
                 </div>
               </div>
             </Tab.Pane>

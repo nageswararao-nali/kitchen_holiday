@@ -2298,7 +2298,17 @@ address{text-align: left;}
 .add_new i{font-size: 22px;color: #ea4335;}
 .txt_title{font-weight: 500;font-size: 20px;}
 .status_info{background: #ffefc7;padding: 5px 15px;color: #b27f00;border-radius: 6px;font-size: 15px;font-weight: 600;}
+.status_completed{background: #c7ffd9;padding: 5px 15px;color: #00b21b;}
 .refund_details span{font-weight: 600;}
+.refunds_wrap{    background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 6px 0px rgba(0, 0, 0, 0.2);}
+.flex-column.myaccount_lft.nav.nav-pills{border: 1px solid #ebeae6;}
+.title_sec .accordion-item:first-of-type>.accordion-header .accordion-button,.title_sec .accordion-item:last-of-type>.accordion-header .accordion-button.collapsed{box-shadow: none;}
+.title_sec .accordion-button:not(.collapsed){background: rgba(253,104,62,.1);box-shadow: none;}
+.title_sec .accordion-item:first-of-type{border-radius: 15px 15px 0 0;}
+.title_sec .accordion-item:last-of-type{border-radius: 0 0 15px 15px;}
 
 @media (max-width: 900px) {
   .container-fluid .mx-5 {
