@@ -135,12 +135,12 @@ function Address() {
                         <form className="needs-validation" novalidate="">
                                 <div className="row">
                                     <div className="col-md-6 mb-3">
-                                        <label for="firstName">* First name</label>
+                                        <label for="firstName"><span className='error'>*</span> First name</label>
                                         <input type="text" className="form-control" id="firstName" placeholder="" value={fName} onChange={(e) => setFName(e.target.value)} required=""/>
                                         <div className="invalid-feedback"> Valid first name is required. </div>
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label for="lastName">* Last name</label>
+                                        <label for="lastName"><span className='error'>*</span> Last name</label>
                                         <input type="text" className="form-control" id="lastName" placeholder="" value={lName} onChange={(e) => setLName(e.target.value)} required=""/>
                                         <div className="invalid-feedback"> Valid last name is required. </div>
                                     </div>
@@ -156,27 +156,27 @@ function Address() {
                                     </div>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="email">* Email </label>
+                                    <label for="email"><span className='error'>*</span> Email </label>
                                     <input type="email" className="form-control" id="email" placeholder="you@example.com"  value={email} onChange={(e) => setEmail(e.target.value)} />
                                     <div className="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="mobile">* Mobile </label>
+                                    <label for="mobile"><span className='error'>*</span> Mobile </label>
                                     <input type="mobile" className="form-control" id="mobile" placeholder="Enetr your mobile number"  value={mobile} onChange={(e) => setMobile(e.target.value)} />
                                     <div className="invalid-feedback"> Please enter a valid mobile for shipping updates. </div>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="address">* Address</label>
+                                    <label for="address"><span className='error'>*</span> Address</label>
                                     <input type="text" className="form-control" id="address" placeholder="1234 Main St" required=""  value={address1} onChange={(e) => setAddress1(e.target.value)} />
                                     <div className="invalid-feedback"> Please enter your shipping address. </div>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="address2">* Address 2 </label>
+                                    <label for="address2"><span className='error'>*</span> Address 2 </label>
                                     <input type="text" className="form-control" id="address2" placeholder="Apartment or suite"  value={address2} onChange={(e) => setAddress2(e.target.value)}/>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-5 mb-3">
-                                        <label for="country">* Country</label>
+                                        <label for="country"><span className='error'>*</span> Country</label>
                                         <select className="custom-select d-block w-100" id="country" required=""  value={country} onChange={(e) => setCountry(e.target.value)}>
                                             <option value="">Choose...</option>
                                             <option>United States</option>
@@ -184,7 +184,7 @@ function Address() {
                                         <div className="invalid-feedback"> Please select a valid country. </div>
                                     </div>
                                     <div className="col-md-4 mb-3">
-                                        <label for="state">* State</label>
+                                        <label for="state"><span className='error'>*</span> State</label>
                                         <select className="custom-select d-block w-100" id="state" required=""  value={stateValue} onChange={(e) => setStateValue(e.target.value)}>
                                             <option value="">Choose...</option>
                                             <option>California</option>
@@ -192,7 +192,7 @@ function Address() {
                                         <div className="invalid-feedback"> Please provide a valid state. </div>
                                     </div>
                                     <div className="col-md-3 mb-3">
-                                        <label for="zip">* Zip</label>
+                                        <label for="zip"><span className='error'>*</span> Zip</label>
                                         <input type="text" className="form-control" id="zip" placeholder="" required=""  value={zip} onChange={(e) => setZip(e.target.value)} />
                                         <div className="invalid-feedback"> Zip code required. </div>
                                     </div>

@@ -148,11 +148,11 @@ console.log(orders)
                {/*  <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
                     My account
                 </Breadcrumb.Item> */}
-            <Breadcrumb.Item active>My account</Breadcrumb.Item>
+            <Breadcrumb.Item active>My Profile</Breadcrumb.Item>
         </Breadcrumb>
         <div className="title-review t-center m-b-2 title_sec">
             {/* <span className="sub_title tit4 p-l-15 p-r-15">My Account</span> */}
-            <h3 className="tit10 t-center p-l-20 p-r-15 p-t-3">My Account</h3>
+            <h3 className="tit10 t-center p-l-20 p-r-15 p-t-3">My Profile</h3>
             {/* <div className="pic-review size14 bo4 wrap-cir-pic m-l-r-auto animated " data-appear="zoomIn">
                 <img src="assets/images/avatar-01.webp" alt="IGM-AVATAR" />
             </div> */}
@@ -301,27 +301,40 @@ console.log(orders)
         <Col sm={3}>
         <div className="profile-nav">           
           <div className="user-heading round">
-            <a>
+            <a className="position-relative overflow-hidden">
               <img src={user.image} alt="IGM-AVATAR"/>
+              <button onClick={onButtonClick} className="edit_photo">Update Photo</button>
             </a>
             <input type='file' id='file' ref={inputFile} onChange={(e) => {uploadPhoto(e)}} style={{display: 'none'}}/>
-            <button onClick={onButtonClick}>Update Photo</button>
+            
             <h1>{user.fName + " " + user.lName}</h1>
             <p className="text-white">{user.username}</p>
           </div>  
         </div>   
           <Nav variant="pills" className="flex-column myaccount_lft">
             <Nav.Item>
-              <Nav.Link eventKey="profile" ><i className="fa fa-user"></i> Profile</Nav.Link>
+              <Nav.Link eventKey="profile" ><i className="fa fa-user"></i> Edit Profile</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="delivery_address"><i className="fa fa-map-marker"></i> Delivery Address</Nav.Link>
+              <Nav.Link eventKey="delivery_address"><i className="fa fa-map-marker"></i> Addresses</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="booking_history"><i className="fa fa-history"></i> Booking History</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="invoice_history"><i className="fa fa-sticky-note"></i> Invoice History</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="payments_refunds"><i class="bi bi-credit-card-2-front-fill"></i> Payments & Refunds</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="post_review"><i class="bi bi-star-fill"></i> Post Review</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="help"><i class="bi bi-question-circle-fill"></i> Help</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="logout"><i class="bi bi-door-closed-fill"></i> Logout</Nav.Link>
             </Nav.Item>
           </Nav>
         </Col>
@@ -390,11 +403,12 @@ console.log(orders)
                     <hr/>
                     <div className="row">
                       <div className="col-sm-3">
-                        <h6 className="mb-0">State</h6>
+                        <h6 className="mb-0">Delete account</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                          <span>{user.state}</span>
-                          <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                          {/* <span>{user.state}</span> */}
+                          {/* <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a> */}
+                          <span class="delete_btn" id="addBtn1">Delete</span>
                       </div>
                     </div>
                     <hr/>
@@ -447,6 +461,7 @@ console.log(orders)
                     onSelect={(e) => handleTabClick(e)}
                   >
                     <Tab eventKey="TodayDelivery" title="Today's Delivery" onClick={() => getUserTodayOrders()}>
+                      <div className="overflow-auto">
                       <table className="table table-hover">
                         <thead>
                           <tr>
@@ -479,6 +494,7 @@ console.log(orders)
                           
                         </tbody>
                       </table>
+                      </div>
                     </Tab>
                     <Tab eventKey="SubscriptionPlan" title="Subscription Plan"  onClick={() => getMyOrders({userId: user.id, orderType: 'subscription'})}>
                     <table className="table table-hover">

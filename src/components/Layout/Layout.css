@@ -1497,6 +1497,8 @@ details[open] .accordion-icon svg {
 .add_btn{background: #fff;border: 2px solid rgb(46 154 63);border-radius: 6px;padding: 5px 15px;font-size: 16px;font-weight: 600;color: #333;
 transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.2);}
 .add_btn:hover{background: rgb(46 154 63);color: #fff;}
+.delete_btn{background: #fff;border: 2px solid #d7344f;border-radius: 6px;padding: 5px 15px;font-size: 16px;font-weight: 600;color: #333;cursor: pointer;}
+.delete_btn:hover{background: #d7344f;color: #fff;}
 .address_btn{background: #ffffff;
   color: #27963c;
   padding: 0 15px;
@@ -2187,6 +2189,24 @@ address{text-align: left;}
 .extra_items_block .extra_item{margin: 10px 0;}
 .sub_total{height: 30px;display: block;;}
 .wrap_header a{padding: 10px 15px;}
+.edit_photo{position: absolute;
+  background: #00000080;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  line-height: 100px;
+  font-weight: 600;
+  text-decoration: underline;transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;opacity: 0;
+}
+.input-group-text{height: 100%;}
+.edit_photo:hover{opacity: 1;}
+.error{color: #ff0000;}
+.edit-icon{min-width: 60px;
+  margin-left: 10px;}
 @media (max-width: 900px) {
   .container-fluid .mx-5 {
     margin-right: 0 !important;
