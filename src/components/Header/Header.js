@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/authSlice";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 // import "./Layout.css";
 
@@ -88,15 +89,23 @@ export default function Header() {
                 
               </Nav>
             </Navbar.Collapse>
-            <div className="social flex-w flex-l-m p-r-20 trans-0-4">
+            <div className=" flex-w flex-l-m p-r-20 trans-0-4">
+            <a href="#" class="cart_icon m-2"><i class="fa fa-shopping-cart" aria-hidden="true" style={{fontSize:'28px'}}></i><span class="count">1</span></a>
               {
                 isAuthenticated ?
-                <div>
-                  <Link to="/myaccount" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">
-                    <i className="fa fa-user" aria-hidden="true" style={{fontSize: '28px'}}></i>
-                  </Link>
-                  <span onClick={logoutHandler}>Logout</span>
+                <div>                 
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <Link to="/myaccount" className="p-0"><i className="fa fa-user txt3" aria-hidden="true" style={{fontSize: '28px'}}></i></Link>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="/myaccount">My profile</Dropdown.Item>
+                      <Dropdown.Item  onClick={logoutHandler}>Logout</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </div>
+                
                 
                 :
                 <Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Sign in</Link>
