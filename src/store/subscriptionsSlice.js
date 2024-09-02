@@ -59,6 +59,12 @@ const subscriptionSlice = createSlice({
     },
     clearData: (state) => {
       state.lastSubDate = ''
+    },
+    clearOrderData: (state) => {
+      localStorage.removeItem('selectedItem');
+      localStorage.removeItem('selectedSubscription');
+      state.selectedItem = {}
+      state.selectedSubscription = {}
     }
   },
   extraReducers: (builder) => {

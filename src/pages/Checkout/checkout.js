@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Map from './map';
 import { addUserAddress, getUserAddresses } from "../../store/usersSlice";
 import { addOrder } from "../../store/orderSlice";
-import { clearData, getZones } from "../../store/subscriptionsSlice";
+import { clearData, getZones, clearOrderData } from "../../store/subscriptionsSlice";
 import Form from 'react-bootstrap/Form';
 
 const displaystyle = {
@@ -97,6 +97,7 @@ function Checkout() {
             console.log(orderObj)
             await dispatch(addOrder(orderObj))
             await dispatch(clearData())
+            await dispatch(clearOrderData())
         } else {
             let orderObj = {
                 userId: user.id,
@@ -120,6 +121,7 @@ function Checkout() {
             console.log("oreder req")
             console.log(orderObj)
             await dispatch(addOrder(orderObj))
+            await dispatch(clearOrderData())
         }
         
         navigate('/payment')

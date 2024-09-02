@@ -33,6 +33,7 @@ function Cart() {
     const { subItems } = useSelector((state) => state.items)
     const [mappings, setMappings] = useState([]);
     const [extraSubItems, setExtraSubItems] = useState([]);
+    const [addedExtraSubItems, setAddedExtraSubItems] = useState([]);
     const [deliverySlot, setDeliverySlot] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
     const [extraItemCountData, setExtraItemCountData] = useState({});
@@ -54,6 +55,7 @@ function Cart() {
   const handleClose = async () => {
     setShow(false);
     let extraSubData = []
+    let addedExtraitems = []
     console.log("extraSubItems")
     console.log(extraSubItems)
     let extraSubItemsData = Object.keys(extraItemCountData)
@@ -72,13 +74,14 @@ function Cart() {
                 totoalPrice = totoalPrice + (subItemData.price * extraItemCountData[extraSubItem])
                 extraSubData.push({itemId: extraSubItem, quantity: extraItemCountData[extraSubItem]})
                 // setExtraSubItems([...extraSubItems, {itemId: extraSubItem, quantity: extraItemCountData[extraSubItem]}])
-                
+                addedExtraitems.push({subItem: subItemData, quantity: extraItemCountData[extraSubItem]})
             } else {
                 totoalPrice = totoalPrice - (subItemData.price * 0)
                 // setExtraSubItems([...extraSubItems, {itemId: extraSubItem, quantity: 0}])
             }
         }
         setExtraSubItems(extraSubData)
+        setAddedExtraSubItems(addedExtraitems)
         console.log("totoalPrice")
         console.log(totoalPrice)
         setTotalPrice(totoalPrice*quantity)
@@ -243,26 +246,27 @@ function Cart() {
                                             <div class="cart-item-product-info">
                                                 <div class="cart-item-product-title">{selectedItem.name} ({selectedSubscription ? selectedSubscription.name : selectedItem.shortName})</div>                                               
                                                 <span className='add_extra' onClick={handleShow}><strong>+ Add Extra</strong></span>
-                                                {/* <div className='extra_items_block mt-3'>
-                                                    <span className='sub_title d-block'><b>Extra items:</b></span>
-                                                    <span class="d-flex align-items-center extra_item ">
-                                                        <img src="https://kitchen-holiday-images.s3.us-east-2.amazonaws.com/veg_item1.png" width="40" alt=""/>
-                                                        <span>Vegetable</span>
-                                                    </span>
-                                                    <span class="d-flex align-items-center extra_item ">
-                                                       <img src="https://kitchen-holiday-images.s3.us-east-2.amazonaws.com/veg_item2.png" width="40" alt=""/>
-                                                        <span>Salad/Soup</span>
-                                                    </span>
-                                                    <span class="d-flex align-items-center extra_item ">
-                                                       <img src="https://kitchen-holiday-images.s3.us-east-2.amazonaws.com/veg_item3.png" width="40" alt=""/>
-                                                        <span class="d-block">Mutton curry</span>
-                                                    </span>
-                                                    <span class="d-flex align-items-center extra_item ">
-                                                      <img src="https://kitchen-holiday-images.s3.us-east-2.amazonaws.com/veg_item3.png" width="40" alt=""/>
-                                                        <span class="d-block">Chapathi</span>
-                                                    </span>
-                                                   
-                                                </div> */}
+                                                {
+                                                    (addedExtraSubItems && addedExtraSubItems.length) ?
+                                                    <div className='extra_items_block mt-3'>
+                                                        <span className='sub_title d-block'><b>Extra items:</b></span>
+                                                        {
+                                                            addedExtraSubItems.map((addedExtraitem) => {
+                                                                return (
+                                                                    <span class="d-flex align-items-center extra_item ">
+                                                                        <img src={addedExtraitem.subItem.image} width="40" alt=""/>
+                                                                        <span>{addedExtraitem.subItem.name}</span>
+                                                                    </span>
+                                                                )
+                                                            })
+                                                        }
+                                                        
+                                                        
+                                                    
+                                                    </div>
+                                                    : null
+                                                }
+                                                
                                             </div>
                                         </a>
                                     </div> 
@@ -296,16 +300,39 @@ function Cart() {
                                     <div className="added_count mt-4" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
                                     <div className="added_count mt-4" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
                                 </div> */}
+                                {
+                                    (addedExtraSubItems && addedExtraitem.length) ?
+                                    <div className='extra_items_block d-inline-block mt-3'>
+                                        {
+                                            addedExtraSubItems.map((addedExtraSubItem) => {
+                                                return (
+                                                    <div className="added_count mt-4" ><span className="count_total">{addedExtraSubItem.quantity}</span></div>
+                                                )
+                                            })
+                                        }
+                                        
+                                    </div>
+                                    : null
+                                }
                             </div>
                             <div class="px-3 my-3 text-center">
                                 <div class="cart-item-label">Subtotal</div>
                                 <span class="text-xl font-weight-medium sub_total">${totalPrice}</span>
-                                {/* <div className='extra_items_block d-inline-block mt-3'>
-                                    <span class="text-xl font-weight-medium sub_total mt-4">${totalPrice}</span>
-                                    <span class="text-xl font-weight-medium sub_total mt-4">${totalPrice}</span>
-                                    <span class="text-xl font-weight-medium sub_total mt-4">${totalPrice}</span>
-                                    <span class="text-xl font-weight-medium sub_total mt-4">${totalPrice}</span>
-                                </div>  */}
+                                {
+                                    (addedExtraSubItems && addedExtraitem.length) ?
+                                    <div className='extra_items_block d-inline-block mt-3'>
+                                        {
+                                            addedExtraSubItems.map((addedExtraSubItem) => {
+                                                return (
+                                                    <span class="text-xl font-weight-medium sub_total mt-4">${addedExtraSubItem.subItem.price*addedExtraSubItem.quantity}</span>
+                                                )
+                                            })
+                                        }
+                                        
+                                    </div>
+                                    : null
+                                }
+                                
                             </div>
                             </div>
                             <hr></hr>
