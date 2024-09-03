@@ -321,6 +321,9 @@ console.log(orders)
               <Nav.Link eventKey="profile" ><i className="fa fa-user"></i> Edit Profile</Nav.Link>
             </Nav.Item>
             <Nav.Item>
+              <Nav.Link eventKey="notifications" ><i className="fa fa-user"></i> Noftications </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
               <Nav.Link eventKey="delivery_address"><i className="fa fa-map-marker"></i> Addresses</Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -426,6 +429,95 @@ console.log(orders)
                         
                 </div> 
             </Tab.Pane>
+            <Tab.Pane eventKey="notifications">
+              <div className="card mb-3  " >
+                <div className="d-address">
+                  <span className="sub_title  p-l-15 p-r-15">Notifications</span>
+                </div>
+                <div className='p-4'>
+                <div class="email-right-box ms-0  ms-sm-0 text-left">
+                  <div role="toolbar" class="toolbar ms-1 ms-sm-0">
+                      <div class="btn-group mb-1 me-1 ms-1">
+                          <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox1"/><label class="form-check-label" for="checkbox1"></label></div></div>
+                          <div class="btn-group mb-1"><button class="btn btn-primary light px-3" type="button"><i class="bi bi-arrow-clockwise"></i></button></div>
+                          <div class="btn-group mb-1 dropdown"><button type="button" id="react-aria8096053300-13" aria-expanded="false" data-toggle="dropdown" class="btn btn-primary px-3 light dropdown-toggle ms-1 dropdown-toggle btn btn-primary">More <span class="caret"></span></button></div>
+                  </div>
+                  <div class="email-list mt-3">
+                    <div class="message position-relative"><div><div class="d-flex message-single">
+                        <div class="ps-1 align-self-center">
+                            <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox2"/><label class="form-check-label" for="checkbox2"></label>
+                            </div>
+                        </div>
+                        <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read">
+                        <div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
+                        <div class="date">11:49 am</div>
+                    </a>
+                  </div>
+                </div>
+                <div class="message position-relative">
+                    <div>
+                        <div class="d-flex message-single">
+                            <div class="ps-1 align-self-center">
+                                <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox3"/><label class="form-check-label" for="checkbox3"></label></div>
+                            </div>
+                            <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button></div>
+                        </div>
+                        <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
+                        <div class="date">11:49 am</div></a>
+                    </div>
+                </div>
+                <div class="message position-relative"><div>
+                <div class="d-flex message-single">
+                    <div class="ps-1 align-self-center">
+                        <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox4"/><label class="form-check-label" for="checkbox4"></label></div>
+                    </div>
+                    <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button></div>
+                </div>
+                <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div><div class="date">11:49 am</div></a>
+            </div>
+              </div>
+              <div class="message position-relative"><div>
+              <div class="d-flex message-single">
+                  <div class="ps-1 align-self-center">
+                      <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox5"/><label class="form-check-label" for="checkbox5"></label></div>
+                  </div>
+                  <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button></div>
+              </div>
+              <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div><div class="date">11:49 am</div></a>
+          </div>
+            </div>
+            <div class="message position-relative"><div>
+            <div class="d-flex message-single">
+                <div class="ps-1 align-self-center">
+                    <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox6"/><label class="form-check-label" for="checkbox6"></label></div>
+                </div>
+                <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button></div>
+            </div>
+            <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div><div class="date">11:49 am</div></a>
+        </div>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-12 ps-3">
+        <nav>
+            <ul class="pagination pagination-gutter pagination-primary pagination-sm no-bg">
+                <li class="page-item page-indicator"><a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a></li>
+                <li class="page-item  active "><a class="page-link" href="#">1</a></li>
+                <li class="page-item   "><a class="page-link" href="/#">2</a></li>
+                <li class="page-item   "><a class="page-link" href="#">3</a></li>
+                <li class="page-item page-indicator"><a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</div>
+</div>                        
+</div> 
+            </Tab.Pane>
+            
             <Tab.Pane eventKey="delivery_address">
               <div className="card mb-3  " id="pills-profile">
                 <div className="d-address d-flex justify-content-between">
@@ -525,7 +617,7 @@ console.log(orders)
                                   <td> {sub.startDate} </td>
                                   <td>{sub.endDate}</td>
                                   <td>{sub.price}</td>
-                                  <td><span onClick={() => showSubscription(sub)}>X</span></td>
+                                  <td><span onClick={() => showSubscription(sub)}>X</span>	<i style={{color: 'green'}} className="bi bi-eye-fill m-1"/></td>
                                 </tr>)
                               })
                             : null
