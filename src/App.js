@@ -18,6 +18,7 @@ import My_account from './pages/My_account/myaccount';
 import Cart from './pages/Cart/cart';
 import Address from './pages/Address/address';
 import Layout from './components/Layout/Layout';
+import DeliveryOrderDetails from './pages/OrderDetails/order-details';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/cart"  element={<Cart />} />
         <Route path="/address"  element={<Address />} />
         <Route path="/address/:addressId"  element={<Address />} />
+        <Route path="/orderdetails"  element={<DeliveryOrderDetails />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

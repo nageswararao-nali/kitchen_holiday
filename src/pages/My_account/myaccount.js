@@ -617,7 +617,7 @@ console.log(orders)
                                   <td> {sub.startDate} </td>
                                   <td>{sub.endDate}</td>
                                   <td>{sub.price}</td>
-                                  <td><span onClick={() => showSubscription(sub)}>X</span>	<i style={{color: 'green'}} className="bi bi-eye-fill m-1"/></td>
+                                  <td><span onClick={() => showSubscription(sub)}>X</span>	<a href="/orderdetails"><i style={{color: 'green'}} className="bi bi-eye-fill m-1"/></a> </td>
                                 </tr>)
                               })
                             : null

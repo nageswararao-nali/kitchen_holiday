@@ -5,7 +5,7 @@ import React from "react";
 export default function Footer() {
   return (
     <footer className="footer ">
-        <div className="container p-t-40 p-b-70">
+        <div className="container p-t-20 p-b-20">
                 <div className="row">
                         <div className="col-sm-6 col-md-4 p-t-50">
                                 <div className="d-flex flex-column">
