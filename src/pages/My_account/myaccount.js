@@ -162,7 +162,7 @@ console.log(orders)
                 <img src="assets/images/avatar-01.webp" alt="IGM-AVATAR" />
             </div> */}
         </div>
-        <div className="row gutters-sm m-b-30">
+        <div className="row gutters-sm m-b-30 justify-content-center">
            
        
  

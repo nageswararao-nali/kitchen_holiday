@@ -2430,7 +2430,7 @@ address{text-align: left;}
 .orders {
   display: flex;
   justify-content: space-around;
-  padding: 0 2.5rem;
+  padding: 0 2.5rem;overflow: auto;
 }
 .orders li {
   padding: 0 1.875rem;
@@ -2551,6 +2551,7 @@ address{text-align: left;}
   --bs-text-opacity: 1;
   color:#ce1212 !important;
 }
+.tab-content>.tab-pane{overflow: auto;}
 
 @media (max-width: 900px) {
   .container-fluid .mx-5 {
@@ -2558,4 +2559,32 @@ address{text-align: left;}
     margin-left:0 !important;
 }
   .cart-item{overflow: auto;}
+}
+@media only screen and (max-width: 575px) {
+  .orders {
+      display: block;padding: 0;
+  }
+  .orders li {
+    padding: 0 0 1.5625rem;
+    width: 100%;
+}
+.orders li a {
+  border-width: .125rem;
+  float: left;
+  height: 3.125rem;
+  line-height: 2.8rem;
+  margin-right: .625rem;
+  min-width: 3.125rem;
+  width: 3.125rem;
+}
+.orders li a svg {
+  height: 1.875rem;
+  width: 1.875rem;
+}
+.orders li:after {
+  height: 100%;
+  left: 1.5625rem;
+  width: .125rem;
+}
+.text-head{display: block !important;}
 }
