@@ -617,7 +617,7 @@ console.log(orders)
                                   <td> {sub.startDate} </td>
                                   <td>{sub.endDate}</td>
                                   <td>{sub.price}</td>
-                                  <td><span onClick={() => showSubscription(sub)}>X</span>	<a href="/orderdetails"><i style={{color: 'green'}} className="bi bi-eye-fill m-1"/></a> </td>
+                                  <td><span onClick={() => showSubscription(sub)}>X</span> </td>
                                 </tr>)
                               })
                             : null
@@ -650,7 +650,7 @@ console.log(orders)
                                   <td> {order.orderType} </td>
                                   <td>{order.status}</td>
                                   <td>{order.address}</td>
-                                  <td>X</td>
+                                  <td><span>X</span>	<a href="/orderdetails"><i style={{color: 'green'}} className="bi bi-eye-fill m-1"/></a> </td>
                                 </tr>)
                               })
                             : null

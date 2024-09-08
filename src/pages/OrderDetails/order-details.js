@@ -111,12 +111,7 @@ function DeliveryOrderDetails() {
         </div>
         <div className="col-xl-9 col-xxl-8">
             <div className="row">
-                <div className="col-xl-12">
-                    <div className="card">
-                        <Map /* latitude={order.latitude} longitude={order.longitude} */></Map>
-                        {/* <div className="card-body"><img src="/assets/img/map_img.jpg" alt="" className='img-fluid' /></div> */}
-                    </div>
-                </div>
+                
                 <div className="col-xl-8 col-md-7">
                     <div className="card justify-content-center">
                        
@@ -273,7 +268,7 @@ function DeliveryOrderDetails() {
                         </div>
                     </div>
                 </div>
-                <div className='col-sm-6'>
+              {/*   <div className='col-sm-6'>
                 <Dropdown drop={"down"}> 
                     <Dropdown.Toggle variant="success"> 
                     Update Order
@@ -290,7 +285,7 @@ function DeliveryOrderDetails() {
                       </Dropdown.Item> 
                     </Dropdown.Menu> 
                   </Dropdown>
-                </div>
+                </div> */}
                 
             </div>
         </div>
