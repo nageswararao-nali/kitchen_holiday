@@ -1517,12 +1517,12 @@ transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgb
   font-size: 18px;
   color: #000;
   text-align: center;
-  border: 1px solid #dee2e6;}
+  border: 1px solid #dee2e6;padding: 4px;}
 /* .count_total{margin: 0 15px;} */
 .count_minus,.count_plus{cursor: pointer;padding: 0 14px;}
 .select_btn{background:rgb(46 154 63);padding: 10px 25px;color: #ffffff;border-radius: 10px;font-size: 15px;cursor: pointer;display: inline-block;}
 .select_btn:hover{background:#cf2227;}
-.form-control{line-height: 2;}
+/* .form-control{line-height: 2;} */
 .form-control:focus{border-color: rgb(46 154 63) !important;box-shadow: none;}
 .plan_box.h_item1 .fa{font-size: 14px;}
 .btn_disable{background: #adadad;cursor: not-allowed;}

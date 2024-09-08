@@ -90,7 +90,7 @@ export default function Header() {
               </Nav>
             </Navbar.Collapse>
             <div className=" flex-w flex-l-m p-r-20 trans-0-4">
-            <a href="#" class="cart_icon m-2"><i class="fa fa-shopping-cart" aria-hidden="true" style={{fontSize:'28px'}}></i><span class="count">1</span></a>
+           {/*  <a href="#" class="cart_icon m-2"><i class="fa fa-shopping-cart" aria-hidden="true" style={{fontSize:'28px'}}></i><span class="count">1</span></a> */}
               {
                 isAuthenticated ?
                 <div>                 
@@ -108,7 +108,8 @@ export default function Header() {
                 
                 
                 :
-                <Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Sign in</Link>
+                <div className="d-flex"><Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Login</Link>
+                <Link to="/signup" className="btn2 btn6 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Signup</Link></div>
               }
           
           {/* <a href="#" className="cart_icon"><i className="fa fa-shopping-cart" aria-hidden="true" style={{fontSize: '28px'}}></i><span className="count">1</span></a> */}

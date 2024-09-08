@@ -348,7 +348,7 @@ function Cart() {
                                     lastSubDate ? 
                                     <div className='px-3 my-3 text-center'>
                                         <div class="cart-item-label">End Date</div>
-                                        <div class="count-input position-relative">
+                                        <div class="count-input position-relative" style={{padding:'.375rem .75rem'}}>
                                             {lastSubDate}
                                         </div>
                                     </div>
