@@ -385,7 +385,7 @@ input[type="date" i] {
   display: -ms-flexbox;
   display: flex;
   align-items: center;
-  justify-content: space-around;width: 80%;
+  justify-content: space-around;width: 60%;
 }
 
 .main_menu li {
@@ -490,6 +490,7 @@ input[type="date" i] {
   border-top: 2px solid #ec1d25;
   border-bottom: 2px solid #ec1d25;
 }
+.dropdown-menu-right{right: 0;    left: inherit !important;}
 
 @media (max-width: 1200px) {
   .main_menu > li {
@@ -500,7 +501,7 @@ input[type="date" i] {
   .social {padding-right: 0px;}
 
   .logo {
-    height: 45px;
+    /* height: 45px; */
   }
 }
 
@@ -2559,6 +2560,7 @@ address{text-align: left;}
     margin-left:0 !important;
 }
   .cart-item{overflow: auto;}
+  .main_menu{width: 100%;background: #fff;}
 }
 @media only screen and (max-width: 575px) {
   .orders {
