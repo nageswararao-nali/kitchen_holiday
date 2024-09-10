@@ -301,7 +301,7 @@ function Cart() {
                                     <div className="added_count mt-4" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
                                 </div> */}
                                 {
-                                    (addedExtraSubItems && addedExtraitem.length) ?
+                                    (addedExtraSubItems && addedExtraSubItems.length) ?
                                     <div className='extra_items_block d-inline-block mt-3'>
                                         {
                                             addedExtraSubItems.map((addedExtraSubItem) => {
@@ -319,7 +319,7 @@ function Cart() {
                                 <div class="cart-item-label">Subtotal</div>
                                 <span class="text-xl font-weight-medium sub_total">${totalPrice}</span>
                                 {
-                                    (addedExtraSubItems && addedExtraitem.length) ?
+                                    (addedExtraSubItems && addedExtraSubItems.length) ?
                                     <div className='extra_items_block d-inline-block mt-3'>
                                         {
                                             addedExtraSubItems.map((addedExtraSubItem) => {

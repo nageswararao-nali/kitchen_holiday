@@ -173,6 +173,6 @@ const subscriptionSlice = createSlice({
   },
 });
 
-export const { setOrderDetails, clearData } = subscriptionSlice.actions;
+export const { setOrderDetails, clearData, clearOrderData } = subscriptionSlice.actions;
 
 export default subscriptionSlice.reducer;
