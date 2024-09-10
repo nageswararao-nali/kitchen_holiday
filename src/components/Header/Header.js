@@ -67,7 +67,32 @@ export default function Header() {
                 <img src="assets/images/logo_f.png" alt="IMG-LOGO" data-logofixed="images/logo_f.png" />
               </div>
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          
+            <div className=" flex-w flex-l-m trans-0-4 d-flex align-content-center d-sm-none">
+              {
+                isAuthenticated ?
+                <div>                 
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <Link to="/myaccount" className="p-0"><i className="fa fa-user txt3" aria-hidden="true" style={{fontSize: '28px'}}></i></Link>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu className="dropdown-menu-right">
+                      <Dropdown.Item href="/myaccount">My profile</Dropdown.Item>
+                      <Dropdown.Item  onClick={logoutHandler}>Logout</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
+                
+                
+                :
+                <div className="d-flex"><Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Login</Link>
+                <Link to="/signup" className="btn2 btn6 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Signup</Link></div>
+              }
+          
+          {/* <a className="cart_icon"></a> */}
+          </div>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto main_menu">
                 <Nav.Link href="home">Home</Nav.Link>
@@ -88,9 +113,8 @@ export default function Header() {
                 <Nav.Link href="contact">Contact</Nav.Link>
                 
               </Nav>
-            </Navbar.Collapse>
-            <div className=" flex-w flex-l-m p-r-20 trans-0-4">
-            <a href="#" class="cart_icon m-2"><i class="fa fa-shopping-cart" aria-hidden="true" style={{fontSize:'28px'}}></i><span class="count">1</span></a>
+            
+            <div className=" flex-w flex-l-m p-r-20 trans-0-4 d-sm-flex d-none">
               {
                 isAuthenticated ?
                 <div>                 
@@ -108,12 +132,13 @@ export default function Header() {
                 
                 
                 :
-                <Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Sign in</Link>
+                <div className="d-flex"><Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Login</Link>
+                <Link to="/signup" className="btn2 btn6 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Signup</Link></div>
               }
           
-          {/* <a href="#" className="cart_icon"><i className="fa fa-shopping-cart" aria-hidden="true" style={{fontSize: '28px'}}></i><span className="count">1</span></a> */}
           <a className="cart_icon"></a>
           </div>
+          </Navbar.Collapse>
           </div>
         </div>
       </div>

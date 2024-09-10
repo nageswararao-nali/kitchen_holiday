@@ -385,7 +385,7 @@ input[type="date" i] {
   display: -ms-flexbox;
   display: flex;
   align-items: center;
-  justify-content: space-around;width: 80%;
+  justify-content: space-around;width: 60%;
 }
 
 .main_menu li {
@@ -490,6 +490,7 @@ input[type="date" i] {
   border-top: 2px solid #ec1d25;
   border-bottom: 2px solid #ec1d25;
 }
+.dropdown-menu-right{right: 0;    left: inherit !important;}
 
 @media (max-width: 1200px) {
   .main_menu > li {
@@ -500,7 +501,7 @@ input[type="date" i] {
   .social {padding-right: 0px;}
 
   .logo {
-    height: 45px;
+    /* height: 45px; */
   }
 }
 
@@ -1517,12 +1518,12 @@ transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgb
   font-size: 18px;
   color: #000;
   text-align: center;
-  border: 1px solid #dee2e6;}
+  border: 1px solid #dee2e6;padding: 4px;}
 /* .count_total{margin: 0 15px;} */
 .count_minus,.count_plus{cursor: pointer;padding: 0 14px;}
 .select_btn{background:rgb(46 154 63);padding: 10px 25px;color: #ffffff;border-radius: 10px;font-size: 15px;cursor: pointer;display: inline-block;}
 .select_btn:hover{background:#cf2227;}
-.form-control{line-height: 2;}
+/* .form-control{line-height: 2;} */
 .form-control:focus{border-color: rgb(46 154 63) !important;box-shadow: none;}
 .plan_box.h_item1 .fa{font-size: 14px;}
 .btn_disable{background: #adadad;cursor: not-allowed;}
@@ -2430,7 +2431,7 @@ address{text-align: left;}
 .orders {
   display: flex;
   justify-content: space-around;
-  padding: 0 2.5rem;
+  padding: 0 2.5rem;overflow: auto;
 }
 .orders li {
   padding: 0 1.875rem;
@@ -2551,6 +2552,7 @@ address{text-align: left;}
   --bs-text-opacity: 1;
   color:#ce1212 !important;
 }
+.tab-content>.tab-pane{overflow: auto;}
 
 @media (max-width: 900px) {
   .container-fluid .mx-5 {
@@ -2558,4 +2560,33 @@ address{text-align: left;}
     margin-left:0 !important;
 }
   .cart-item{overflow: auto;}
+  .main_menu{width: 100%;background: #fff;}
+}
+@media only screen and (max-width: 575px) {
+  .orders {
+      display: block;padding: 0;
+  }
+  .orders li {
+    padding: 0 0 1.5625rem;
+    width: 100%;
+}
+.orders li a {
+  border-width: .125rem;
+  float: left;
+  height: 3.125rem;
+  line-height: 2.8rem;
+  margin-right: .625rem;
+  min-width: 3.125rem;
+  width: 3.125rem;
+}
+.orders li a svg {
+  height: 1.875rem;
+  width: 1.875rem;
+}
+.orders li:after {
+  height: 100%;
+  left: 1.5625rem;
+  width: .125rem;
+}
+.text-head{display: block !important;}
 }
