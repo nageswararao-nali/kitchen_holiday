@@ -37,6 +37,7 @@ function Cart() {
     const [deliverySlot, setDeliverySlot] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
     const [extraItemCountData, setExtraItemCountData] = useState({});
+    const [isPickFromKitchen, setIsPickFromKitchen] = useState(false);
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -64,6 +65,7 @@ function Cart() {
         // console.log("hhhh")
         // extraSubItemsData.map((extraSubItem) => {
         let totoalPrice = selectedSubscription ? selectedSubscription.price : selectedItem.price
+        let noDays = selectedSubscription ? selectedSubscription.days : 1
         for(let extraSubItem of extraSubItemsData){
             // console.log(extraSubItem)
             let subItemData = subItems.filter((subItem) => {
@@ -84,8 +86,8 @@ function Cart() {
         setAddedExtraSubItems(addedExtraitems)
         console.log("totoalPrice")
         console.log(totoalPrice)
-        setTotalPrice(totoalPrice*quantity)
-        setPrice(totoalPrice)
+        setTotalPrice(noDays*totoalPrice*quantity)
+        setPrice(totoalPrice*quantity)
     }
     
   } 
@@ -100,7 +102,9 @@ function Cart() {
     console.log(price)
     let qty = quantity+num;
     setQuantity(qty > 0 ? qty : 0)
-    setTotalPrice(price*qty)
+    let noDays = selectedSubscription ? selectedSubscription.days : 1
+    setTotalPrice(noDays*price*qty)
+    setPrice(price*qty)
     
   }
 
@@ -119,7 +123,7 @@ function Cart() {
   useEffect(() => {
     if(selectedSubscription.id) {
         setPrice(selectedSubscription.price)
-        setTotalPrice(selectedSubscription.price)
+        setTotalPrice(selectedSubscription.days*selectedSubscription.price)
     } else {
         setPrice(selectedItem.price)
         setTotalPrice(selectedItem.price)
@@ -164,7 +168,8 @@ function Cart() {
                 price,
                 startDate,
                 selectedPlan,
-                deliverySlot
+                deliverySlot,
+                isPickFromKitchen
             }
         } else {
             console.log("3")
@@ -177,7 +182,8 @@ function Cart() {
                 totalPrice,
                 price,
                 selectedPlan,
-                deliverySlot
+                deliverySlot,
+                isPickFromKitchen
             }
         }
         console.log(orderDetails)
@@ -235,16 +241,16 @@ function Cart() {
             <h3 className="tit10 t-center p-l-20 p-r-15 p-t-3">My Meals</h3>
             
         </div>
-        <div class="container pb-5 mb-2 p-t-30">
+        <div className="container pb-5 mb-2 p-t-30">
   
-        <div class="cart-item ">
+        <div className="cart-item ">
                             <div className='d-flex justify-content-between'>
                                 
-                                    <div class="px-3 my-3">
-                                        <a class="cart-item-product d-flex " href="#">
-                                            <div class="cart-item-product-thumb"><img src={selectedItem.image} alt="Product" width={100}/></div>
-                                            <div class="cart-item-product-info">
-                                                <div class="cart-item-product-title">{selectedItem.name} ({selectedSubscription ? selectedSubscription.name : selectedItem.shortName})</div>                                               
+                                    <div className="px-3 my-3">
+                                        <a className="cart-item-product d-flex " href="#">
+                                            <div className="cart-item-product-thumb"><img src={selectedItem.image} alt="Product" width={100}/></div>
+                                            <div className="cart-item-product-info">
+                                                <div className="cart-item-product-title">{selectedItem.name} ({selectedSubscription ? selectedSubscription.name : selectedItem.shortName})</div>                                               
                                                 <span className='add_extra' onClick={handleShow}><strong>+ Add Extra</strong></span>
                                                 {
                                                     (addedExtraSubItems && addedExtraSubItems.length) ?
@@ -253,7 +259,7 @@ function Cart() {
                                                         {
                                                             addedExtraSubItems.map((addedExtraitem) => {
                                                                 return (
-                                                                    <span class="d-flex align-items-center extra_item ">
+                                                                    <span className="d-flex align-items-center extra_item ">
                                                                         <img src={addedExtraitem.subItem.image} width="40" alt=""/>
                                                                         <span>{addedExtraitem.subItem.name}</span>
                                                                     </span>
@@ -274,11 +280,11 @@ function Cart() {
                                 
                                 {
                                     selectedSubscription ?
-                                    <div class="px-3 my-3 text-center">
-                                        <div class="cart-item-label">Choose your plan</div>
-                                        <div class="count-input position-relative">
-                                            <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
-                                            <select class="form-control" onChange={(e) => {setPlan(e.target.value); setSelectedPlan(e.target.value); getLastOrderDate()}} style={{height:'38px',minWidth:'100px'}}>
+                                    <div className="px-3 my-3 text-center">
+                                        <div className="cart-item-label">Choose your plan</div>
+                                        <div className="count-input position-relative">
+                                            <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i className="bi bi-chevron-down"></i></span>
+                                            <select className="form-control" onChange={(e) => {setPlan(e.target.value); setSelectedPlan(e.target.value); getLastOrderDate()}} style={{height:'38px',minWidth:'100px'}}>
                                                 <option value="">Select Plan</option>
                                                 <option value={[1,2,3,4,5]}>Mon-Fri</option>
                                                 <option value={[1,2,3,4,5,6]}>Mon-Sat</option>
@@ -291,8 +297,8 @@ function Cart() {
                                 }
                             
                             
-                            <div class="px-3 my-3 text-center">
-                                <div class="cart-item-label">Quantity</div>
+                            <div className="px-3 my-3 text-center">
+                                <div className="cart-item-label">Quantity</div>
                                 <div className="added_count" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
                                 {/* <div className='extra_items_block d-inline-block mt-3'>
                                     <div className="added_count mt-4" ><span className="count_minus" onClick={() => updateQuantity(-1)}>-</span><span className="count_total">{quantity}</span><span className="count_plus" onClick={() => updateQuantity(1)}>+</span></div>
@@ -315,16 +321,16 @@ function Cart() {
                                     : null
                                 }
                             </div>
-                            <div class="px-3 my-3 text-center">
-                                <div class="cart-item-label">Subtotal</div>
-                                <span class="text-xl font-weight-medium sub_total">${totalPrice}</span>
+                            <div className="px-3 my-3 text-center">
+                                <div className="cart-item-label">Subtotal</div>
+                                <span className="text-xl font-weight-medium sub_total">${price}</span>
                                 {
                                     (addedExtraSubItems && addedExtraSubItems.length) ?
                                     <div className='extra_items_block d-inline-block mt-3'>
                                         {
                                             addedExtraSubItems.map((addedExtraSubItem) => {
                                                 return (
-                                                    <span class="text-xl font-weight-medium sub_total mt-4">${addedExtraSubItem.subItem.price*addedExtraSubItem.quantity}</span>
+                                                    <span className="text-xl font-weight-medium sub_total mt-4">${addedExtraSubItem.subItem.price*addedExtraSubItem.quantity}</span>
                                                 )
                                             })
                                         }
@@ -343,11 +349,11 @@ function Cart() {
                             <div className='d-md-flex'>
                                 {
                                     (deliverySlots && deliverySlots.length) ?
-                                    <div class="px-3 my-3 text-center">
-                                        <div class="cart-item-label">Choose Delivery Slot</div>
-                                        <div class="count-input position-relative" style={{minWidth: '200px'}}>
-                                            <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i class="bi bi-chevron-down"></i></span>
-                                            <select class="form-control" onChange={(e) => {setDeliverySlot(e.target.value);}}>
+                                    <div className="px-3 my-3 text-center">
+                                        <div className="cart-item-label">Choose Delivery Slot</div>
+                                        <div className="count-input position-relative" style={{minWidth: '200px'}}>
+                                            <span className='position-absolute end-0 top-50 translate-middle d-arrow'><i className="bi bi-chevron-down"></i></span>
+                                            <select className="form-control" onChange={(e) => {setDeliverySlot(e.target.value);}}>
                                                 <option value="">Select Delivery Slot</option>
                                                 {
                                                     deliverySlots.map((deliverySlot) => {
@@ -364,8 +370,8 @@ function Cart() {
                                 {
                                     selectedSubscription ? 
                                     <div className='px-3 my-3 text-center'>
-                                        <div class="cart-item-label">Start Date</div>
-                                        <div class="count-input position-relative" style={{minWidth: '200px'}}>
+                                        <div className="cart-item-label">Start Date</div>
+                                        <div className="count-input position-relative" style={{minWidth: '200px'}}>
                                             <DatePicker selected={startDate} onChange={(date) => {setStartDate(date); getLastOrderDate()}} />
                                         </div>
                                     </div>
@@ -374,13 +380,18 @@ function Cart() {
                                 {
                                     lastSubDate ? 
                                     <div className='px-3 my-3 text-center'>
-                                        <div class="cart-item-label">End Date</div>
-                                        <div class="count-input position-relative" style={{padding:'.375rem .75rem'}}>
+                                        <div className="cart-item-label">End Date</div>
+                                        <div className="count-input position-relative" style={{padding:'.375rem .75rem'}}>
                                             {lastSubDate}
                                         </div>
                                     </div>
                                     : null
                                 }
+                                <Form.Group className="px-3 my-3 text-center" controlId="formHorizontalCheck">
+                                    <Col sm={12}>
+                                        <Form.Check label="Pickup From Kitchen?" checked={isPickFromKitchen} onChange={(e) => setIsPickFromKitchen(e.target.checked)} />
+                                    </Col>
+                                </Form.Group>
                             </div>
                             
                             
@@ -455,22 +466,22 @@ function Cart() {
       label="Stay duration" 
       className="max-w-xs" 
     /> */}
-    {/* <div class="d-sm-flex justify-content-between align-items-center text-center text-sm-left px-4">
-        <form class="row py-2">
+    {/* <div className="d-sm-flex justify-content-between align-items-center text-center text-sm-left px-4">
+        <form className="row py-2">
             <div className='col-md-6 px-0'>
-                <label class="sr-only">Coupon code</label>
-                <input class="form-control form-control-sm my-2 mr-3" type="text" placeholder="Coupon code" required=""/>
+                <label className="sr-only">Coupon code</label>
+                <input className="form-control form-control-sm my-2 mr-3" type="text" placeholder="Coupon code" required=""/>
             </div>
             <div className='col-md-6 px-0'>
-                <button class="btn btn-style-1 btn-secondary btn-sm my-2 mx-auto mx-sm-0" type="submit">Apply Coupon</button>
+                <button className="btn btn-style-1 btn-secondary btn-sm my-2 mx-auto mx-sm-0" type="submit">Apply Coupon</button>
             </div>
         </form>
-        <div class="py-2"><span class="d-inline-block align-middle text-sm text-muted font-weight-medium text-uppercase mr-2">Subtotal:</span><span class="d-inline-block align-middle text-xl font-weight-medium">${totalPrice}</span></div>
+        <div className="py-2"><span className="d-inline-block align-middle text-sm text-muted font-weight-medium text-uppercase mr-2">Subtotal:</span><span className="d-inline-block align-middle text-xl font-weight-medium">${totalPrice}</span></div>
     </div> */}
-    <hr class="my-2"/>
-    <div class="row pt-3 pb-5 mb-2">
-        <div class="col-sm-6 mb-3"></div>
-        <div class="col-sm-6 mb-3"><a class="btn2 btn-style-1 btn-primary btn-block" onClick={() => checkOut()}><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
+    <hr className="my-2"/>
+    <div className="row pt-3 pb-5 mb-2">
+        <div className="col-sm-6 mb-3"></div>
+        <div className="col-sm-6 mb-3"><a className="btn2 btn-style-1 btn-primary btn-block" onClick={() => checkOut()}><i className="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
     </div>
     
        
@@ -492,7 +503,7 @@ function Cart() {
                                 return (
                                     <div className="menu_item d-flex align-items-center justify-content-between">
                                         <span className='d-flex align-items-center'><img src={subItem.image} width="60" alt=""/><span className='d-block'>{subItem.name}</span></span>
-                                        <div class="d-flex flex-column flex_ryt"><span class="price mb-2">${price}</span><div class="added_count"><span class="count_minus" onClick={() => updateItemQuantity(-1, subItem.id)}>-</span><span class="count_total">{extraItemCountData[subItem.id] ? extraItemCountData[subItem.id] : 0}</span><span class="count_plus" onClick={() => updateItemQuantity(1, subItem.id)}>+</span></div></div>
+                                        <div className="d-flex flex-column flex_ryt"><span className="price mb-2">${subItem.price}</span><div className="added_count"><span className="count_minus" onClick={() => updateItemQuantity(-1, subItem.id)}>-</span><span className="count_total">{extraItemCountData[subItem.id] ? extraItemCountData[subItem.id] : 0}</span><span className="count_plus" onClick={() => updateItemQuantity(1, subItem.id)}>+</span></div></div>
                                     </div>
                                 )
                             }

@@ -30,3 +30,6 @@ export const GET_DELIVERY_SLOTS = 'zones/getDeliverySlots';
 export const GET_DELIVERY_ORDER_DATES = 'orders/getOrderDates';
 export const UPDATE_USER_IMAGE = 'users/updateUserImage';
 export const GET_USER = 'users/getUser';
+export const GET_PAYMENTS = 'payments/getPayments';
+export const GET_REFUNDS = 'payments/getRefunds';
+export const UPDATE_USER_DETAILS = 'users/updateUser';

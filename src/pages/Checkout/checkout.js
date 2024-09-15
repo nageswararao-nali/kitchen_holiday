@@ -52,7 +52,7 @@ function Checkout() {
             let aZips = []
             if(resData) {
                 for(let zone of resData) {
-                    aZips.push(zone.name)
+                    aZips.push(zone.zipcode)
                 }
             }
             setAllowedZipCodes(aZips)
@@ -60,7 +60,33 @@ function Checkout() {
         await dispatch(getUserAddresses({userId: user.id}))
     }
     useEffect(() => {
-        getUserAddressesData()
+        if(orderDetails.isPickFromKitchen) {
+            console.log("pick form kit")
+            setAddress({
+                "id": 1,
+                "userId": 7,
+                "fName": "tet",
+                "lName": "tt",
+                "mobile": "1212121212",
+                "email": "admin@test.com",
+                "address": "tete",
+                "address1": "te",
+                "latitude": "-3.754592457083707",
+                "longitude": "-38.521626708984385",
+                "city": null,
+                "zipcode": "500084",
+                "isDefault": true,
+                "created_at": null
+            })
+            setAddressId(1)
+            setTimeout(() => {
+                goToPayment()
+            }, 100)
+            
+        } else {
+            getUserAddressesData()
+        }
+        
         window.scrollTo(0, 0)
       }, [])
 
@@ -91,7 +117,8 @@ function Checkout() {
                 noOrders: orderDetails.subscription.days,
                 subscriptionId: orderDetails.subscription.id,
                 latitude: address.latitude,
-                longitude: address.longitude
+                longitude: address.longitude,
+                isPickFromKitchen: orderDetails.isPickFromKitchen ? orderDetails.isPickFromKitchen : false
             }
             console.log("oreder req")
             console.log(orderObj)
@@ -116,7 +143,8 @@ function Checkout() {
                 orderType: 'normal',
                 extraSubItems: orderDetails.extraSubItems,
                 latitude: address.latitude,
-                longitude: address.longitude
+                longitude: address.longitude,
+                isPickFromKitchen: orderDetails.isPickFromKitchen ? orderDetails.isPickFromKitchen : false
             }
             console.log("oreder req")
             console.log(orderObj)

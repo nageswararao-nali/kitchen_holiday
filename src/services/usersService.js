@@ -1,5 +1,5 @@
 import apiRequest from '../utils/api';
-import { TOTAL_USERS, ADD_USER, GET_USERS, ADD_USER_ADDRESS, GET_USER_ADDRESSES, GET_USER_ADDRESS, UPDATE_USER_IMAGE } from '../utils/apiRoutes'
+import { TOTAL_USERS, ADD_USER, GET_USERS, ADD_USER_ADDRESS, GET_USER_ADDRESSES, GET_USER_ADDRESS, UPDATE_USER_IMAGE, UPDATE_USER_DETAILS } from '../utils/apiRoutes'
 
 
 const getTotalUsers = async (reqObj, userToken) => {
@@ -30,6 +30,9 @@ const updateUserImage = async (reqObj, userToken) => {
   return await apiRequest(UPDATE_USER_IMAGE, 'POST', reqObj, userToken, true);
 };
 
+const updateUserDetails = async (reqObj, userToken) => {
+  return await apiRequest(UPDATE_USER_DETAILS, 'POST', reqObj, userToken);
+};
 
 
 const usersService = {
@@ -39,7 +42,8 @@ const usersService = {
     addUserAddress,
     getUserAddresses,
     getUserAddress,
-    updateUserImage
+    updateUserImage,
+    updateUserDetails
 };
 
 export default usersService;

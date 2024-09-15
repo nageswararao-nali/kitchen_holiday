@@ -10,7 +10,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useDispatch, useSelector } from "react-redux";
-import { getUserAddresses, updateUserImage } from "../../store/usersSlice";
+import { getUserAddresses, updateUserDetails, updateUserImage } from "../../store/usersSlice";
 import { getOrders, clearOrders } from "../../store/orderSlice";
 import * as moment from 'moment';
 import { getMySubscriptions, updateMySubscription, deleteMySubscription } from "../../store/subscriptionsSlice";
@@ -22,6 +22,7 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import { getUser, setUser } from "../../store/authSlice";
 import Accordion from 'react-bootstrap/Accordion';
+import { getPayments, getRefunds } from "../../store/paymentSlice";
 
 
 const heighstyle = {
@@ -38,10 +39,21 @@ function Myaccount() {
   const { userAddresses } = useSelector((state) => state.users)
   const { orders } = useSelector((state) => state.orders)
   const { mySubscriptions } = useSelector((state) => state.subscriptions)
+  const { payments, refunds } = useSelector((state) => state.payments)
   const [show, setShow] = useState(false);
   const [selectedSub, setSelectedSub] = useState({});
   const [rDates, setrDates] = useState([]);
   const [mySubLastDate, setMySubLastDate] = useState();
+  const [editFName, setEditFName] = useState(false)
+  const [editLName, setEditLName] = useState(false)
+  const [editMobile, setEditMobile] = useState(false)
+  const [editEmail, setEditEmail] = useState(false)
+  const [editPassword, setEditPassword] = useState(false)
+  const [userFName, setUserFName] = useState(user.fName)
+  const [userLName, setUserLName] = useState(user.lName)
+  const [userMobile, setUserMobile] = useState(user.mobile)
+  const [userEmail, setUserEmail] = useState(user.email)
+  const [userPassword, setUserPassword] = useState(user.password)
 
   const inputFile = useRef(null) 
   const [userImage , setUserImage] = useState(null)
@@ -83,6 +95,13 @@ console.log(orders)
     if(e == "myorders") {
       getMyOrders({userId: user.id})
     }
+    if(e == "Payments") {
+      await dispatch(getPayments({userId: user.id}))
+    }
+    if(e == "Refunds") {
+      await dispatch(getRefunds({userId: user.id}))
+    }
+    
     
   }
   const getUserTodayOrders = async () => {
@@ -143,6 +162,20 @@ console.log(orders)
       if(userres.payload.success) {
         await dispatch(setUser(userres.payload.data))
       }
+    }
+  }
+  const updateUserDetailsFun = async () => {
+    let reqObj = {
+      fName: userFName,
+      lName: userLName,
+      email: userEmail,
+      mobile: userMobile,
+      password: userPassword,
+    }
+    await dispatch(updateUserDetails({userId: user.id, updateData: reqObj}))
+    let userres = await dispatch(getUser({userId: user.id}))
+    if(userres.payload.success) {
+      await dispatch(setUser(userres.payload.data))
     }
   }
   return (
@@ -333,16 +366,16 @@ console.log(orders)
               <Nav.Link eventKey="invoice_history"><i className="fa fa-sticky-note"></i> Invoice History</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="payments_refunds"><i class="bi bi-credit-card-2-front-fill"></i> Payments & Refunds</Nav.Link>
+              <Nav.Link eventKey="payments_refunds"><i className="bi bi-credit-card-2-front-fill"></i> Payments & Refunds</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="post_review"><i class="bi bi-star-fill"></i> Post Review</Nav.Link>
+              <Nav.Link eventKey="post_review"><i className="bi bi-star-fill"></i> Post Review</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="help"><i class="bi bi-question-circle-fill"></i> Help</Nav.Link>
+              <Nav.Link eventKey="help"><i className="bi bi-question-circle-fill"></i> Help</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="logout"><i class="bi bi-door-closed-fill"></i> Logout</Nav.Link>
+              <Nav.Link eventKey="logout"><i className="bi bi-door-closed-fill"></i> Logout</Nav.Link>
             </Nav.Item>
           </Nav>
         </Col>
@@ -356,14 +389,27 @@ console.log(orders)
                 <div className='p-4'>
                   <div className="row">
                     <div className="col-sm-3">
-                      <h6 className="mb-0">Full Name</h6>
+                      <h6 className="mb-0">First Name</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                      <span>{user.fName + " " +user.lName}</span> 
-                      <div data-mdb-input-init className="form-outline d-none">
-                        <input type="text"  className="form-control" placeholder="Name" />
+                      <span>{user.fName }</span> 
+                      <div data-mdb-input-init className={"form-outline "+ (!editFName ? 'd-none' : '')}>
+                        <input type="text"  className="form-control" value={userFName} onChange={(e) => setUserFName(e.target.value)} placeholder="Name" />
                       </div> 
-                        <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                        <a className='float-end' onClick={() => {setEditFName(!editFName); console.log(editFName)}} ><i className="bi bi-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div className="row">
+                    <div className="col-sm-3">
+                      <h6 className="mb-0">Last Name</h6>
+                    </div>
+                    <div className="col-sm-9 text-secondary">
+                      <span>{user.lName}</span> 
+                      <div data-mdb-input-init className={"form-outline "+ (!editLName ? 'd-none' : '')}>
+                        <input type="text"  className="form-control"  value={userLName} onChange={(e) => setUserLName(e.target.value)} placeholder="Name" />
+                      </div> 
+                        <a className='float-end' onClick={() => setEditLName(!editLName)} ><i className="bi bi-pencil"></i> Edit</a>
                       </div>
                     </div>
                     <hr/>
@@ -373,11 +419,11 @@ console.log(orders)
                       </div>
                       <div className="col-sm-9 text-secondary">
                         <span>{user.email}</span>
-                        <div data-mdb-input-init className="form-outline d-none">
-                          <input type="email" id="form3Example3" className="form-control" placeholder="Email address" />
+                        <div data-mdb-input-init  className={"form-outline "+ (!editEmail ? 'd-none' : '')}>
+                          <input type="email" id="form3Example3"  value={userEmail} onChange={(e) => setUserEmail(e.target.value)} className="form-control" placeholder="Email address" />
                           <span className="text-danger fs-13 d-none">Please enter valid Email id</span>
                         </div>
-                        <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                        <a  onClick={() => setEditEmail(!editEmail)}  className='float-end'><i className="bi bi-pencil"></i> Edit</a>
                       </div>
                     </div>
                     <hr/>
@@ -387,11 +433,11 @@ console.log(orders)
                       </div>
                       <div className="col-sm-9 text-secondary">
                         <span> {user.mobile}</span>
-                        <div data-mdb-input-init className="form-outline d-none">
-                          <input type="mobile" id="form3Example4" className="form-control" placeholder="Mobile number" />
+                        <div data-mdb-input-init  className={"form-outline "+ (!editMobile ? 'd-none' : '')}>
+                          <input type="mobile" id="form3Example4"  value={userMobile} onChange={(e) => setUserMobile(e.target.value)} className="form-control" placeholder="Mobile number" />
                           <span className="text-danger fs-13 d-none">Please enter mobile number</span>
                         </div>
-                        <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                        <a  onClick={() => setEditMobile(!editMobile)}  className='float-end'><i className="bi bi-pencil"></i> Edit</a>
                       </div>
                     </div>
                     <hr/>
@@ -401,11 +447,20 @@ console.log(orders)
                       </div>
                       <div className="col-sm-9 text-secondary">
                         <span> *******</span>
-                        <div data-mdb-input-init className="form-outline d-none">
-                          <input type="password" id="form3Example4" className="form-control" placeholder="Password" />
+                        <div data-mdb-input-init  className={"form-outline "+ (!editPassword ? 'd-none' : '')}>
+                          <input type="password" id="form3Example4"  value={userPassword} onChange={(e) => setUserPassword(e.target.value)} className="form-control" placeholder="Password" />
+
                           <span className="text-danger fs-13 d-none">Please enter password</span>
                         </div>
-                        <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                        <a  onClick={() => setEditPassword(!editPassword)}  className='float-end'><i className="bi bi-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div className="row">
+                      <div className="col-sm-3">
+                      </div>
+                      <div className="col-sm-9 text-secondary">
+                          <span className="delete_btn" onClick={() => updateUserDetailsFun()}>Update</span>
                       </div>
                     </div>
                     <hr/>
@@ -416,7 +471,7 @@ console.log(orders)
                       <div className="col-sm-9 text-secondary">
                           {/* <span>{user.state}</span> */}
                           {/* <a href="#" className='float-end'><i className="bi bi-pencil"></i> Edit</a> */}
-                          <span class="delete_btn" id="addBtn1" onClick={() => showDeletePop()}>Delete</span>
+                          <span className="delete_btn" id="addBtn1" onClick={() => showDeletePop()}>Delete</span>
                       </div>
                     </div>
                     <hr/>
@@ -435,80 +490,80 @@ console.log(orders)
                   <span className="sub_title  p-l-15 p-r-15">Notifications</span>
                 </div>
                 <div className='p-4'>
-                <div class="email-right-box ms-0  ms-sm-0 text-left">
-                  <div role="toolbar" class="toolbar ms-1 ms-sm-0">
-                      <div class="btn-group mb-1 me-1 ms-1">
-                          <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox1"/><label class="form-check-label" for="checkbox1"></label></div></div>
-                          <div class="btn-group mb-1"><button class="btn btn-primary light px-3" type="button"><i class="bi bi-arrow-clockwise"></i></button></div>
-                          <div class="btn-group mb-1 dropdown"><button type="button" id="react-aria8096053300-13" aria-expanded="false" data-toggle="dropdown" class="btn btn-primary px-3 light dropdown-toggle ms-1 dropdown-toggle btn btn-primary">More <span class="caret"></span></button></div>
+                <div className="email-right-box ms-0  ms-sm-0 text-left">
+                  <div role="toolbar" className="toolbar ms-1 ms-sm-0">
+                      <div className="btn-group mb-1 me-1 ms-1">
+                          <div className="form-check custom-checkbox"><input type="checkbox" className="form-check-input" id="checkbox1"/><label className="form-check-label" for="checkbox1"></label></div></div>
+                          <div className="btn-group mb-1"><button className="btn btn-primary light px-3" type="button"><i className="bi bi-arrow-clockwise"></i></button></div>
+                          <div className="btn-group mb-1 dropdown"><button type="button" id="react-aria8096053300-13" aria-expanded="false" data-toggle="dropdown" className="btn btn-primary px-3 light dropdown-toggle ms-1 dropdown-toggle btn btn-primary">More <span className="caret"></span></button></div>
                   </div>
-                  <div class="email-list mt-3">
-                    <div class="message position-relative"><div><div class="d-flex message-single">
-                        <div class="ps-1 align-self-center">
-                            <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox2"/><label class="form-check-label" for="checkbox2"></label>
+                  <div className="email-list mt-3">
+                    <div className="message position-relative"><div><div className="d-flex message-single">
+                        <div className="ps-1 align-self-center">
+                            <div className="form-check custom-checkbox"><input type="checkbox" className="form-check-input" id="checkbox2"/><label className="form-check-label" for="checkbox2"></label>
                             </div>
                         </div>
-                        <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button>
+                        <div className="ms-2"><button className="border-0 bg-transparent align-middle p-0"><i className="bi bi-star-fill" aria-hidden="true"></i></button>
                         </div>
                     </div>
-                    <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read">
-                        <div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
-                        <div class="date">11:49 am</div>
+                    <a className="col-mail col-mail-2" href="/react/demo/email-inbox/email-read">
+                        <div className="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
+                        <div className="date">11:49 am</div>
                     </a>
                   </div>
                 </div>
-                <div class="message position-relative">
+                <div className="message position-relative">
                     <div>
-                        <div class="d-flex message-single">
-                            <div class="ps-1 align-self-center">
-                                <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox3"/><label class="form-check-label" for="checkbox3"></label></div>
+                        <div className="d-flex message-single">
+                            <div className="ps-1 align-self-center">
+                                <div className="form-check custom-checkbox"><input type="checkbox" className="form-check-input" id="checkbox3"/><label className="form-check-label" for="checkbox3"></label></div>
                             </div>
-                            <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button></div>
+                            <div className="ms-2"><button className="border-0 bg-transparent align-middle p-0"><i className="bi bi-star-fill" aria-hidden="true"></i></button></div>
                         </div>
-                        <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
-                        <div class="date">11:49 am</div></a>
+                        <a className="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div className="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
+                        <div className="date">11:49 am</div></a>
                     </div>
                 </div>
-                <div class="message position-relative"><div>
-                <div class="d-flex message-single">
-                    <div class="ps-1 align-self-center">
-                        <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox4"/><label class="form-check-label" for="checkbox4"></label></div>
+                <div className="message position-relative"><div>
+                <div className="d-flex message-single">
+                    <div className="ps-1 align-self-center">
+                        <div className="form-check custom-checkbox"><input type="checkbox" className="form-check-input" id="checkbox4"/><label className="form-check-label" for="checkbox4"></label></div>
                     </div>
-                    <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button></div>
+                    <div className="ms-2"><button className="border-0 bg-transparent align-middle p-0"><i className="bi bi-star-fill" aria-hidden="true"></i></button></div>
                 </div>
-                <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div><div class="date">11:49 am</div></a>
+                <a className="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div className="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div><div className="date">11:49 am</div></a>
             </div>
               </div>
-              <div class="message position-relative"><div>
-              <div class="d-flex message-single">
-                  <div class="ps-1 align-self-center">
-                      <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox5"/><label class="form-check-label" for="checkbox5"></label></div>
+              <div className="message position-relative"><div>
+              <div className="d-flex message-single">
+                  <div className="ps-1 align-self-center">
+                      <div className="form-check custom-checkbox"><input type="checkbox" className="form-check-input" id="checkbox5"/><label className="form-check-label" for="checkbox5"></label></div>
                   </div>
-                  <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button></div>
+                  <div className="ms-2"><button className="border-0 bg-transparent align-middle p-0"><i className="bi bi-star-fill" aria-hidden="true"></i></button></div>
               </div>
-              <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div><div class="date">11:49 am</div></a>
+              <a className="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div className="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div><div className="date">11:49 am</div></a>
           </div>
             </div>
-            <div class="message position-relative"><div>
-            <div class="d-flex message-single">
-                <div class="ps-1 align-self-center">
-                    <div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input" id="checkbox6"/><label class="form-check-label" for="checkbox6"></label></div>
+            <div className="message position-relative"><div>
+            <div className="d-flex message-single">
+                <div className="ps-1 align-self-center">
+                    <div className="form-check custom-checkbox"><input type="checkbox" className="form-check-input" id="checkbox6"/><label className="form-check-label" for="checkbox6"></label></div>
                 </div>
-                <div class="ms-2"><button class="border-0 bg-transparent align-middle p-0"><i class="bi bi-star-fill" aria-hidden="true"></i></button></div>
+                <div className="ms-2"><button className="border-0 bg-transparent align-middle p-0"><i className="bi bi-star-fill" aria-hidden="true"></i></button></div>
             </div>
-            <a class="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div><div class="date">11:49 am</div></a>
+            <a className="col-mail col-mail-2" href="/react/demo/email-inbox/email-read"><div className="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div><div className="date">11:49 am</div></a>
         </div>
     </div>
 </div>
-<div class="row mt-4">
-    <div class="col-12 ps-3">
+<div className="row mt-4">
+    <div className="col-12 ps-3">
         <nav>
-            <ul class="pagination pagination-gutter pagination-primary pagination-sm no-bg">
-                <li class="page-item page-indicator"><a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a></li>
-                <li class="page-item  active "><a class="page-link" href="#">1</a></li>
-                <li class="page-item   "><a class="page-link" href="/#">2</a></li>
-                <li class="page-item   "><a class="page-link" href="#">3</a></li>
-                <li class="page-item page-indicator"><a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a></li>
+            <ul className="pagination pagination-gutter pagination-primary pagination-sm no-bg">
+                <li className="page-item page-indicator"><a className="page-link" href="#"><i className="bi bi-chevron-left"></i></a></li>
+                <li className="page-item  active "><a className="page-link" href="#">1</a></li>
+                <li className="page-item   "><a className="page-link" href="/#">2</a></li>
+                <li className="page-item   "><a className="page-link" href="#">3</a></li>
+                <li className="page-item page-indicator"><a className="page-link" href="#"><i className="bi bi-chevron-right"></i></a></li>
             </ul>
         </nav>
     </div>
@@ -789,24 +844,24 @@ console.log(orders)
                     <Tab eventKey="Payments" title="Payments" >
                       <span className="txt_title">Saved cards</span>
                       <div className="row">
-                        <div class="credit-card visa selectable  m-3">
-                          <div class="credit-card-last4">
+                        <div className="credit-card visa selectable  m-3">
+                          <div className="credit-card-last4">
                             4242
                           </div>
-                          <div class="credit-card-expiry ">
+                          <div className="credit-card-expiry ">
                             08/25
                           </div>
                         </div>
-                        <div class="credit-card mastercard selectable m-3">
-                          <div class="credit-card-last4">
+                        <div className="credit-card mastercard selectable m-3">
+                          <div className="credit-card-last4">
                             8210
                           </div>
-                          <div class="credit-card-expiry">
+                          <div className="credit-card-expiry">
                             10/22
                           </div>
                         </div>
                         <div className="add_new my-3">
-                          <i class="bi bi-plus-square"></i>
+                          <i className="bi bi-plus-square"></i>
                           <span className="m-2">ADD NEW CARD</span>
                         </div>
                       </div>   
@@ -816,27 +871,36 @@ console.log(orders)
                         <img src="https://i.imgur.com/7kQEsHU.png" style={{width:'30px'}}/>
                         <span className="m-2">ve********@hotmail.com</span>
                         <div className="flex_ryt flex-1">
-                          <a href="#" class="float-end"><i class="bi bi-pencil"></i> Edit</a>
+                          <a href="#" className="float-end"><i className="bi bi-pencil"></i> Edit</a>
                         </div>
                       </div>
                     </Tab>
                     <Tab eventKey="Refunds" title="Refunds" >
-                      <div className="refunds_wrap">
-                        <div className="d-flex justify-content-between">
-                          <span className="txt_title">Veg-meals</span>
-                          <span className="status_info">Processing</span>
-                        </div>
-                        <div className="refund_details mt-2">
-                          <div><span>To:</span><span className="m-2">PayPal</span></div>
-                          <div><span>Amount:</span><span className="m-2">$120</span></div>
-                          <div><span>Expected by:</span><span className="m-2">1st Sep, 2024</span></div>
-                          <small className="error mt-3 d-block">Your refund is taking longer than usual. We are working to get it resolve at the earliest.</small>
-                        </div>
-                        <hr></hr>
-                          <span>Order ID: #17548524568</span>
-                        <hr></hr>
-                      </div>
-                      <div className="refunds_wrap mt-4">
+                      {
+                        (refunds && refunds.length) ? 
+                          refunds.map((refund) => {
+                            return (
+                              <div className="refunds_wrap">
+                                <div className="d-flex justify-content-between">
+                                  <span className="txt_title">{refund.itemName}</span>
+                                  <span className="status_info">{refund.status}</span>
+                                </div>
+                                <div className="refund_details mt-2">
+                                  <div><span>To:</span><span className="m-2">PayPal</span></div>
+                                  <div><span>Amount:</span><span className="m-2">${refund.amount}</span></div>
+                                  <div><span>Raised On:</span><span className="m-2">{refund.refundRaisedDate}</span></div>
+                                  <small className="error mt-3 d-block">Your refund is taking longer than usual. We are working to get it resolve at the earliest.</small>
+                                </div>
+                                <hr></hr>
+                                  <span>Order IDs: {refund.orderIds}</span>
+                                <hr></hr>
+                              </div>
+                            )
+                          })
+                        : null
+                      }
+                      
+                      {/* <div className="refunds_wrap mt-4">
                         <div className="d-flex justify-content-between">
                           <span className="txt_title">Non veg-meals</span>
                           <span className="status_info status_completed">Completed</span>
@@ -850,7 +914,7 @@ console.log(orders)
                         <hr></hr>
                           <span>Order ID: #17548524568</span>
                         <hr></hr>
-                      </div>
+                      </div> */}
                     </Tab>
                   </Tabs>
                 </div>
@@ -862,8 +926,8 @@ console.log(orders)
                   <span className="sub_title  p-l-15 p-r-15">Post Review</span>
                 </div>                     
                 <div className='p-b-14 p-3'>
-                <div class="form-group mb-3"><label for="comment" class="text-black font-w600">Message</label><textarea rows="4" class="form-control" name="comment" placeholder="Type your message" id="comment"></textarea></div>
-                <div class="col-lg-12"><div class="form-group"><input type="submit" class="submit btn btn2" id="submit" name="submit" value="Post Review"/></div></div>
+                <div className="form-group mb-3"><label for="comment" className="text-black font-w600">Message</label><textarea rows="4" className="form-control" name="comment" placeholder="Type your message" id="comment"></textarea></div>
+                <div className="col-lg-12"><div className="form-group"><input type="submit" className="submit btn btn2" id="submit" name="submit" value="Post Review"/></div></div>
                 </div>
               </div>
             </Tab.Pane>
