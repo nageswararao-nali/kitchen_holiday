@@ -1519,8 +1519,8 @@ summary::-webkit-details-marker {
 details[open] .accordion-icon svg {
   transform: rotate(180deg);
 }
-.menu_items ul{padding: 0;flex-wrap: wrap;align-items: center;}
-.menu_items ul li{width: 50%;margin: 15px 0;}
+.menu_items ul{padding: 0;flex-wrap: wrap;align-items: center;justify-self: center;}
+.menu_items ul li{/* width: 50%; */margin: 15px 0;}
 .menu_items .item_title{text-align: left;
   padding-left: 20px;}
 .a_price{color: #aaaaaa;text-decoration: line-through;font-size: 18px;}

@@ -37,8 +37,8 @@ function MenuItem(props) {
 
   return (
     <div className="col-md-6">
-        <div className="veg_menu text-end">
-            <img src={item.image} className="img-fluid" width="500"/>
+        <div className="veg_menu text-center">
+            <img src={item.image} className="img-fluid" width="250"/>
             <h3 className="tit9 m-b-15 text-center m-t-13">
                 <span className="m-r-10">
                     {
