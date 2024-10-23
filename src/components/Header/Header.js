@@ -120,7 +120,7 @@ export default function Header() {
                 <div>                 
                   <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    <Link to="/myaccount" className="p-0"><i className="fa fa-user txt3" aria-hidden="true" style={{fontSize: '28px'}}></i></Link>
+                    <Link to="/myaccount" className="p-0"><i className="fa fa-user txt3" aria-hidden="true" style={{fontSize: '18px'}}></i></Link>
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>

@@ -21,13 +21,13 @@ export default function MainSlider() {
 <div className="bg_view" style={{backgroundImage: "url(assets/images/banner_bg3.png)"}}>
 <Slider {...settings}>
         <div className="" >
-                <div className="row">  
+                <div className="row align-items-center">  
                        
-                        <div className="col-md-7 p-t-45 p-b-30">
-                                <div className="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-50 ">
+                        <div className="col-md-7 p-t-15 p-b-10">
+                                <div className="wrap-content-slide1  flex-col-c-m p-l-15 p-r-15 ">
                                       
                                         <h2 className="caption2-slide1 slide_cnt tit3-1 t-start animated " data-appear="fadeInLeft">
-                                        100%<br /> <span>Organic</span> Food is<small>Waiting for you</small>
+                                        100% <span>Organic</span><br /> Food is<small>Waiting for you</small>
                                         
                                                 <div className="wrap-btn-slide1 animated  m-t-32" data-appear="fadeInUp">
                                                 <Link to="/subscription" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10">Subscribe Now</Link>
@@ -39,14 +39,14 @@ export default function MainSlider() {
                         </div>
                         <div className="col-md-5 p-t-45 p-b-30">
                                 <h2 className="caption1-slide1 tit1 t-center animated  m-b-37 m-t-33" data-appear="fadeInRight">
-                                        <img src="assets/images/m_plate3.png" width="550" className="img-fluid" />
+                                        <img src="assets/images/m_plate3.png" width="450" className="img-fluid" />
                                 </h2>
                         </div>
                 </div>
         
         </div>
         <div className="" style={{backgroundImage: "url(assets/images/banner_bg.png)"}}>
-                <div className="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 ">
+                <div className="wrap-content-slide1  flex-col-c-m p-l-15 p-r-15  ">
                         <div className="d-flex justify-content-between p-0 align-items-center container-fluid">
                                         <h2 className="caption1-slide1 txt1 t-center animated  m-b-15  " data-appear="fadeInLeft">
                                                 <img src="assets/images/meal_plate.png" width="500" />

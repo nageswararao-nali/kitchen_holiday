@@ -4,10 +4,10 @@ import React from "react";
 // Pass the child props
 export default function Faq() {
   return (
-    <section className="section-review p-t-50 m-b-70 p-b-40">
+    <section className="section-review p-t-50  p-b-40">
         <div className="container">
                 <div className="title-review t-center m-b-2 title_sec">
-                        <h3 className="sub_title tit4 p-l-15 p-r-15 t-center p-l-20 p-r-15 p-t-3">Frequently Asked Questions</h3>
+                        <h3 className="sub_title tit4 p-l-15 p-r-15 t-center p-l-20 p-r-15 p-t-3">Frequently Asked <span>Questions</span></h3>
                 </div>
                 <div className="accordion-container">
                         <details open>

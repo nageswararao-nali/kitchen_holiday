@@ -1,24 +1,30 @@
 import React from "react";
-// import "./Layout.css";
+import Slider from "react-slick";
 
 // Pass the child props
-export default function HowWorks() {
+export default function Convenient() {
+  const settings = {
+    arrows: true,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
   return (
-    <section className="section-welcome p-t-60 p-b-50">
-<div className="container">
-<div className="row">
-<div className="wrap-text-welcome t-center title_sec">
-<span className="t-center sub_title m-b-50">
-How it <span>works?</span>
-</span>
-{/* <h3 className="tit3 t-center m-b-35 m-t-5">
-Kitchen Holiday
-</h3> */}
-<div className="row">
+    <section className="section-review p-t-50">
+        <div className="title-review t-center m-b-2 title_sec">
+                <span className="sub_title tit4 p-l-15 p-r-15"> Fresh, Healthy, <br></br>
+                Insanely <span>Convenient</span></span>
+                {/* <h3 className="tit8 t-center p-l-20 p-r-15 p-t-3">Review</h3> */}
+        </div>
+        <div className="p-t-50 p-b-50 container text-center">
+        <div className="row">
         <div className="col-md-4">
                 <div className=" d-flex flex-column  align-items-center">
-                        <img src="assets/images/choose.png" className="img-fluid"  width={50}/>
-                        <span className="txt5 color0-hov trans-0-4 m-t-13 how_title">Choose Meal Plan</span>
+                        <img src="assets/images/ingrediants.png" className="img-fluid"  width={50}/>
+                        <span className="txt5 color0-hov trans-0-4 m-t-13 how_title">Cooked from responsibly sourced,
+                        <br></br>quality ingredients</span>
                         <div className="cnt_block">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
@@ -26,8 +32,9 @@ Kitchen Holiday
         </div>
         <div className="col-md-4">
                 <div className=" d-flex flex-column align-items-center">
-                        <img src="assets/images/subscribe.png" className="img-fluid"  width={50}/>
-                        <span className="txt5 color0-hov trans-0-4 m-t-13 how_title">Subscribe</span>
+                        <img src="assets/images/chef.png" className="img-fluid"  width={50}/>
+                        <span className="txt5 color0-hov trans-0-4 m-t-13 how_title">Created and curated
+                        <br></br>by the chefs</span>
                         <div className="cnt_block">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
@@ -35,8 +42,9 @@ Kitchen Holiday
         </div>
         <div className="col-md-4">
                 <div className=" d-flex flex-column align-items-center">
-                        <img src="assets/images/delivered.png" className="img-fluid text-center"  width={50}/>
-                        <span className="txt5 color0-hov trans-0-4 m-t-13 how_title">Get delivered</span>
+                        <img src="assets/images/hygiene.png" className="img-fluid text-center"  width={50}/>
+                        <span className="txt5 color0-hov trans-0-4 m-t-13 how_title">Made at a hygiene-first
+                        <br></br>audited kitchen</span>
                         <div className="cnt_block">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
@@ -44,9 +52,8 @@ Kitchen Holiday
         </div>
         {/* <span className="m-t-33">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </span> */}
 </div>
-</div>
-</div>
-</div>
+        </div>
+
 </section>
 
   

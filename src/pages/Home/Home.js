@@ -8,15 +8,17 @@ import MainSlider from '../../features/mainslider/mainSlider';
 import HowWorks from '../../features/howworks/howWorks';
 import Review from '../../features/review/Review';
 import Faq from '../../features/faq/faq';
+import Convenient from '../../features/convenient/convenient';
 
 function Home() {
   return (
     <div>
         <MainSlider />
-        <WhoChoose />
         <HowWorks />
-        <Review />
+        <WhoChoose />
+        <Convenient/>
         <Faq />
+        <Review />
     </div>
     
   );

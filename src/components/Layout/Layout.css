@@ -313,7 +313,7 @@ input[type="date" i] {
 .wrap-menu-header {
   position: absolute;
   width: 100%;
-  height: 120px;
+  height: 65px;
   top: 0;
   left: 0;
   z-index: 100;
@@ -336,7 +336,7 @@ input[type="date" i] {
 
 .header-fixed .wrap-menu-header {
   position: fixed;
-  height: 100px;
+  height:60px;
   background: rgba(255,255,255,0.9);
   box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
 }
@@ -436,7 +436,8 @@ input[type="date" i] {
 }
 .h_item1{/* border: 2px solid #cf2227; */    box-shadow: 0px 12px 18px -6px rgba(0, 0, 0, 0.3);
   border-radius: 20px;}
-.cnt_block{padding: 20px;}
+.cnt_block{padding: 10px;}
+.cnt_block p{font-size: 14px;letter-spacing: normal;}
 .subscribe_btn span{background: #2e9a3f;
   color: #fff;
   padding: 10px 25px;
@@ -450,13 +451,13 @@ input[type="date" i] {
 .block_btn:hover{background: #ec1d25;}
 .social-network{    display: flex;
   justify-content: space-between;
-  max-width: 180px;
-  padding: 0;margin: 20px auto;}
-.f_list{padding: 0;}
+  width: 180px;
+  padding: 0;margin: 5px auto;}
+.f_list{padding: 0; font-size: 15px;font-weight: 500;}
 .f_list a{text-decoration: none;
-  font-size: 18px;
-  margin: 5px 0;
-  display: inline-block;color: #111111;
+  font-size: 15px;font-weight: 500;text-align: left;
+  margin: 2px 0;
+  display: inline-block;color: #666666;
 }
 .f_list a:hover{color: #ec1d25;}
 
@@ -738,6 +739,8 @@ input[type="date" i] {
     border: 3px solid white;
     background-color: #d41b22;
 } 
+.slick-list{height: 550px;}
+.caption2-slide1{font-size: 2.5rem;}
 
 /*[ Caption ]
 -----------------------------------------------------------
@@ -806,7 +809,7 @@ input[type="date" i] {
   background-color: #2e9a3f;
   color: white;
 }
-.slide_cnt span{display: block;color: #2e9a3f;}
+.slide_cnt span{color: #2e9a3f;}
 .slide_cnt small{display: block;font-size: 30px;font-weight: 500;}
 
 .btn5{background-color: #8c8c8c;}
@@ -964,10 +967,33 @@ input[type="date" i] {
   border: 1px solid #d41b22;
   background-color: #d41b22;
 } 
+.wrap-btn-slide1 a{text-transform: none;font-size: 16px;font-weight: 500;border-radius: 6px;padding: 12px 15px;border: 1px solid #c2191e;}
 
-
-
-
+.title_sec .sub_title{font-weight: 600;color: #184d32;text-transform: none;position: relative;display: inline-block;}
+.title_sec .sub_title span{color: #2e9a3f;}
+.title_sec .sub_title::before,.title_sec .sub_title::after{content: "";width: 100px;height: 1px;background: #184d32;display: inline-block;vertical-align: middle;margin-right: 20px;    position: absolute;
+  top: 50%;
+  left: -120px;}
+.title_sec .sub_title::after{margin-right: 0;margin-left: 20px;    left: unset;
+  right: -120px;}
+.how_title{font-size: 15px;font-weight: 600;letter-spacing: normal;}
+.subscribe_btn_new{width:250px;
+  height: 48.86px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #2e9a3f 0%, #249635 93.32%);
+  box-shadow: 0px 15px 25px rgba(28, 174, 101, 0.33);
+  border-radius: 5px;
+  border: none !important;
+  margin: 20px  auto;    padding: 14px 0;}
+.subscribe_btn_nonveg{
+  background: linear-gradient(90deg, #dd2d2d 0%, #e03232 93.32%);
+  box-shadow: 0px 15px 25px rgba(174, 28, 28, 0.33);}
 
 /*[ Block2 ]
 ///////////////////////////////////////////////////////////
@@ -1426,7 +1452,7 @@ body {padding-right: 0px !important;}
   /* max-width: 600px; */
   width: 100%;
 }
-.accordion-title{font-weight: 500;font-size: 18px;}
+.accordion-title{font-weight: 600;font-size: 15px;}
 details {
   font-size: var(--title);
   margin: 0 auto;
@@ -1480,8 +1506,9 @@ summary:hover .accordion-icon {
   padding: var(--content-padding);
   font-size: var(--content);
   font-weight: 400;
-  line-height: 1.65;margin-top: 15px;;
+  line-height: 1.65;margin-top: 15px;;font-size: 14px;
 }
+.reviews_section .slick-slider{height: 360px;}
 
 /** Remove Marker */
 summary::-webkit-details-marker {
@@ -1672,7 +1699,7 @@ transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgb
     font-family: Poppins;
     font-weight: 400;
     font-size: 14px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     color: rgb(0, 0, 0);
     padding: 15px;
     text-decoration: none;
@@ -2192,7 +2219,7 @@ address{text-align: left;}
 .extra_item span{font-size: 14px;}
 .extra_items_block .extra_item{margin: 10px 0;}
 .sub_total{height: 30px;display: block;;}
-.wrap_header a{padding: 10px 15px;}
+.wrap_header a{padding:0px 15px;}
 .edit_photo{position: absolute;
   background: #00000080;
   left: 0;
