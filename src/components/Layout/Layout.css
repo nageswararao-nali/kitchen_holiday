@@ -452,7 +452,7 @@ input[type="date" i] {
 .social-network{    display: flex;
   justify-content: space-between;
   width: 180px;
-  padding: 0;margin: 5px auto;}
+  padding: 0;}
 .f_list{padding: 0; font-size: 15px;font-weight: 500;}
 .f_list a{text-decoration: none;
   font-size: 15px;font-weight: 500;text-align: left;
@@ -1522,7 +1522,7 @@ details[open] .accordion-icon svg {
 .menu_items ul{padding: 0;flex-wrap: wrap;align-items: center;justify-self: center;}
 .menu_items ul li{/* width: 50%; */margin: 15px 0;}
 .menu_items .item_title{text-align: left;
-  padding-left: 20px;}
+  padding-left: 5px;}
 .a_price{color: #aaaaaa;text-decoration: line-through;font-size: 18px;}
 .f_price{color: rgb(46 154 63);font-size: 22px;font-weight: 600;}
 .add_btn{background: #fff;border: 2px solid rgb(46 154 63);border-radius: 6px;padding: 5px 15px;font-size: 16px;font-weight: 600;color: #333;
@@ -1691,7 +1691,7 @@ transition: all 0.2s ease-in-out;cursor: pointer;box-shadow: 2px 2px 3px 0px rgb
   opacity: 1;background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;}
-  .menu_items .item_title{flex:1}
+  .menu_items .item_title{flex:1;font-size: 15px;}
   .accordion-button:not(.collapsed){background-color: #f8f9fa;color: #000000;}
   .accordion-button{background-color: #f8f9fa;}
   .wrap_header a,  .wrap_header img{height: 100%;}
@@ -2580,6 +2580,15 @@ address{text-align: left;}
   color:#ce1212 !important;
 }
 .tab-content>.tab-pane{overflow: auto;}
+.veg_menu {background: #FFFFFF;  box-shadow: 0px 2px 6px #FDB853;  border-radius: 8px;}
+.menu_items{flex: 1;display: flex;}
+.img_wrap{    border-right: 1px solid #fee0b5;
+  padding: 15px;}
+ .sub_wrap {    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #fff2dd;
+    padding: 15px;    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
 
 @media (max-width: 900px) {
   .container-fluid .mx-5 {

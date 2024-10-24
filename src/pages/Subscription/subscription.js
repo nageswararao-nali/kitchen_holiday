@@ -58,12 +58,12 @@ function Subscription() {
                 </div>
             </div>
         </section>
-    <section className="section-welcome p-t-45 p-b-105 subscription_block">       
-            <div className="container">            
-          
-                  <div className="row">
-                  <div className="col-md-5">
-                    <h3>Choose your preferences</h3>
+    <section className="section-welcome p-t-45 p-b-105 subscription_block" style={{background:"#f6f6f6"}}>       
+            <div className="container title_sec text-center">            
+            <h3 className='sub_title  m-b-10'>Choose your <span>preferences</span></h3>
+                  <div className="row w-75 m-auto sub_wrap">
+                  <div className="col-md-5  ">
+                   
                     <ul className="nav nav-tabs flex-column p-t-22" role="tablist" >
                       {
                         (items && items.length) ?
@@ -71,8 +71,8 @@ function Subscription() {
                             return (<li className={"nav-item " + (!item.isVeg ? "tab_item2" : "")} onClick={() => setSelectedItem(item)}>
                               <a className={"nav-link "+ (index == 0 ? "active" : "")} data-bs-toggle="tab" href={"#" + (item.isVeg ? "home" : "menu1")}>
                                 <div className="d-flex align-items-center">
-                                  <img src={item.image} className="img-fluid" width="200"/>
-                                  <span className="tit10 d-block m-t-13">{item.name}</span>
+                                  <img src={item.image} className="img-fluid" width="120"/>
+                                  <span className="tit10 d-block m-t-13 how_title">{item.name}</span>
                                 </div>
                               </a>
                             </li>)
@@ -82,9 +82,9 @@ function Subscription() {
                     </ul>
                   </div>
                   <div className="col-md-7 text-center" >
-                    <h3>Select your plan</h3>    
+                    {/* <h3>Select your plan</h3>     */}
                     <div className="tab-content">
-                      <div id="home" className="container tab-pane active"><br/>                
+                      <div id="home" className="container tab-pane active  p-b-10"><br/>                
                         <div className="plan_wrap">
                           <div className="plan_box h_item1 m-b-10 p-b-22 p-t-22 p-l-20 p-r-20 ">
                               <div className="d-flex justify-content-between align-items-center">

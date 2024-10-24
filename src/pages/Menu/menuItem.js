@@ -37,9 +37,10 @@ function MenuItem(props) {
 
   return (
     <div className="col-md-6">
-        <div className="veg_menu text-center">
-            <img src={item.image} className="img-fluid" width="250"/>
-            <h3 className="tit9 m-b-15 text-center m-t-13">
+        <div className="veg_menu text-center d-flex ">
+            <div className='m-10 img_wrap'>
+            <img src={item.image} className="img-fluid" width="150"/>
+            <h3 className="how_title m-b-15 text-center m-t-13">
                 <span className="m-r-10">
                     {
                         item.isVeg ? <img src="assets/images/veg_icon.png" width="24" alt=""/> : <img src="assets/images/non-veg_icon.png" width="24" alt=""/>
@@ -48,16 +49,16 @@ function MenuItem(props) {
                 </span>
                 {item.name}
             </h3>
-
-            <div className="menu_items">
-            <ul className="d-flex">
+            </div>
+            <div className="menu_items m-10">
+            <ul className="d-flex align-items-start">
                 {
                     (subItems.length && mappings.length) ? 
                         subItems.map((subItem) => {
                             let mps = JSON.parse(mappings[0].subItemIds)
                             if(mps.indexOf(subItem.id.toString()) > -1) {
                                 console.log(subItem.id)
-                                return (<li className="d-flex justify-content-center  align-items-center tit11"><span  ><img src={subItem.image} width="100" alt=""/></span><span className="item_title">{subItem.quantity} {subItem.name}</span></li>)
+                                return (<li className="d-flex justify-content-center  align-items-center tit11"><span  ><img src={subItem.image} width="60" alt=""/></span><span className="item_title">{subItem.quantity} {subItem.name}</span></li>)
                             }
                             
                         })

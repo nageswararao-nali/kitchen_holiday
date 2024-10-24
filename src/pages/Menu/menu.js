@@ -61,7 +61,7 @@ function Menu() {
                     </div>
 
                   </div> */}
-                  <div className="subscribe_btn m-t-40 text-center"><span onClick={() => navigate('/subscription')}>Subscribe now</span></div>
+                  <div className="subscribe_btn_new m-t-32"><span onClick={() => navigate('/subscription')}>Subscribe now</span></div>
 
                   </div>
                   

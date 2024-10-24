@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="footer ">
         <div className="container p-t-20 p-b-20">
                 <div className="row">
-                        <div className="col-sm-6 col-md-4 p-t-50 p-r-15">
+                        <div className="col-sm-6 col-md-3 p-t-50 p-r-15">
                                 <div className="d-flex flex-column">
                                         <img src="assets/images/logo_f.png" className="img-fluid m-l-r-auto" width="120"/>
                                         <p className="m-t-12 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -43,14 +43,10 @@ export default function Footer() {
                                 </div>
                        
                         </div>
-                       
-                       
-                </div>
-        </div>
-        <div className="end-footer1">
-                <div className="container">
-                        <div className="flex-sb-m flex-w p-t-10 p-b-10">
-                                 <div className="social_block">
+                        <div className="col-sm-6 col-md-3 p-t-50 ">
+                                <h4 className="txt13 m-b-33 how_title text-capitalize">Follow Us</h4>
+                                <div className="m-b-25">
+                                <div className="social_block">
                                                 <ul className="social-network social-circle">
                                                         <li><a href="#" className="icoRss" title="Rss"><i className="fa fa-rss"></i></a></li>
                                                         <li><a href="#" className="icoFacebook" title="Facebook"><i className="fa fa-facebook"></i></a></li>
@@ -59,6 +55,16 @@ export default function Footer() {
                                                         <li><a href="#" className="icoLinkedin" title="Linkedin"><i className="fa fa-linkedin"></i></a></li>
                                                     </ul>
                                         </div>
+                                </div>
+                       
+                        </div>
+                       
+                </div>
+        </div>
+        <div className="end-footer1">
+                <div className="container">
+                        <div className="flex-sb-m flex-w p-t-10 p-b-10">
+                                
                                 <div className="txt17 p-r-20 p-t-5 p-b-5">@ 2024 Kitchen Holiday.</div>
                         </div>
                 </div>
