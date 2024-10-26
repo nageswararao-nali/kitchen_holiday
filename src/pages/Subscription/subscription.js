@@ -53,7 +53,7 @@ function Subscription() {
                 <div className="banner position-relative" >
                     <img src="assets/images/banner_bg4.png" className="img-fluid"/>
                     <div className="banner_title position-absolute">
-                        <span className="tit3">Subscription</span>
+                        <span className="tit5">Subscription</span>
                     </div>
                 </div>
             </div>

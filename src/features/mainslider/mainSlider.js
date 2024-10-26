@@ -46,7 +46,7 @@ export default function MainSlider() {
         
         </div>
         <div className="" style={{backgroundImage: "url(assets/images/banner_bg.png)"}}>
-                <div className="wrap-content-slide1  flex-col-c-m p-l-15 p-r-15  ">
+                <div className="wrap-content-slide1  flex-col-c-m p-l-15 p-t-150  ">
                         <div className="d-flex justify-content-between p-0 align-items-center container-fluid">
                                         <h2 className="caption1-slide1 txt1 t-center animated  m-b-15  " data-appear="fadeInLeft">
                                                 <img src="assets/images/meal_plate.png" width="500" />
@@ -67,7 +67,7 @@ export default function MainSlider() {
         
         
         <div className="" style={{backgroundImage: "url(assets/images/banner_bg.png)"}}>
-                <div className="wrap-content-slide1 sizefull flex-col-c-m p-t-150 ">
+                <div className="wrap-content-slide1 sizefull flex-col-c-m p-t-50 ">
                         <div className="d-flex justify-content-between p-0 align-items-center container-fluid">
                         <span className="caption1-slide1 txt1 t-center animated  m-b-15" data-appear="fadeInLeft">
                                 <img src="assets/images/m_plate1.png"  width="250" className="img-fluid"/>

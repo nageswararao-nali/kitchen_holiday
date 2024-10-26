@@ -27,7 +27,7 @@ function Menu() {
               <div className="banner position-relative" >
                   <img src="assets/images/banner_bg4.png" className="img-fluid"/>
                   <div className="banner_title position-absolute">
-                      <span className="tit3">MENU</span>
+                      <span className="tit5">MENU</span>
                   </div>
               </div>
           </div>

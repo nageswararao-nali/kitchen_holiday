@@ -16,7 +16,7 @@ function About() {
             <div className="banner position-relative" >
                 <img src="assets/images/banner_bg4.png" className="img-fluid"/>
                 <div className="banner_title position-absolute">
-                    <span className="tit3">ABOUT</span>
+                    <span className="tit5">ABOUT</span>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@ function About() {
 
                 </div>
                 <div className="col-md-6 title_sec m-b-70 p-l-60" style={bdrstyle}> 
-                    <span className="sub_title tit4 ">About <br/>Kitchen Holiday</span>
+                    <span className="sub_title sub_title_w tit4 ">About <br/>Kitchen Holiday</span>
                
                     <p className="tit11 m-t-13">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </div>

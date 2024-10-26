@@ -14,17 +14,17 @@ function Contact() {
             <div className="banner position-relative" >
                 <img src="assets/images/banner_bg4.png" className="img-fluid"/>
                 <div className="banner_title position-absolute">
-                    <span className="tit3">CONTACT US</span>
+                    <span className="tit5">CONTACT US</span>
                 </div>
             </div>
         </div>
     </section>
     <section className="section-welcome p-t-45 p-b-105">    
-        <div className="container p-t-120">
+        <div className="container p-t-10">
             <div className="row">
                 <div className="col-md-5 title_sec">
-                    <span className="sub_title tit4-1 ">Contact Us</span>
-                    <h3 className="tit4-1 m-b-35 m-t-5">Get In Touch!</h3>
+                    <span className="sub_title  sub_title_w tit4-1 ">Contact Us</span>
+                    <h3 className="tit4-1 m-b-5 m-t-5">Get In Touch!</h3>
                     <p className="txt6 m-t-13">We are here to answer any questions you may have about Kitchen Holiday and its services. Reach out to us and we’ll respond as soon as we can.</p>
                     <address className='m-t-13'><i className="fa fa-phone"></i>
                         <b>+91-9999 999 999<br/>                        
