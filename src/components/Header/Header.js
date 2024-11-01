@@ -117,10 +117,13 @@ export default function Header() {
             <div className=" flex-w flex-l-m p-r-20 trans-0-4 d-sm-flex d-none">
               {
                 isAuthenticated ?
-                <div>                 
-                  <Dropdown>
+                <div className="d-flex align-items-center">      
+                
+                  <Dropdown className="d-flex align-items-center">
+                  <p className="u_name">User name</p>           
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                     <Link to="/myaccount" className="p-0"><i className="fa fa-user txt3" aria-hidden="true" style={{fontSize: '18px'}}></i></Link>
+                   
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
@@ -132,8 +135,8 @@ export default function Header() {
                 
                 
                 :
-                <div className="d-flex"><Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Login</Link>
-                <Link to="/signup" className="btn2 btn6 flex-c-m size2 txt3 trans-0-4 m-r-10" tabIndex="0">Signup</Link></div>
+                <div className="d-flex"><Link to="/login" className="btn2 flex-c-m size2 txt3 trans-0-4 m-r-10 login_btns" tabIndex="0">Login</Link>
+                <Link to="/signup" className="btn2 btn6 flex-c-m size2 txt3 trans-0-4 m-r-10 login_btns" tabIndex="0">Signup</Link></div>
               }
           
           <a className="cart_icon"></a>

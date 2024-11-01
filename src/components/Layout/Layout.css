@@ -997,7 +997,17 @@ input[type="date" i] {
 .subscribe_btn_nonveg{
   background: linear-gradient(90deg, #dd2d2d 0%, #e03232 93.32%);
   box-shadow: 0px 15px 25px rgba(174, 28, 28, 0.33);}
-
+.wrap_header .login_btns{padding: 10px 15px;}
+.dropdown-toggle::after{content: none;}
+.u_name {font-size: 13px;color: #000;font-weight: 600;margin-right: 5px;}
+.u_name:after{border-bottom: 0;
+  border-left: .3em solid #0000;
+  border-right: .3em solid #0000;
+  border-top: .3em solid;
+  content: "";
+  display: inline-block;
+  margin-left: .255em;
+  vertical-align: .255em;}
 /*[ Block2 ]
 ///////////////////////////////////////////////////////////
 */

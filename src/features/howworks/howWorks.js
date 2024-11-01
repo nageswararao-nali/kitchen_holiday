@@ -17,7 +17,7 @@ Kitchen Holiday
 <div className="row">
         <div className="col-md-4">
                 <div className=" d-flex flex-column  align-items-center">
-                        <img src="assets/images/choose.png" className="img-fluid"  width={50}/>
+                        <img src="assets/images/choose_meal.png" className="img-fluid"  width={100}/>
                         <span className="txt5 color0-hov trans-0-4 m-t-13 how_title">Choose Meal Plan</span>
                         <div className="cnt_block">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -26,7 +26,7 @@ Kitchen Holiday
         </div>
         <div className="col-md-4">
                 <div className=" d-flex flex-column align-items-center">
-                        <img src="assets/images/subscribe.png" className="img-fluid"  width={50}/>
+                        <img src="assets/images/subscribe_meal.png" className="img-fluid"  width={100}/>
                         <span className="txt5 color0-hov trans-0-4 m-t-13 how_title">Subscribe</span>
                         <div className="cnt_block">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -35,7 +35,7 @@ Kitchen Holiday
         </div>
         <div className="col-md-4">
                 <div className=" d-flex flex-column align-items-center">
-                        <img src="assets/images/delivered.png" className="img-fluid text-center"  width={50}/>
+                        <img src="assets/images/get_delivered.png" className="img-fluid text-center"  width={100}/>
                         <span className="txt5 color0-hov trans-0-4 m-t-13 how_title">Get delivered</span>
                         <div className="cnt_block">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
